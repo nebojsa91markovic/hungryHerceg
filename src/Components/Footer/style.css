@@ -1,3 +1,6 @@
 .footer {
     border: 1px dashed green;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }

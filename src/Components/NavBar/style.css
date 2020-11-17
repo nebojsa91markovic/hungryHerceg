@@ -1,4 +1,23 @@
 .navBar {
     border: 1px dashed orange;
     margin: 5px 5px;
+    position: relative;
+    height: 10vh;
+}
+.userLogin-wrapper {
+    position: absolute;
+    top: 20%;
+    right: 0;
+    text-align: right;
+}
+.userInfo-wrapper {
+    text-align: right;
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+.logo {
+    position: absolute;
+    bottom: 40%;
+    left: 2%;
 }

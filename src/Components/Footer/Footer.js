@@ -1,8 +1,9 @@
 import React from 'react';
+import './style.css'
 
 const Footer = () => {
     return ( <div className="footer">
-        Copyright @ 2020 | Tesla Team
+        <p>Copyright @ 2020 | Tesla Team</p>
     </div> );
 }
  

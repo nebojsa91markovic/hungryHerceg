@@ -1,0 +1,15 @@
+.welcome-wrapper {
+    border: 1px dashed black;
+    width: 90%;
+    height: 85vh;
+    margin: 5px 5px;
+    padding: 5px 5px;
+}
+h1 {
+    border: 1px solid blue;
+    color: darkslategrey;
+    margin: 0 5px;
+}
+h3 {
+    margin: 0 5px;
+}

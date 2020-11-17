@@ -1,15 +1,22 @@
 .welcome-wrapper {
     border: 1px dashed black;
     width: 90%;
-    height: 85vh;
-    margin: 5px 5px;
+    height: 79vh;
     padding: 5px 5px;
+    margin: 0 auto;
+    position: relative;
 }
 h1 {
     border: 1px solid blue;
     color: darkslategrey;
     margin: 0 5px;
+    position: absolute;
+    top: 30%;
+    left: 40%;
 }
 h3 {
     margin: 0 5px;
+    position: absolute;
+    top: 40%;
+    left: 40%;
 }

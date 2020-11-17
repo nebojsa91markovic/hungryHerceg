@@ -14,6 +14,7 @@ const CreatePoll = () => {
         {/* Ljubica */}
 
         <input type="submit" />
+
       </form>
     </div>
   );

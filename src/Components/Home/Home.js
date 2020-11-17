@@ -5,7 +5,7 @@ const Home = () => {
     return ( <div className="main">
         <button>Active Polls</button>
         <button>Create Poll</button>
-        <button>Make an order</button>
+        <button>Create order</button>
 
         {/* active polls true */}
         <ActivePolls />

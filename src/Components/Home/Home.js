@@ -1,14 +1,15 @@
 import React from 'react';
-import ActivePolls from "./ActivePolls/ActivePolls"
+import AllPolls from '../AllPolls/AllPolls';
 
 const Home = () => {
     return ( <div className="main">
         <button>Active Polls</button>
         <button>Create Poll</button>
+        <button>Active Order</button>
         <button>Create order</button>
 
         {/* active polls true */}
-        <ActivePolls />
+        <AllPolls />
     </div> );
 }
  

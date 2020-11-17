@@ -4,6 +4,7 @@ const ViewOrderPoll = () => {
     return ( <div className="polls">
         <form>
             <ul>
+                
                 <li>
                     <input type="checkbox" />
                     Pizza Margarita
@@ -14,6 +15,7 @@ const ViewOrderPoll = () => {
                     <span>Napomena</span>
                     <input type="text" />
                 </li>
+
                 <li>
                     <input type="checkbox" />
                     Palacinka Krem plazma
@@ -26,7 +28,6 @@ const ViewOrderPoll = () => {
                 </li>
             </ul>
         </form>
-
         {/* consumer (localstorage id)
             quantity: input type number
             mealId: checkbox

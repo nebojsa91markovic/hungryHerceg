@@ -1,22 +1,28 @@
+body {
+  background-image: url("../WelcomePage/food-background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Arial Black";
+}
+
 .welcome-wrapper {
-    border: 1px dashed black;
-    width: 90%;
-    height: 79vh;
-    padding: 5px 5px;
-    margin: 0 auto;
-    position: relative;
+  text-shadow: -3px -3px 3px rgba(240, 176, 0, 1);
+  color: white;
+  display: flex;
+  justify-content: space-between;
 }
+
 h1 {
-    border: 1px solid blue;
-    color: darkslategrey;
-    margin: 0 5px;
-    position: absolute;
-    top: 30%;
-    left: 40%;
+  font-size: 100px;
+  margin-top: 0;
+  margin-left: 0.4em;
+  text-align: left;
 }
+
 h3 {
-    margin: 0 5px;
-    position: absolute;
-    top: 40%;
-    left: 40%;
+  margin-top: 0;
+  width: 41%;
+  font-size: 50px;
+  text-align: left;
+  margin-left: 1em;
 }

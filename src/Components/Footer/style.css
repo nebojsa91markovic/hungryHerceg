@@ -1,6 +1,7 @@
 .footer {
-    border: 1px dashed green;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+  background-color: transparent;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }

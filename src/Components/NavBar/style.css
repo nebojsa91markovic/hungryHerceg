@@ -1,23 +1,36 @@
 .navBar {
-    border: 1px dashed orange;
-    margin: 5px 5px;
-    position: relative;
-    height: 10vh;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  padding: 3em;
+  height: 200px;
 }
-.userLogin-wrapper {
-    position: absolute;
-    top: 20%;
-    right: 0;
-    text-align: right;
-}
-.userInfo-wrapper {
-    text-align: right;
-    position: absolute;
-    top: 50%;
-    right: 0;
-}
+
 .logo {
-    position: absolute;
-    bottom: 40%;
-    left: 2%;
+  width: 20em;
+  height: 25em;
+  background-image: url("./logo1.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.userLogin-button {
+  width: 12em;
+  height: 4em;
+  margin: 1em;
+  margin-top: 3em;
+  color: #f0af00;
+  font-size: 20px;
+  font-weight: bolder;
+  background-color: transparent;
+  border-style: solid;
+  border-color: #f0af00;
+  border-radius: 10px;
+  border-width: 3px;
+}
+
+.userLogin-button:hover {
+  background-color: #f0af00;
+  color: black;
+  transition: 0.3s;
 }

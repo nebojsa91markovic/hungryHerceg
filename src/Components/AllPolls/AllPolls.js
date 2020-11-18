@@ -7,8 +7,8 @@ const AllPolls = () => {
                 <li>Anketa 1</li>
                 <li>Anketa 2</li>
                 <li>Order 1 
-                    <button>Zavrsi order</button>
                 </li>
+                <button>Zavrsi order</button>
             </ul>
         </div> );
 }

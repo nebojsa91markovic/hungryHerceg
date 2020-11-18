@@ -108,7 +108,7 @@ const CreateRestaurantDatabase = () => {
 
 
     return (
-        <button onClick={handleDatabaseCreate1}>Upisi Restorane</button>
+        <button >Upisi Restorane</button>
     );
 }
  

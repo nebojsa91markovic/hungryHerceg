@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ApiBase from "../../services/ApiBase/ApiBase"
 import axios from 'axios';
 
@@ -9,8 +9,10 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
     console.log('submit test')
+
     const data = {
       email,
       firstName,
@@ -19,15 +21,17 @@ const SignUp = () => {
     }
 
     axios.post(`${ApiBase}auth/register`, data)
-    .then(response => {
-      console.log('test', response.data)
-    })
-    .catch(err => console.log(err))
+      .then(response => {
+        console.log('test', response.data)
+      })
+      .catch(err => console.log(err))
   }
-    return ( <div className="signUp-wrapper">
-        <form onSubmit={handleSubmit}>
+  return (
+
+    <div className="signUp-wrapper">
+      <form onSubmit={handleSubmit}>
         <label>email</label>
-        <input type="email" onChange={(event) => setEmail(event.target.value)}/>
+        <input type="email" onChange={(event) => setEmail(event.target.value)} />
         <br></br>
         <label>First Name</label>
         <input type="text" onChange={(event) => setFirstName(event.target.value)} />
@@ -39,7 +43,7 @@ const SignUp = () => {
         <input type="password" onChange={(event) => setPassword(event.target.value)} />
         <input type="submit" />
       </form>
-    </div> );
+    </div>);
 }
- 
+
 export default SignUp;

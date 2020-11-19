@@ -1,10 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ApiBase from "../../services/ApiBase/ApiBase"
 import axios from 'axios';
+import { useHistory } from "react-router";
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('1');
+
+
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -15,21 +19,23 @@ const Login = () => {
     }
 
     axios.post(`${ApiBase}auth`, data)
-    .then(response => {
-      console.log('test', response.data)
-      localStorage.setItem('userToken', response.data.access_token)
-    })
-    .catch(err => console.log(err))
+      .then(response => {
+        console.log('test', response.data)
+        localStorage.setItem('userToken', response.data.access_token)
+
+        history.push("/home");
+      })
+      .catch(err => console.log(err))
   }
 
   return (
     <div className="login-wrapper">
       <form onSubmit={handleSubmit}>
         <label>email</label>
-        <input type="email" onChange={(event) => setUsername(event.target.value)}/>
+        <input type="email" onChange={(event) => setUsername(event.target.value)} />
         <br></br>
         <label>password</label>
-        <input type="password" onChange={(event) => setPassword(event.target.value)}/>
+        <input type="password" onChange={(event) => setPassword(event.target.value)} />
         <input type="submit" />
       </form>
     </div>

@@ -1,0 +1,40 @@
+.autocomplete-wrapper{
+    width: 30vw;
+    padding-left: 30vw;
+    
+}
+
+.autocomplete-input{
+    width: 29vw;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: inline;
+}
+
+#ingredients{
+    max-height: 300px;
+    overflow: auto;
+}
+
+.search-results{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid lightgrey;
+}
+
+.search-result-button{
+    width: 100%;
+    text-align: left;
+    background-color: white;
+    border: none;
+}
+
+.search-result-button:hover{
+    background-color: #e9ecef;
+}

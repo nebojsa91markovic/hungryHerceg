@@ -5,9 +5,10 @@
 }
 
 .pollButton {
-  /*color: white;*/
+  display: inline-block;
+  width: 15%;
   text-decoration: none;
-  margin: 5%;
+  margin: 2%;
   padding: 1%;
   color: black;
   font-size: 20px;
@@ -22,5 +23,5 @@
   background-color: transparent;
   color: #f0af00;
   transition: 0.5s;
-  padding: 0.8%;
+  width: 14.5%;
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AllPolls from '../AllPolls/AllPolls';
 import CreateRestaurant from "../CreateRestaurant/CreateRestaurant"
 import CreateRestaurantDatabase from "../CreateRestaurantDatabase/CreateRestaurantDatabase"
+import ViewOrder from '../ViewOrder/ViewOrder';
 import "./style.css"
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
         <CreateRestaurantDatabase /> */}
             {/* active polls true */}
             <AllPolls />
+            {/* <ViewOrder /> */}
         </div>
 
     );

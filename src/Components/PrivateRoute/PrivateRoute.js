@@ -5,7 +5,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
     const isLogin = () => {
 
-        if (localStorage.getItem("status") === null) {
+        if (localStorage.getItem("userToken") === null) {
             return false
         }
         else return true

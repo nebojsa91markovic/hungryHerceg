@@ -56,7 +56,7 @@ const CreatePoll = () => {
       .then(response => {
         console.log(response.data);
         let pollId = response.data.id;
-        history.push(`polls/${pollId}`);
+        history.push(`poll/${pollId}`);
       })
       .catch(err => console.log(err));
 

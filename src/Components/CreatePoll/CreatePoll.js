@@ -68,8 +68,8 @@ const CreatePoll = () => {
   return (
     <div className="polls">
       <form onSubmit={createNewPoll}>
-        <label>Naziv ankete</label>
-        <input type="text" placeholder="radna subota" onChange={(e) => setLabel(e.target.value)} />
+        <label className="poll-label">Naziv ankete</label>
+        <input className="poll-input" type="text" placeholder="radna subota" onChange={(e) => setLabel(e.target.value)} />
         <br />
         <span>Datum i vreme: {datetime}</span>
         <br />

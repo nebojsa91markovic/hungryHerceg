@@ -7,3 +7,11 @@
     border: 1px solid red;
     background:rgba(0,0,0,0.9);
 }
+.poll-label {
+    font-size: 30px;
+    margin-right: 20px;
+}
+.poll-input {
+    width: 29vw;
+    text-align: center;
+}

@@ -9,6 +9,8 @@ import './createPoll.css';
 import RestaurantCollection from "../../collections/RestaurantCollection"
 import PollsCollection from "../../collections/PollsCollection"
 import { v4 as uuidv4 } from 'uuid';
+import Moment from 'react-moment';
+import moment from 'moment';
 
 const CreatePoll = () => {
 
@@ -46,6 +48,9 @@ const CreatePoll = () => {
     + d.getHours() + ':'
     + d.getMinutes() + ':'
     + d.getSeconds();
+
+    let date1 = moment().format('MMMM Do YYYY, h:mm:ss a')
+    console.log(date1, 'ovo je date')
 
 
   const createNewPoll = (e) => {

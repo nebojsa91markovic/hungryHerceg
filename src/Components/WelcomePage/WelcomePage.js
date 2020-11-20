@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import Login from "../Login/Login"
 import SignUp from '../SignUp/SignUp';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom'
 
 const WelcomePage = () => {
 

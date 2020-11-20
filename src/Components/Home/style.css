@@ -1,0 +1,28 @@
+.main {
+  width: 80%;
+  margin: auto;
+  margin-top: 5%;
+}
+
+.pollButton {
+  color: white;
+  text-decoration: none;
+  border-style: solid;
+  margin: 5%;
+  padding: 1%;
+  color: #f0af00;
+  font-size: 20px;
+  font-weight: bolder;
+  background-color: transparent;
+  border-style: solid;
+  border-color: #f0af00;
+  border-radius: 10px;
+  border-width: 3px;
+  outline: none;
+}
+
+.pollButton:hover {
+  background-color: #f0af00;
+  color: black;
+  transition: 0.5s;
+}

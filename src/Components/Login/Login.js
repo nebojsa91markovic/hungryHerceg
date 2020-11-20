@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ApiBase from "../../services/ApiBase/ApiBase"
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import "./style.css"
 
 const Login = () => {
 
@@ -31,12 +32,15 @@ const Login = () => {
   return (
     <div className="login-wrapper">
       <form onSubmit={handleSubmit}>
-        <label>email</label>
-        <input type="email" onChange={(event) => setUsername(event.target.value)} />
+        <label>Email:</label>
         <br></br>
-        <label>password</label>
-        <input type="password" onChange={(event) => setPassword(event.target.value)} />
-        <input type="submit" />
+        <input className="logIn-input" type="email" onChange={(event) => setUsername(event.target.value)} />
+        <br></br>
+        <label>Password:</label>
+        <br></br>
+        <input className="logIn-input" type="password" onChange={(event) => setPassword(event.target.value)} />
+        <br></br>
+        <input  className="logIn-input-button" type="submit" value="Log In" />
       </form>
     </div>
   );

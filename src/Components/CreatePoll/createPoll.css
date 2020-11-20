@@ -1,5 +1,8 @@
 .polls{
-    height: 500px;
+    height: 600px;
+    width: 40%;
+    margin: 0 auto;
+    border-radius: 20px;
     border: 1px solid red;
-    background-color: white;
+    background:rgba(0,0,0,0.9);
 }

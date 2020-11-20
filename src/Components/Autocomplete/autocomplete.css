@@ -1,6 +1,7 @@
 .autocomplete-wrapper {
     width: 30vw;
-    padding-left: 30vw;
+    /*padding-left: 30vw;*/
+    margin: 0 auto;
 }
 
 .autocomplete-input {

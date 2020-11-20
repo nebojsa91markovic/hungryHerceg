@@ -3,6 +3,8 @@ import ApiBase from "../../services/ApiBase/ApiBase"
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import "./style.css"
+import UsersCollection from "../../collections/UsersCollection";
+
 
 const Login = () => {
 
@@ -14,19 +16,22 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('submit test')
-    const data = {
-      username,
-      password,
-    }
 
-    axios.post(`${ApiBase}auth`, data)
-      .then(response => {
-        console.log('test', response.data)
-        localStorage.setItem('userToken', response.data.access_token)
-
-        history.push("/home");
-      })
-      .catch(err => console.log(err))
+      let allUsers = [];
+      UsersCollection.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          allUsers.push(doc.data());
+          
+        });
+        console.log(allUsers);
+        allUsers.map(user => {
+          if(user.email === username && user.password === password) {
+            console.log('success')
+            localStorage.setItem('status', 'ulogovan')
+            history.push("/home");
+          }
+        })
+      });
   }
 
   return (

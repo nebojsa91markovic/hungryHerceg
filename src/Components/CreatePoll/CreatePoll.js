@@ -6,11 +6,14 @@ import ApiBase from "../../services/ApiBase/ApiBase";
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import './createPoll.css';
+import RestaurantCollection from "../../collections/RestaurantCollection"
+import PollsCollection from "../../collections/PollsCollection"
+import { v4 as uuidv4 } from 'uuid';
 
 const CreatePoll = () => {
 
   const [allRestaurants, setAllRestaurants] = useState([]);
-  const [selectedRestaurants, setSelectedRestaurants] = useState([{ id: 0 }]);
+  const [selectedRestaurants, setSelectedRestaurants] = useState([{ restaurantId: 0 }]);
   const [label, setLabel] = useState('');
   const history = useHistory();
   const user = localStorage.getItem('userName');
@@ -22,12 +25,16 @@ const CreatePoll = () => {
   };
 
   useEffect(() => {
-    axios.get(`${ApiBase}restaurants`, config)
-      .then(response => {
-        console.log(response.data);
-        setAllRestaurants(response.data);
-      })
-      .catch(err => console.log(err));
+
+    let allRestaurants = [];
+    RestaurantCollection.get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        allRestaurants.push(doc.data());
+      });
+      console.log(allRestaurants);
+      setAllRestaurants(allRestaurants);
+    });
+
 
   }, []);
 
@@ -44,23 +51,29 @@ const CreatePoll = () => {
   const createNewPoll = (e) => {
 
     e.preventDefault();
+    console.log(selectedRestaurants, 'prvi')
+    console.log(selectedRestaurants[1], 'drugi')
 
     let restaurants = selectedRestaurants.slice(1).map(selectedRestaurant => selectedRestaurant.restaurantId);
-
-    let body = {
-      label,
-      restaurants
-    }
-
-    axios.post(`${ApiBase}polls`, body, config)
-      .then(response => {
-        console.log(response.data);
-        let pollId = response.data.id;
-        history.push(`poll/${pollId}`);
-      })
-      .catch(err => console.log(err));
+console.log(restaurants, 'ovde smo')
+    let pollId = uuidv4();
 
 
+
+
+
+    PollsCollection.doc(pollId).set({
+      created: 'now',
+      createBy: 'tesla@tesla.com',
+      label: label,
+      restaurants: selectedRestaurants.slice(1),
+      active: true,
+      id: pollId,
+      voters: []
+    }, {merge: true})
+    .then(() => {
+      history.push(`poll/${pollId}`);
+  })
 
   }
 
@@ -75,7 +88,7 @@ const CreatePoll = () => {
         <br />
         {selectedRestaurants.map(selected => {
           return (
-            <Autocomplete key={selected.id} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} allRestaurants={allRestaurants} />
+            <Autocomplete key={selected.restaurantId} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} allRestaurants={allRestaurants} />
           )
         })}
         <input type="submit" />

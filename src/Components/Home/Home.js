@@ -16,7 +16,7 @@ const Home = () => {
             {/* <CreateRestaurant />
         <CreateRestaurantDatabase /> */}
             {/* active polls true */}
-            {/* <AllPolls /> */}
+            <AllPolls />
         </div>
 
     );

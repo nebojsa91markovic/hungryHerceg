@@ -1,6 +1,19 @@
 import React from 'react';
+import PollsCollection from "../../collections/PollsCollection"
 
 const AllPolls = () => {
+
+    const getAllPolls = () => {
+        let allPolls = [];
+        PollsCollection.get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              allPolls.push(doc.data());
+            });
+            console.log(allPolls);
+          });
+    }
+  
     return ( 
         <div className="allPolls">
             <ul>

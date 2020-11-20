@@ -17,7 +17,7 @@ const Autocomplete = ({ selectedRestaurants, setSelectedRestaurants, allRestaura
     setText(e.target.innerText);
     setFilter('');
     let tmp = [...selectedRestaurants];
-    let newEntry = { id: uuidv1(), restaurantId: e.target.value };
+    let newEntry = {  restaurantId: e.target.value, restaurantName: e.target.innerText, votes: 0 };
     tmp.push(newEntry);
     setChosen(e.target.value);
     // console.log(tmp);

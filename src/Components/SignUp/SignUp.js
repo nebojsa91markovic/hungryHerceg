@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ApiBase from "../../services/ApiBase/ApiBase"
 import axios from 'axios';
 import "./style.css"
+import UsersCollection from "../../collections/UsersCollection";
 
 
 
@@ -23,11 +24,10 @@ const SignUp = () => {
       password,
     }
 
-    axios.post(`${ApiBase}auth/register`, data)
-      .then(response => {
-        console.log('test', response.data)
+    UsersCollection.doc().set(data, {merge: true})
+    .then(() => {
+      console.log('user upisan')
       })
-      .catch(err => console.log(err))
   }
  return ( <div className="signUp-wrapper">
         <form onSubmit={handleSubmit}>

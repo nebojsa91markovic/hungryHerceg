@@ -11,7 +11,7 @@ const WelcomePage = () => {
     const showText = () => {
         if (location.pathname === '/') {
             return (
-                <h3>Easy solution for company food ordering!</h3>
+                <h3 className="h3-welcome-page">Easy solution for company food ordering!</h3>
             )
         }
         else return
@@ -19,7 +19,7 @@ const WelcomePage = () => {
     return (
 
         <div className="welcome-wrapper">
-            <h1>ARE YOU <br></br> HUNGRY?</h1>
+            <h1 className="h1-welcome-page">ARE YOU <br></br> HUNGRY?</h1>
 
             {showText()}
 

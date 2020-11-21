@@ -5,14 +5,14 @@ body {
   font-family: "Arial Black";
 }
 
-.welcome-wrapper h1 {
+.h1-welcome-page {
   width: 45%;
   font-size: 100px;
   margin-top: 10%;
   text-align: left;
 }
 
-.welcome-wrapper h3 {
+.h3-welcome-page {
   width: 40%;
   font-size: 50px;
   text-align: right;

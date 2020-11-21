@@ -1,12 +1,12 @@
 .main {
   width: 80%;
-  margin: 5% auto;
+  margin: 10% auto;
   /*margin-top: 5%;*/
 }
 
 .pollButton {
   display: inline-block;
-  width: 15%;
+  width: 20%;
   text-decoration: none;
   margin: 2%;
   padding: 1%;
@@ -23,7 +23,7 @@
   background-color: transparent;
   color: #f0af00;
   transition: 0.5s;
-  width: 14.5%;
+  width: 19%;
 }
 @media screen and (max-width: 600px) {
   .main {

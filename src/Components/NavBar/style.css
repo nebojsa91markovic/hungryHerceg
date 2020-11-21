@@ -46,31 +46,64 @@
   height: 3.7em;
   transition: 0.5s;
 }
-
 @media screen and (max-width: 600px) {
   .logo {
-    width: 10em;
-    height: 10em;
-    /* background-image: url("./logo.png"); */
+    width: 8em;
+    height: 8em;
+    background-image: url("./logo.png");
     background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: -10%;
+    margin-top: -10%;
   }
+
   .navBar {
     width: 100%;
+
     background-color: transparent;
-    padding: 3em;
+    height: 200px;
+  }
+
+  .userLogin-wrapper {
+    width: 100%;
+    margin: none;
+    margin-top: -10%;
+    margin-left: -5%;
+    padding: none;
+    display: flex;
   }
 
   .userLogin-button {
-    width: 5em;
+    width: 95%;
     height: 2em;
     margin: 1em;
-    color: #f0af00;
+    margin-top: 3em;
+    color: black;
     font-size: 20px;
     font-weight: bolder;
-    background-color: transparent;
+    background-color: #f0af00;
+    /* background-color: transparent; */
     border-style: solid;
     border-color: #f0af00;
     border-radius: 10px;
     border-width: 3px;
+    outline: none;
+  }
+
+  .userLogin-button:hover {
+    width: 95%;
+    height: 2em;
+    margin: 1em;
+    margin-top: 3em;
+    color: black;
+    font-size: 20px;
+    font-weight: bolder;
+    background-color: #f0af00;
+    /* background-color: transparent; */
+    border-style: solid;
+    border-color: #f0af00;
+    border-radius: 10px;
+    border-width: 3px;
+    outline: none;
   }
 }

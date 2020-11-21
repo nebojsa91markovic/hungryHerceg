@@ -12,10 +12,10 @@ const NavBar = () => {
             return (
                 <div className="userLogin-wrapper">
                     <Link to='/login'>
-                        <button className="userLogin-button">Log In</button>
+                        <button className="userLogin-button">LOG IN</button>
                     </Link>
                     <Link to='/signup'>
-                        <button className="userLogin-button">Sign Up</button>
+                        <button className="userLogin-button">SIGN UP</button>
                     </Link>
                 </div>
             )

@@ -5,6 +5,7 @@ import ApiBase from "../../services/ApiBase/ApiBase";
 import ApiKey from "../../services/ApiKey/ApiKey"
 import "./style.css";
 import PollsCollection from "../../collections/PollsCollection"
+import firebase from 'firebase/app'
 
 
 const ViewPoll = () => {
@@ -28,13 +29,11 @@ const ViewPoll = () => {
           return response.data()
         })
         .then(data => {
-            console.log('ovde je data', data)
           let newRestaurantVoteState = [...data.restaurants];
           let prevState = [...data.restaurants]
-        
-        
+
           newRestaurantVoteState = newRestaurantVoteState.filter(restaurant => restaurant.restaurantId === vote);
-        
+
           let index = prevState.indexOf(newRestaurantVoteState[0])
         
         newRestaurantVoteState[0].votes += 1;
@@ -42,7 +41,7 @@ const ViewPoll = () => {
         
           PollsCollection.doc(pollId).update({
             restaurants: prevState,
-            voters: ["pera"]
+            voters: firebase.firestore.FieldValue.arrayUnion('dusan')
           })
         
         })

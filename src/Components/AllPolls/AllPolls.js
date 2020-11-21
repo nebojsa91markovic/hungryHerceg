@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PollsCollection from "../../collections/PollsCollection"
 
 const AllPolls = () => {
 
+    const finishOrder = () => {
+        PollsCollection.doc('1c207585-ee01-4b1d-94d1-f4fb694e4191').update({
+            active: false
+        })
+    }
+
     const getAllPolls = () => {
-        let allPolls = [];
+        let arrAllPolls = [];
         PollsCollection.get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
-              allPolls.push(doc.data());
+              arrAllPolls.push(doc.data());
             });
-            console.log(allPolls);
+            return arrAllPolls;
           });
     }
+
   
     return ( 
         <div className="allPolls">
@@ -21,7 +28,7 @@ const AllPolls = () => {
                 <li>Anketa 2</li>
                 <li>Order 1 
                 </li>
-                <button>Zavrsi order</button>
+                <button onClick={finishOrder}>Zavrsi order</button>
             </ul>
         </div> );
 }

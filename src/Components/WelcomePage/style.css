@@ -40,14 +40,14 @@ body {
     background-color: #21211f;
   }
 
-  .welcome-wrapper h3 {
+  .h3-welcome-page {
     width: 50%;
     font-size: 30px;
     text-align: right;
     margin-top: -10%;
     margin-right: 2%;
   }
-  .welcome-wrapper h1 {
+  .h1-welcome-page {
     width: 50%;
     font-size: 50px;
     margin-top: 50%;

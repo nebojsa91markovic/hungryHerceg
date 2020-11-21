@@ -2,17 +2,22 @@
   width: 40%;
   text-align: left;
   margin-top: 5%;
+  margin-right: 5%;
+  border-style: solid;
+  background-color: rgba(128, 128, 128, 0.288);
+  padding: 2%;
+  border-radius: 10px;
 }
 label {
   font-size: 20px;
 }
 .logIn-input {
   width: 100%;
-  height: 3em;
-  background-color: rgba(255, 255, 255, 0.246);
+  height: 2.3em;
+  background-color: rgba(255, 255, 255, 0.582);
   border-style: none;
   border-radius: 10px;
-  color: #f0af00;
+  color: black;
   font-family: "Arial Black";
   font-size: 20px;
   outline: none;
@@ -33,7 +38,55 @@ label {
 }
 
 .logIn-input-button:hover {
-  width: 28%;
+  width: 29%;
   height: 2.7em;
   transition: 0.5s;
+}
+@media screen and (max-width: 600px) {
+  .login-wrapper {
+    position: fixed;
+    margin: auto;
+    z-index: 3;
+    width: 88%;
+    text-align: center;
+    border-style: solid;
+    background-color: rgba(128, 128, 128, 0.288);
+    padding: 2%;
+    border-radius: 10px;
+  }
+  label {
+    font-size: 20px;
+  }
+  .logIn-input {
+    width: 95%;
+    height: 2.3em;
+    background-color: rgba(255, 255, 255, 0.582);
+    border-style: none;
+    border-radius: 10px;
+    color: #000000;
+    font-family: "Arial Black";
+    font-size: 20px;
+    outline: none;
+    padding-left: 3%;
+  }
+
+  .logIn-input-button {
+    background-color: #f0af00;
+    color: black;
+    width: 40%;
+    height: 2em;
+    font-size: 20px;
+    font-weight: bolder;
+    border-style: none;
+    border-radius: 10px;
+    border-width: 3px;
+    margin-top: 1em;
+    outline: none;
+  }
+
+  .logIn-input-button:hover {
+    width: 40%;
+    height: 2em;
+    transition: 0.5s;
+  }
 }

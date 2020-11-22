@@ -69,10 +69,14 @@ const ViewPoll = () => {
         newRestaurantVoteState[0].votes += 1;
           prevState[index] = newRestaurantVoteState[0]
         
-          PollsCollection.doc(pollId).update({
-            restaurants: prevState,
-            voters: firebase.firestore.FieldValue.arrayUnion('dusan')
-          })
+            if(data.active) {
+                PollsCollection.doc(pollId).update({
+                    restaurants: prevState,
+                    voters: firebase.firestore.FieldValue.arrayUnion('dusan')
+                  })
+            }
+
+         
         
         })
     }

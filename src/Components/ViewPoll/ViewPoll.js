@@ -6,9 +6,11 @@ import ApiKey from "../../services/ApiKey/ApiKey"
 import "./style.css";
 import PollsCollection from "../../collections/PollsCollection"
 import firebase from 'firebase/app'
+import { useCookies } from "react-cookie";
 
 
 const ViewPoll = () => {
+    const [cookies, setCookie] = useCookies(["user"]);
 
     const pollId = useParams().pollId;
     const [poll, setPoll] = useState([]);
@@ -20,6 +22,33 @@ const ViewPoll = () => {
             "Authorization": "Bearer " + ApiKey
         }
     };
+
+    const addOrder =  () => {
+    
+        OrdersCollection.doc().set({
+          created: 'now',
+          createBy: 'tesla@tesla.com',
+          label: pollName,
+          restaurantId: '20ce30a6-fe28-s4c75-a37a-5499851af079',
+          active: true,
+          allMeals: []
+        }, {merge: true})
+        .then(() => {
+          console.log('order upisan')
+          });
+        }
+
+    const finishPoll = () => {
+        PollsCollection.doc(pollId).get()
+        .then(response => {
+            if(response.data().createBy === cookies.user){
+                PollsCollection.doc(pollId).update({
+                    active: false
+                })
+            }
+            else alert('nisi admin')
+        })
+    }
 
 
     const addVote = (event) => {
@@ -113,6 +142,7 @@ const ViewPoll = () => {
                 </div>
 
             </form>
+            <button onClick={finishPoll}>Zavrsi anketu</button>
         </div>
     );
 }

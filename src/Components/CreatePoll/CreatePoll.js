@@ -76,7 +76,8 @@ console.log(restaurants, 'ovde smo')
       restaurants: selectedRestaurants.slice(1),
       active: true,
       id: pollId,
-      voters: []
+      voters: [],
+      isOrderCreated: false
     }, {merge: true})
     .then(() => {
       history.push(`poll/${pollId}`);

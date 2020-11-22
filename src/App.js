@@ -21,7 +21,7 @@ function App() {
         <NavBar />
 
         <Switch>
-          <PrivateRoute component={Home} exact path="/home" />
+          <PrivateRoute component={Home} exact path={["/home", "/polls", "/orders"]} />
           <PrivateRoute component={CreatePoll} exact path="/create-poll" />
           <PrivateRoute component={CreateOrder} exact path="/create-order" />
           <PrivateRoute component={ViewPoll} exact path="/poll/:pollId" />

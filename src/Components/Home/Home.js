@@ -18,7 +18,7 @@ const Home = () => {
         <CreateRestaurantDatabase /> */}
             {/* active polls true */}
             <AllPolls />
-            {/* <ViewOrder /> */}
+            <ViewOrder />
         </div>
 
     );

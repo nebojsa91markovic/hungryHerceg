@@ -5,14 +5,19 @@ import ApiBase from "../../services/ApiBase/ApiBase";
 import ApiKey from "../../services/ApiKey/ApiKey"
 import "./style.css";
 import PollsCollection from "../../collections/PollsCollection"
+import OrdersCollection from "../../collections/OrdersCollection"
+import firebase from 'firebase/app'
+import { useCookies } from "react-cookie";
 
 
 const ViewPoll = () => {
+    const [cookies, setCookie] = useCookies(["user"]);
 
     const pollId = useParams().pollId;
     const [poll, setPoll] = useState([]);
     const [allPolls, setAllPolls] = useState([]);
     const [vote, setVote] = useState('');
+    const [voted,setVoted] = useState(false);
 
     const config = {
         headers: {
@@ -20,30 +25,59 @@ const ViewPoll = () => {
         }
     };
 
+    const addOrder =  () => {
+    
+        OrdersCollection.doc().set({
+          created: 'now',
+          createBy: 'tesla@tesla.com',
+          label: 'pollName',
+          restaurantId: '20ce30a6-fe28-s4c75-a37a-5499851af079',
+          active: true,
+          allMeals: []
+        }, {merge: true})
+        .then(() => {
+          console.log('order upisan')
+          });
+        }
+
+    const finishPoll = () => {
+        PollsCollection.doc(pollId).get()
+        .then(response => {
+            if(response.data().createBy === cookies.user){
+                PollsCollection.doc(pollId).update({
+                    active: false
+                })
+                alert('zavrseno');
+            }
+            else alert('nisi admin')
+        })
+    }
+
 
     const addVote = (event) => {
-  event.preventDefault();
+    event.preventDefault();
         PollsCollection.doc(pollId).get()
         .then(response => {
           return response.data()
         })
         .then(data => {
-            console.log('ovde je data', data)
           let newRestaurantVoteState = [...data.restaurants];
           let prevState = [...data.restaurants]
-        
-        
+
           newRestaurantVoteState = newRestaurantVoteState.filter(restaurant => restaurant.restaurantId === vote);
-        
+
           let index = prevState.indexOf(newRestaurantVoteState[0])
         
         newRestaurantVoteState[0].votes += 1;
           prevState[index] = newRestaurantVoteState[0]
-        
+        if(data.active){
           PollsCollection.doc(pollId).update({
             restaurants: prevState,
-            voters: ["pera"]
+            voters: firebase.firestore.FieldValue.arrayUnion('dusan')
+          }).then(() => {
+            setVoted(true);
           })
+        }
         
         })
     }
@@ -65,7 +99,7 @@ const ViewPoll = () => {
         //         console.log(response.data)
         //         setPoll(response.data);
         //     });
-    }, [pollId]);
+    }, [voted]);
 
     // useEffect(() => {
     //     axios.get(`${ApiBase}polls`, config)
@@ -75,18 +109,9 @@ const ViewPoll = () => {
     //         })
     // }, []);
 
+    const showVoting = () => {
 
-
-    const submitVote = (e) => {
-
-        e.preventDefault();
-
-
-    }
-
-    return (
-
-        <div className="polls">
+        return(
             <form onSubmit={addVote}>
                 <h3>{poll.label}</h3>
                 {/* vote mode */}
@@ -97,25 +122,46 @@ const ViewPoll = () => {
 
                 </div>
                 <input type="submit" />
-
-                {allPolls && allPolls.map(onePoll => <Link key={onePoll.id} to={`/poll/${onePoll.id}`}><h5>{onePoll.label}</h5></Link>)}
-
-                {/* view mode */}
-                <div className="restaurantList">
-                    {/* loading polje da se popunjava css Bojan */}
-                    <label>Ime restorana</label>
-                    <span>23%</span>
-                    <label>Ime restorana2</label>
-                    <span>23%</span>
-                    <label>Ime restorana3</label>
-                    <span>23%</span>
-                    <label>Ime restorana4</label>
-                    <span>23%</span>
-                </div>
-
             </form>
+        )
+
+    }
+
+    const finishPollButton = () => {
+        if(poll.createBy === cookies.user){
+            return(
+                <button onClick={finishPoll}>Finish poll</button>
+            )
+        }
+    }
+
+    const showResults = () => {
+
+        return(
+            <>
+            <h1>RESULTS</h1>
+            <h3>Naziv ankete: {poll.label}</h3>
+            {poll.restaurants.map(restaurant => <li key={restaurant.restaurantId}><span>{restaurant.restaurantName}|| {restaurant.votes}</span></li>)}
+            {finishPollButton()}
+
+            </>
+        )
+    }
+
+    return (
+        <div className="polls">
+
+        {voted === false
+            ?
+            showVoting()
+            :
+            showResults()}
         </div>
+
+            
+
     );
+
 }
 
 export default ViewPoll;

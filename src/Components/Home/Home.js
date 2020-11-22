@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route, Router, Switch } from 'react-router-dom';
+import AllOrders from '../AllOrders/AllOrders';
 import AllPolls from '../AllPolls/AllPolls';
 import CreateRestaurant from "../CreateRestaurant/CreateRestaurant"
 import CreateRestaurantDatabase from "../CreateRestaurantDatabase/CreateRestaurantDatabase"
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import ViewOrder from '../ViewOrder/ViewOrder';
 import "./style.css"
 
@@ -11,13 +13,17 @@ const Home = () => {
 
         <div className="main">
             <Link className="pollButton" to="/polls">Active Polls</Link>
-            <Link  className="pollButton" to="/create-poll">Create Poll</Link>
-            <Link  className="pollButton" to="/orders">Active Orders</Link>
-            <Link  className="pollButton" to="/create-order">Create Order</Link>
+            <Link className="pollButton" to="/create-poll">Create Poll</Link>
+            <Link className="pollButton" to="/orders">Active Orders</Link>
+            <Link className="pollButton" to="/create-order">Create Order</Link>
             {/* <CreateRestaurant />
         <CreateRestaurantDatabase /> */}
             {/* active polls true */}
-            <AllPolls />
+
+            <Switch>
+                <Route component={AllPolls} exact path="/polls" />
+                <PrivateRoute component={AllOrders} exact path="/orders" />
+            </Switch>
             {/* <ViewOrder /> */}
         </div>
 

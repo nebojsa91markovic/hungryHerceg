@@ -1,17 +1,17 @@
-.polls{
-    height: 500px;
-    color: white;
-    width: 40%;
-    margin: 0 auto;
-    border-radius: 20px;
-    border: 1px solid red;
-    background:rgba(0,0,0,0.9);
+.polls {
+  height: 500px;
+  color: white;
+  width: 40%;
+  margin: 0 auto;
+  border-radius: 20px;
+  border: 2px solid white;
+  background: rgba(128, 128, 128, 0.288);
 }
 .poll-label {
-    font-size: 30px;
-    margin-right: 20px;
+  font-size: 30px;
+  margin-right: 20px;
 }
 .poll-input {
-    width: 29vw;
-    text-align: center;
+  width: 29vw;
+  text-align: center;
 }

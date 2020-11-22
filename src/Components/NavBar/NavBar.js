@@ -12,25 +12,39 @@ const NavBar = () => {
         history.push('/')
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem('status')
+    }
+
     const showButtons = () => {
 
         if (location.pathname === "/" || location.pathname === "/login" || location.pathname === "/signup") {
             return (
                 <div className="userLogin-wrapper">
                     <Link to='/login'>
-                        <button className="userLogin-button">Log In</button>
+                        <button className="userLogin-button">LOG IN</button>
                     </Link>
                     <Link to='/signup'>
-                        <button className="userLogin-button">Sign Up</button>
+                        <button className="userLogin-button">SIGN UP</button>
                     </Link>
                 </div>
             )
         }
         else return (
+<<<<<<< HEAD
             <button onClick={handleLogout} className="userLogin-button">Log Out</button>
         )
 
 
+=======
+
+            <div className="userLogin-wrapper">
+                <Link to='/'>
+                    <button onClick={handleLogout} className="userLogin-button">LOG OUT</button>
+                </Link>
+            </div>
+        )
+>>>>>>> main
     }
 
     return (

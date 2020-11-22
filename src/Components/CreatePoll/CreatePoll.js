@@ -11,8 +11,10 @@ import PollsCollection from "../../collections/PollsCollection"
 import { v4 as uuidv4 } from 'uuid';
 import Moment from 'react-moment';
 import moment from 'moment';
+import { useCookies } from "react-cookie";
 
 const CreatePoll = () => {
+  const [cookies, setCookie] = useCookies(["user"]);
 
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [selectedRestaurants, setSelectedRestaurants] = useState([{ restaurantId: 0 }]);
@@ -68,8 +70,8 @@ console.log(restaurants, 'ovde smo')
 
 
     PollsCollection.doc(pollId).set({
-      created: 'now',
-      createBy: 'tesla@tesla.com',
+      created: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      createBy: cookies.user,
       label: label,
       restaurants: selectedRestaurants.slice(1),
       active: true,
@@ -89,7 +91,7 @@ console.log(restaurants, 'ovde smo')
         <label className="poll-label">Naziv ankete</label>
         <input className="poll-input" type="text" placeholder="radna subota" onChange={(e) => setLabel(e.target.value)} />
         <br />
-        <span>Datum i vreme: {datetime}</span>
+        <span >Datum i vreme: {datetime}</span>
         <br />
         {selectedRestaurants.map(selected => {
           return (

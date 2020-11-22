@@ -14,7 +14,8 @@ const CreateOrder = () => {
           createBy: 'tesla@tesla.com',
           label: pollName,
           restaurantId: '20ce30a6-fe28-s4c75-a37a-5499851af079',
-          active: true
+          active: true,
+          allMeals: []
         }, {merge: true})
         .then(() => {
           console.log('order upisan')

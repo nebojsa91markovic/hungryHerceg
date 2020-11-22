@@ -4,9 +4,15 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import "./style.css"
 import UsersCollection from "../../collections/UsersCollection";
-
+import { useCookies } from "react-cookie";
 
 const Login = () => {
+
+  const [cookies, setCookie] = useCookies(["user"]);
+
+  const handleCookie = (userId) => {
+    setCookie("user", userId, { path: "/" });
+  }
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('1');
@@ -15,6 +21,7 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     console.log('submit test')
 
     let allUsers = [];
@@ -27,14 +34,27 @@ const Login = () => {
       allUsers.map(user => {
         if (user.email === username && user.password === password) {
           console.log('success')
+          console.log(user.id)
+          handleCookie(user.id);
           localStorage.setItem('status', 'ulogovan')
           history.push("/home");
         }
       })
     });
+    console.log(allUsers);
+    allUsers.map(user => {
+      if (user.email === username && user.password === password) {
+        console.log('success')
+        localStorage.setItem('status', 'ulogovan')
+        history.push("/home");
+      }
+    })
   }
 
+
+
   return (
+
     <div className="login-wrapper">
       <form onSubmit={handleSubmit}>
         <label>Email:</label>

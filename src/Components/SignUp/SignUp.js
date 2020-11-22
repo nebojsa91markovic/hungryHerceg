@@ -24,7 +24,15 @@ const SignUp = () => {
       password,
     }
 
-    UsersCollection.doc().set(data, {merge: true})
+    let newDocRef = UsersCollection.doc()
+    
+    newDocRef.set({
+      email,
+      firstName,
+      lastName,
+      password,
+      id: newDocRef.id
+    }, {merge: true})
     .then(() => {
       console.log('user upisan')
       })

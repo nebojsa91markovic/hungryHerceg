@@ -1,30 +1,16 @@
-import React, { createContext, useReducer, useEffect, useState } from "react";
-import ApiBase from "../services/ApiBase/ApiBase"
+import React, { createContext, useReducer } from "react";
+import {LoginReducer} from "../Reducers/LoginReducer"
 
+export const LoginContext = createContext();
 
-export const CustomerContext = createContext();
-
-const CustomerContextProvider = (props) => {
-
-  const [allCustomers, setAllCustomers] = useState([]);
-
-  const [customers, dispatch] = useReducer(CustomerReducer, [], () => {
-
-
-    const localData = localStorage.getItem("customers");
-    return localData ? JSON.parse(localData) : [];
-  });
-
-  useEffect(() => {
-
-    localStorage.setItem("customers", JSON.stringify(customers));
-  }, [customers]);
+const LoginContextProvider = (props) => {
+  const [isLogedIn, dispatch] = useReducer(LoginReducer);
 
   return (
-    <CustomerContext.Provider value={{ customers, dispatch }}>
+    <LoginContext.Provider value={{ isLogedIn, dispatch }}>
       {props.children}
-    </CustomerContext.Provider>
+    </LoginContext.Provider>
   );
 };
 
-export default CustomerContextProvider;
+export default LoginContextProvider;

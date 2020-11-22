@@ -5,6 +5,7 @@ import ApiBase from "../../services/ApiBase/ApiBase";
 import ApiKey from "../../services/ApiKey/ApiKey"
 import "./style.css";
 import PollsCollection from "../../collections/PollsCollection"
+import OrdersCollection from "../../collections/OrdersCollection"
 import firebase from 'firebase/app'
 import { useCookies } from "react-cookie";
 
@@ -28,7 +29,7 @@ const ViewPoll = () => {
         OrdersCollection.doc().set({
           created: 'now',
           createBy: 'tesla@tesla.com',
-          label: pollName,
+          label: 'pollName',
           restaurantId: '20ce30a6-fe28-s4c75-a37a-5499851af079',
           active: true,
           allMeals: []

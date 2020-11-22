@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import OrdersCollection from "../../collections/OrdersCollection"
+import PollsCollection from "../../collections/PollsCollection"
+
 
 const CreateOrder = () => {
 
@@ -18,6 +20,11 @@ const CreateOrder = () => {
           allMeals: []
         }, {merge: true})
         .then(() => {
+
+          PollsCollection.doc('20ce30a6-fe28-s4c75-a37a-5499851af079').update({
+            isOrderCreated: true
+          })
+
           console.log('order upisan')
           });
         }

@@ -12,10 +12,6 @@ const NavBar = () => {
         history.push('/')
     }
 
-    const handleLogout = () => {
-        localStorage.removeItem('status')
-    }
-
     const showButtons = () => {
 
         if (location.pathname === "/" || location.pathname === "/login" || location.pathname === "/signup") {
@@ -31,12 +27,6 @@ const NavBar = () => {
             )
         }
         else return (
-<<<<<<< HEAD
-            <button onClick={handleLogout} className="userLogin-button">Log Out</button>
-        )
-
-
-=======
 
             <div className="userLogin-wrapper">
                 <Link to='/'>
@@ -44,7 +34,6 @@ const NavBar = () => {
                 </Link>
             </div>
         )
->>>>>>> main
     }
 
     return (

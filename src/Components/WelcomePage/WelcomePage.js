@@ -2,11 +2,7 @@ import React from 'react';
 import './style.css';
 import Login from "../Login/Login"
 import SignUp from '../SignUp/SignUp';
-<<<<<<< HEAD
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
-=======
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom'
->>>>>>> main
 
 const WelcomePage = () => {
 
@@ -30,18 +26,6 @@ const WelcomePage = () => {
             )
         }
         else return
-    }
-
-    const isLogin = () => {
-
-        if (localStorage.getItem("status") === null) {
-            return false
-        }
-        else {
-            return (
-                <Redirect to="/home" />
-            )
-        }
     }
 
 

@@ -96,7 +96,7 @@ console.log(restaurants, 'ovde smo')
         <br />
         {selectedRestaurants.map(selected => {
           return (
-            <Autocomplete key={selected.restaurantId} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} allRestaurants={allRestaurants} />
+            <Autocomplete key={selected.restaurantId} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} allRestaurants={allRestaurants}  />
           )
         })}
         <input type="submit" />

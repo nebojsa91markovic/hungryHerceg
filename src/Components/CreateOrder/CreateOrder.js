@@ -36,9 +36,9 @@ const CreateOrder = () => {
     return ( <div className="polls">
         {/* Ljubica */}
         {/* izaberi anketu */}
-        <input type="text" onChange={event => setRestaurantWon(event.target.value)}/>
-      <input type="text" onChange={event => setPollName(event.target.value)} />
-        <button onClick={addOrder}>Push</button>
+        <input className="poll-input" type="text" onChange={event => setRestaurantWon(event.target.value)}/>
+      <input className="poll-input" type="text" onChange={event => setPollName(event.target.value)} />
+        <button className="submit-button" onClick={addOrder}>Push</button>
     </div> );
 }
  

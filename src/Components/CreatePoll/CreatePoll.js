@@ -89,11 +89,11 @@ console.log(restaurants, 'ovde smo')
   return (
     <div className="polls">
       <form onSubmit={createNewPoll}>
-        <label className="poll-label">Naziv ankete</label>
-        <input className="poll-input" type="text" placeholder="radna subota" onChange={(e) => setLabel(e.target.value)} />
+        <label className="poll-label">Poll Name</label>
+        <input className="poll-input" type="text" placeholder="Monday..." onChange={(e) => setLabel(e.target.value)} />
         <br />
-        <span >Datum i vreme: {datetime}</span>
-        <br />
+        {/* <span >Datum i vreme: {datetime}</span>
+        <br /> */}
         {selectedRestaurants.map(selected => {
           return (
             <Autocomplete key={selected.restaurantId} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} allRestaurants={allRestaurants}  />

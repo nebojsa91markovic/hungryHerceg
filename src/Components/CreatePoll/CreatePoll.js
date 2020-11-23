@@ -96,6 +96,8 @@ console.log(restaurants, 'ovde smo')
         <input type="time" />
         <span >Datum i vreme: {datetime}</span>
         <br />
+        {/* <span >Datum i vreme: {datetime}</span>
+        <br /> */}
         {selectedRestaurants.map(selected => {
           return (
             <Autocomplete key={selected.restaurantId} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} allRestaurants={allRestaurants}  />

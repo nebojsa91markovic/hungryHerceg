@@ -9,6 +9,15 @@
   background: rgba(128, 128, 128, 0.288);
 }
 
+.date-time-input {
+  border: 2px solid white;
+  width: 46%;
+  margin: auto;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.582);
+  color: black;
+}
+
 .submit-button {
   background-color: #f0af00;
   color: black;
@@ -33,4 +42,47 @@
   color: black;
   height: 3em;
   outline: none;
+}
+
+@media screen and (max-width: 600px) {
+  .polls {
+    color: white;
+    padding: 2em;
+    width: 90%;
+    margin: auto;
+  }
+
+  .submit-button {
+    height: 2em;
+  }
+  .poll-label {
+    font-size: 30px;
+  }
+  .poll-input {
+    width: 100%;
+    margin: auto;
+    margin-top: 1em;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+  .polls {
+    color: white;
+    padding: 2em;
+    width: 80%;
+    margin: auto;
+    margin-top: 15%;
+  }
+
+  .submit-button {
+    height: 2em;
+  }
+  .poll-label {
+    font-size: 30px;
+  }
+  .poll-input {
+    width: 100%;
+    margin: auto;
+    margin-top: 1em;
+  }
 }

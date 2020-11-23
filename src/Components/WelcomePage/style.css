@@ -1,6 +1,5 @@
 body {
-  background-image: url("./food-background.jpeg");
-  background-repeat: no-repeat;
+  background: url("./food-background.jpeg") center center fixed no-repeat;
   background-size: cover;
   font-family: "Arial Black";
 }
@@ -30,19 +29,14 @@ body {
   justify-content: space-between;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
   body {
     font-family: "Arial Black";
-    /* background-image: none; */
     background-image: url("./background-mobile3.jpeg");
-    background-size: cover;
-
     background-position: center center;
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
-
-    background-color: #21211f;
   }
 
   .h3-welcome-page {
@@ -58,5 +52,11 @@ body {
     margin-top: 50%;
     text-align: left;
     margin-left: 5%;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+  .h1-welcome-page {
+    margin-top: 30%;
   }
 }

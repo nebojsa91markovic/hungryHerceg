@@ -68,7 +68,7 @@
     width: 100%;
     margin: none;
     margin-top: -10%;
-    margin-left: -5%;
+    margin-left: 0%;
     padding: none;
     display: flex;
   }
@@ -107,3 +107,54 @@
     outline: none;
   }
 }
+
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+  .navBar {
+    width: 100%;
+    margin: auto;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+    height: 200px;
+  }
+
+  .userLogin-wrapper {
+    width: 60%;
+    margin: none;
+    padding: none;
+  }
+
+  .logo {
+    width: 15em;
+    height: 15em;
+    background-image: url("./logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .userLogin-button {
+    width: 33%;
+    height: 3em;
+    margin: 1em;
+    margin-top: 3em;
+    color: black;
+    font-size: 20px;
+    font-weight: bolder;
+    background-color: #f0af00;
+    /* background-color: transparent; */
+    border-style: solid;
+    border-color: #f0af00;
+    border-radius: 10px;
+    border-width: 3px;
+    outline: none;
+  }
+
+  .userLogin-button:hover {
+    background-color: transparent;
+    color: #f0af00;
+    width: 32%;
+    height: 3.7em;
+    transition: 0.5s;
+  }
+} ;

@@ -11,13 +11,17 @@ const CreateOrder = () => {
 
     const addOrder =  () => {
     
-        OrdersCollection.doc().set({
+
+      let newDocRef = OrdersCollection.doc()
+
+      newDocRef.set({
           created: 'now',
           createBy: 'tesla@tesla.com',
           label: pollName,
           restaurantId: '20ce30a6-fe28-s4c75-a37a-5499851af079',
           active: true,
-          allMeals: []
+          allMeals: [],
+          id: newDocRef.id
         }, {merge: true})
         .then(() => {
 

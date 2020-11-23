@@ -99,7 +99,7 @@ console.log(restaurants, 'ovde smo')
             <Autocomplete key={selected.restaurantId} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} allRestaurants={allRestaurants}  />
           )
         })}
-        <input type="submit" />
+        <input type="submit" className="submit-button" />
 
       </form>
     </div>

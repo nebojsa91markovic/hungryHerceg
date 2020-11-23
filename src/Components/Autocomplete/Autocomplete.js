@@ -39,7 +39,7 @@ const Autocomplete = ({ selectedRestaurants, setSelectedRestaurants, allRestaura
   return (
 
     <div className='autocomplete-wrapper'>
-      <input className='autocomplete-input' type='text' onChange={(e) => { setFilter(e.target.value); setText(e.target.value) }} value={text} placeholder='Choose a restaurant' disabled={disabled} />
+      <input className='poll-input' type='text' onChange={(e) => { setFilter(e.target.value); setText(e.target.value) }} value={text} placeholder='Choose a restaurant' disabled={disabled} />
       <br />
       <div id='ingredients'>
         <ul className='search-results'>{filteredOptions.map(el =>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import OrdersCollection from "../../collections/OrdersCollection"
+import OrderItem from '../OrderItem/OrderItem';
 
 const AllOrders = () => {
 
@@ -19,13 +19,12 @@ const AllOrders = () => {
 
     useEffect(() => {
         getAllOrders()
-        console.log(orders);
     }, [])
 
 
     return (
         <div className="allPolls">
-            {orders.map(order => <Link to={`/order/${order.restaurantId}`}><li>NAME: {order.label} || STATUS: {order.active + ''}</li></Link>)}
+            {orders.map(order => <OrderItem order={order} />)}
         </div >
     );
 }

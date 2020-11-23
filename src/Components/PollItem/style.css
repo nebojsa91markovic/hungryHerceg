@@ -1,0 +1,8 @@
+.pollItem {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    border: 1px solid white;
+    height: 6rem;
+    margin-top: 1rem;;
+}

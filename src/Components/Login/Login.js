@@ -22,33 +22,20 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log('submit test')
-
     let allUsers = [];
     UsersCollection.get().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
         allUsers.push(doc.data());
 
       });
-      console.log(allUsers);
       allUsers.map(user => {
         if (user.email === username && user.password === password) {
-          console.log('success')
-          console.log(user.id)
           handleCookie(user.id);
           localStorage.setItem('status', 'ulogovan')
           history.push("/home");
         }
       })
     });
-    console.log(allUsers);
-    allUsers.map(user => {
-      if (user.email === username && user.password === password) {
-        console.log('success')
-        localStorage.setItem('status', 'ulogovan')
-        history.push("/home");
-      }
-    })
   }
 
 

@@ -27,6 +27,8 @@ const WelcomePage = () => {
         }
         else return
     }
+
+
     return (
 
         <div className="welcome-wrapper">
@@ -34,7 +36,7 @@ const WelcomePage = () => {
 
             {isLogin()}
             {showText()}
-
+            {isLogin()}
             <Switch>
                 <Route component={Login} exact path='/login' />
                 <Route component={SignUp} exact path='/signup' />

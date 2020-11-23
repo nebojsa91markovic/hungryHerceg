@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { useCookies } from "react-cookie";
-import UsersCollection from "../../collections/UsersCollection";
-
 const PrivateRoute = ({ component: Component, ...rest }) => {
-
-    const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
-    console.log(cookies.user)
 
 
     const isLogin = () => {

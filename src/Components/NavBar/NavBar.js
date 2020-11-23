@@ -1,13 +1,15 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 import './style.css';
 
 const NavBar = () => {
 
     const location = useLocation()
+    const history = useHistory()
 
     const handleLogout = () => {
         localStorage.removeItem('status')
+        history.push('/')
     }
 
     const showButtons = () => {

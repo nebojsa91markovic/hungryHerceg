@@ -9,8 +9,9 @@ import { useCookies } from "react-cookie";
 const Login = () => {
 
   const [cookies, setCookie] = useCookies(["user"]);
+
   const handleCookie = (userId) => {
-    setCookie("user", userId, {      path: "/"    });  
+    setCookie("user", userId, { path: "/" });
   }
 
   const [username, setUsername] = useState('');
@@ -20,29 +21,27 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    console.log('submit test')
 
-      let allUsers = [];
-      UsersCollection.get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          allUsers.push(doc.data());
-          
-        });
-        console.log(allUsers);
-        allUsers.map(user => {
-          if(user.email === username && user.password === password) {
-            console.log('success')
-            console.log(user.id)
-            handleCookie(user.id);
-            localStorage.setItem('status', 'ulogovan')
-            history.push("/home");
-          }
-        })
+    let allUsers = [];
+    UsersCollection.get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        allUsers.push(doc.data());
+
       });
+      allUsers.map(user => {
+        if (user.email === username && user.password === password) {
+          handleCookie(user.id);
+          localStorage.setItem('status', 'ulogovan')
+          history.push("/home");
+        }
+      })
+    });
   }
 
+
+
   return (
+
     <div className="login-wrapper">
       <form onSubmit={handleSubmit}>
         <label>Email:</label>
@@ -53,7 +52,7 @@ const Login = () => {
         <br></br>
         <input className="logIn-input" type="password" onChange={(event) => setPassword(event.target.value)} />
         <br></br>
-        <input  className="logIn-input-button" type="submit" value="LOG IN" />
+        <input className="logIn-input-button" type="submit" value="LOG IN" />
       </form>
     </div>
   );

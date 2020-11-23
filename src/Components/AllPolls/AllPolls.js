@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PollsCollection from "../../collections/PollsCollection"
+import PollItem from '../PollItem/PollItem';
 
 const AllPolls = () => {
+
+    const [polls, setPolls] = useState([])
 
     const finishOrder = () => {
         PollsCollection.doc('1c207585-ee01-4b1d-94d1-f4fb694e4191').update({
@@ -12,25 +15,25 @@ const AllPolls = () => {
     const getAllPolls = () => {
         let arrAllPolls = [];
         PollsCollection.get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-              arrAllPolls.push(doc.data());
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    arrAllPolls.push(doc.data());
+                });
+                setPolls(arrAllPolls)
             });
-            return arrAllPolls;
-          });
     }
 
-  
-    return ( 
+    useEffect(() => {
+        getAllPolls()
+    }, [])
+
+
+    return (
         <div className="allPolls">
-            <ul>
-                <li>Anketa 1</li>
-                <li>Anketa 2</li>
-                <li>Order 1 
-                </li>
-                <button onClick={finishOrder}>Zavrsi order</button>
-            </ul>
-        </div> );
+            {polls.map(poll => <PollItem key={poll.id} poll={poll} />)
+            }
+        </div >
+    );
 }
- 
+
 export default AllPolls;

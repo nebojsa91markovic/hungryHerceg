@@ -1,10 +1,16 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 import './style.css';
 
 const NavBar = () => {
 
     const location = useLocation()
+    const history = useHistory()
+
+    const handleLogout = () => {
+        localStorage.removeItem('status')
+        history.push('/')
+    }
 
     const showButtons = () => {
 
@@ -20,7 +26,14 @@ const NavBar = () => {
                 </div>
             )
         }
-        else return
+        else return (
+
+            <div className="userLogin-wrapper">
+                <Link to='/'>
+                    <button onClick={handleLogout} className="userLogin-button">LOG OUT</button>
+                </Link>
+            </div>
+        )
     }
 
     return (

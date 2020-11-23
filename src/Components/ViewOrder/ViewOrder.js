@@ -6,6 +6,7 @@ import items from "./data"
 import "./style.css"
 import OrdersCollection from "../../collections/OrdersCollection"
 import RestaurantCollection from "../../collections/RestaurantCollection"
+import FavoriteMealsCollection from "../../collections/FavoriteMealsCollection"
 import firebase from 'firebase/app'
 
 const ViewOrder = () => {
@@ -24,10 +25,20 @@ const ViewOrder = () => {
     ]
 }
 
+  const addFavoriteMeal = () => {
+    console.log('test2')
+
+    FavoriteMealsCollection.doc('C653YQ51XdA5gqWXUWRw').update({
+      pizza: 1
+    })
+  }
+
   const addOrder = () => {
+    console.log('test1')
     OrdersCollection.doc('89cHkUJiwrqiXW8v10TY').update({
       allMeals: firebase.firestore.FieldValue.arrayUnion(newMeals)
     })
+    addFavoriteMeal();
   }
 
   const getAllMeals = () => {

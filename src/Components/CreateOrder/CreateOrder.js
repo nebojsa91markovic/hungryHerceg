@@ -11,13 +11,17 @@ const CreateOrder = () => {
 
     const addOrder =  () => {
     
-        OrdersCollection.doc().set({
+
+      let newDocRef = OrdersCollection.doc()
+
+      newDocRef.set({
           created: 'now',
           createBy: 'tesla@tesla.com',
           label: pollName,
           restaurantId: '20ce30a6-fe28-s4c75-a37a-5499851af079',
           active: true,
-          allMeals: []
+          allMeals: [],
+          id: newDocRef.id
         }, {merge: true})
         .then(() => {
 
@@ -32,9 +36,9 @@ const CreateOrder = () => {
     return ( <div className="polls">
         {/* Ljubica */}
         {/* izaberi anketu */}
-        <input type="text" onChange={event => setRestaurantWon(event.target.value)}/>
-      <input type="text" onChange={event => setPollName(event.target.value)} />
-        <button onClick={addOrder}>Push</button>
+        <input className="poll-input" type="text" onChange={event => setRestaurantWon(event.target.value)}/>
+      <input className="poll-input" type="text" onChange={event => setPollName(event.target.value)} />
+        <button className="submit-button" onClick={addOrder}>Push</button>
     </div> );
 }
  

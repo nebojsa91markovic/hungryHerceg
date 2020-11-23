@@ -19,6 +19,7 @@ const CreatePoll = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [selectedRestaurants, setSelectedRestaurants] = useState([{ restaurantId: 0 }]);
   const [label, setLabel] = useState('');
+  const [date, setDate] = useState('');
   const history = useHistory();
   const user = localStorage.getItem('userName');
 
@@ -39,20 +40,21 @@ const CreatePoll = () => {
       setAllRestaurants(allRestaurants);
     });
 
-
+    setDate(moment().format('MMMM Do YYYY, h:mm:ss a'));
+    
   }, []);
 
 
-  let d = new Date();
-  let datetime = d.getFullYear() + '-'
-    + (d.getMonth() + 1) + '-'
-    + d.getDate() + ' '
-    + d.getHours() + ':'
-    + d.getMinutes() + ':'
-    + d.getSeconds();
+  // let d = new Date();
+  // let datetime = d.getFullYear() + '-'
+  //   + (d.getMonth() + 1) + '-'
+  //   + d.getDate() + ' '
+  //   + d.getHours() + ':'
+  //   + d.getMinutes() + ':'
+  //   + d.getSeconds();
 
-    let date1 = moment().format('MMMM Do YYYY, h:mm:ss a')
-    console.log(date1, 'ovo je date')
+  //   let date1 = moment().format('MMMM Do YYYY, h:mm:ss a')
+  //   console.log(date1, 'ovo je date')
 
 
   const createNewPoll = (e) => {
@@ -70,7 +72,8 @@ console.log(restaurants, 'ovde smo')
 
 
     PollsCollection.doc(pollId).set({
-      created: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      // created: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      created: moment().format(),
       createBy: cookies.user,
       label: label,
       restaurants: selectedRestaurants.slice(1),
@@ -92,14 +95,18 @@ console.log(restaurants, 'ovde smo')
         <label className="poll-label">Naziv ankete</label>
         <input className="poll-input" type="text" placeholder="radna subota" onChange={(e) => setLabel(e.target.value)} />
         <br />
-        <span >Datum i vreme: {datetime}</span>
+        <input type="date" />
+        <input type="time" />
+        <span >Datum i vreme: {date}</span>
         <br />
+        {/* <span >Datum i vreme: {datetime}</span>
+        <br /> */}
         {selectedRestaurants.map(selected => {
           return (
-            <Autocomplete key={selected.restaurantId} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} allRestaurants={allRestaurants} />
+            <Autocomplete key={selected.restaurantId} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} allRestaurants={allRestaurants}  />
           )
         })}
-        <input type="submit" />
+        <input type="submit" className="submit-button" />
 
       </form>
     </div>

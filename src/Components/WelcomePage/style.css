@@ -33,9 +33,14 @@ body {
 @media screen and (max-width: 600px) {
   body {
     font-family: "Arial Black";
-    background-image: none;
-    /* background-image: url("./background-image5.jpg");
-    background-size: cover; */
+    /* background-image: none; */
+    background-image: url("./background-mobile3.jpeg");
+    background-size: cover;
+
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
 
     background-color: #21211f;
   }

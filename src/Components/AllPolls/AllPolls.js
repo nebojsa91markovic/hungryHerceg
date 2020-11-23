@@ -30,6 +30,12 @@ const AllPolls = () => {
 
     return (
         <div className="allPolls">
+            <div className="pollItem">
+            <h3>Name: </h3>
+            <span>Date: </span>
+            <span>Time left to Vote:</span>
+            <span>Ordered:</span>
+        </div>
             {polls.map(poll => <PollItem key={poll.id} poll={poll} />)
             }
         </div >

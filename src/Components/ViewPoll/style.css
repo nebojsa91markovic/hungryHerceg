@@ -1,3 +1,13 @@
 .poll-vote-list{
     list-style-type: none;
 }
+
+.polls{
+    position: relative;
+}
+
+.timer{
+    position: absolute;
+    top: 2%;
+    right: 5%;
+}

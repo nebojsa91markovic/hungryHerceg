@@ -1,17 +1,36 @@
 .polls {
-  height: 500px;
   color: white;
+  padding: 3em;
   width: 40%;
-  margin: 0 auto;
+  margin: auto;
+  margin-top: 10%;
   border-radius: 20px;
   border: 2px solid white;
   background: rgba(128, 128, 128, 0.288);
 }
+
+.submit-button {
+  background-color: #f0af00;
+  color: black;
+  width: 30%;
+  height: 3em;
+  font-size: 20px;
+  font-weight: bolder;
+  border-style: none;
+  border-radius: 10px;
+  border-width: 3px;
+  margin-top: 1em;
+  outline: none;
+}
 .poll-label {
   font-size: 30px;
-  margin-right: 20px;
 }
 .poll-input {
-  width: 29vw;
+  width: 100%;
   text-align: center;
+  border: 2px solid white;
+  background-color: rgba(255, 255, 255, 0.582);
+  color: black;
+  height: 3em;
+  outline: none;
 }

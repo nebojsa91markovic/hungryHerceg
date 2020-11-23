@@ -8,6 +8,8 @@ import PollsCollection from "../../collections/PollsCollection"
 import OrdersCollection from "../../collections/OrdersCollection"
 import firebase from 'firebase/app'
 import { useCookies } from "react-cookie";
+import Timer from "../Timer/Timer";
+import moment from 'moment';
 
 
 const ViewPoll = () => {
@@ -18,6 +20,7 @@ const ViewPoll = () => {
     const [allPolls, setAllPolls] = useState([]);
     const [vote, setVote] = useState('');
     const [voted,setVoted] = useState(false);
+    const [duration, setDuration] = useState(0);
 
     const config = {
         headers: {
@@ -77,6 +80,8 @@ const ViewPoll = () => {
           }).then(() => {
             setVoted(true);
           })
+        }else{
+            alert('Ova anketa je istekla, glasanje nije moguce');
         }
         
         })
@@ -109,11 +114,25 @@ const ViewPoll = () => {
     //         })
     // }, []);
 
+    // console.log('OVO JE ANKETA', poll);
+
+    useEffect(() => {
+        setDuration(-moment().diff(timeLeft(), 'seconds'));
+    }, [poll]);
+
+    const timeLeft = () => {
+        if(poll.created){
+        let created = poll.created;
+        let pollDuration = ({'minutes' : 30});
+        let endTime = moment(created).add(pollDuration).format(); 
+        return endTime;
+        }
+    }
+
     const showVoting = () => {
 
         return(
             <form onSubmit={addVote}>
-                <h3>{poll.label}</h3>
                 {/* vote mode */}
                 <div className="restaurantList">
                     <ul className="poll-vote-list">
@@ -140,25 +159,27 @@ const ViewPoll = () => {
         return(
             <>
             <h1>RESULTS</h1>
-            <h3>Naziv ankete: {poll.label}</h3>
             {poll.restaurants.map(restaurant => <li key={restaurant.restaurantId}><span>{restaurant.restaurantName}|| {restaurant.votes}</span></li>)}
             {finishPollButton()}
 
             </>
         )
     }
+    console.log(-moment().diff(timeLeft(), 'seconds'))
 
-    return (
+    return ( 
+        
         <div className="polls">
-
-        {voted === false
+            <h3>Naziv ankete: {poll.label}</h3>
+            {duration && <Timer duration={duration} pollId={pollId}/>}
+            {voted === false
             ?
             showVoting()
             :
             showResults()}
         </div>
 
-            
+
 
     );
 

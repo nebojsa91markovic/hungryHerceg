@@ -1,11 +1,3 @@
-.logo {
-  width: 20em;
-  height: 15em;
-  background-image: url("./logo.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
 .navBar {
   width: 90%;
   margin: auto;
@@ -17,9 +9,17 @@
 }
 
 .userLogin-wrapper {
-  width: 45%;
+  width: 40%;
   margin: none;
   padding: none;
+}
+
+.logo {
+  width: 20em;
+  height: 15em;
+  background-image: url("./logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .userLogin-button {

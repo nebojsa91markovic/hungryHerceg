@@ -71,6 +71,30 @@ const team = [
         img: './imagesAbout/veljko.jpg',
         desc: ' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi, corrupti.'
     },
+    {
+        id: 10,
+        name: 'Danko Novovic',
+        email: 'danko.novovic@svea.com',
+        category: `Mentors`,
+        img: './imagesAbout/danko.jpg',
+        desc: ' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi, corrupti.'
+    },
+    {
+        id: 11,
+        name: 'Nevena Masovic',
+        email: 'nevena.masovic@svea.com',
+        category: `Mentors`,
+        img: './imagesAbout/nevena.jpg',
+        desc: ' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi, corrupti.'
+    },
+    {
+        id: 12,
+        name: 'Svetozar Bata Stojkovic',
+        email: 'svetozar.stojkovic@gmail.com',
+        category: `Mentors`,
+        img: './imagesAbout/bata.jpg',
+        desc: ' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi, corrupti.'
+    },
 ];
 
 export default team;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./style.css"
 import UsersCollection from "../../collections/UsersCollection";
+import FavoriteMealsCollection from "../../collections/FavoriteMealsCollection";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 
@@ -18,6 +19,16 @@ const SignUp = () => {
 
   const handleCookie = (userId) => {
     setCookie("user", userId, { path: "/" });
+  }
+
+  const createFavoriteMeals = (id) => {
+    FavoriteMealsCollection.doc(id).set({
+      pizza: 0,
+      palacinke: 0,
+      burgeri: 0,
+      burito: 0,
+      salate: 0,
+    })
   }
 
   const handleSubmit = (event) => {
@@ -43,6 +54,7 @@ const SignUp = () => {
     }, { merge: true })
       .then(() => {
         console.log('user upisan')
+        createFavoriteMeals(newDocRef.id);
         handleCookie(newDocRef.id);
         history.push('/home')
       })

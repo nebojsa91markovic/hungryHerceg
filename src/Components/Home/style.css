@@ -1,5 +1,5 @@
 .main {
-	width: 80%;
+	/* width: 80%; */
 	margin: 10% auto;
 	/*margin-top: 5%;*/
 }
@@ -23,7 +23,7 @@
 	background-color: transparent;
 	color: #f0af00;
 	transition: 0.5s;
-	width: 19%;
+	width: 19.5%;
 }
 @media screen and (max-width: 600px) {
 	.main {

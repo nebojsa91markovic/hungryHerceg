@@ -6,6 +6,7 @@ Variables
 
 :root {
 	--clr-grey-1: #21211f;
+	--clr-grey-5: hsl(210, 22%, 49%);
 	--clr-grey-8: hsl(210, 31%, 80%);
 	--clr-grey-9: hsl(212, 33%, 89%);
 	--clr-grey-10: hsl(210, 36%, 96%);
@@ -218,4 +219,34 @@ input {
 	.photo {
 		height: 150px;
 	}
+}
+
+/*
+=============== 
+about tesla team
+===============
+*/
+
+.item-text a {
+	color: var(--clr-grey-5);
+}
+.item-text a:hover {
+	color: var(--clr-gold);
+}
+
+/*
+=============== 
+ALL ORDERS
+===============
+*/
+
+.all-orders {
+	width: 100%;
+}
+
+td,
+th {
+	border: 1px solid #424242;
+	text-align: left;
+	padding: 8px;
 }

@@ -2,11 +2,12 @@ import React from 'react';
 import { Link, Route, Router, Switch } from 'react-router-dom';
 import AllOrders from '../AllOrders/AllOrders';
 import AllPolls from '../AllPolls/AllPolls';
-import CreateRestaurant from "../CreateRestaurant/CreateRestaurant"
-import CreateRestaurantDatabase from "../CreateRestaurantDatabase/CreateRestaurantDatabase"
+import CreateRestaurant from "../CreateRestaurant/CreateRestaurant";
+import CreateRestaurantDatabase from "../CreateRestaurantDatabase/CreateRestaurantDatabase";
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import ViewOrder from '../ViewOrder/ViewOrder';
-import "./style.css"
+import About from '../About/About';
+import "./style.css";
 
 const Home = () => {
     return (
@@ -25,9 +26,10 @@ const Home = () => {
                 <PrivateRoute component={AllOrders} exact path="/orders" />
             </Switch>
             {/* <ViewOrder /> */}
+            {/* <About /> */}
         </div>
 
     );
-}
+};
 
 export default Home;

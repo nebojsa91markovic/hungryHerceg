@@ -25,8 +25,8 @@ const Home = () => {
                 <Route component={AllPolls} exact path="/polls" />
                 <PrivateRoute component={AllOrders} exact path="/orders" />
             </Switch>
-            {/* <ViewOrder /> */}
-            {/* <About /> */}
+            <ViewOrder />
+            <About />
         </div>
 
     );

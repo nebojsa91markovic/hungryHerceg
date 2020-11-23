@@ -97,7 +97,7 @@ console.log(restaurants, 'ovde smo')
         <br />
         <input type="date" />
         <input type="time" />
-        <span >Datum i vreme: {datetime}</span>
+        <span >Datum i vreme: {date}</span>
         <br />
         {/* <span >Datum i vreme: {datetime}</span>
         <br /> */}

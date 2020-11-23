@@ -1,15 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './style.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./style.css";
+
+import moment from "moment";
 
 const PollItem = ({ poll }) => {
-    return (
-        <Link className="pollItem" to={`/poll/${poll.id}`}>
-            <h3>Name: {poll.label}</h3>
-            <span>Created: {poll.created}</span>
-            <span>Status: {poll.active + ''}</span>
-        </Link>
-    )
-}
+  const [timeLeft, setTimeLeft] = useState(
+    moment(poll.created).add(2, "hours").fromNow()
+  );
+  return (
+    <Link className="pollItem" to={`/poll/${poll.id}`}>
+      <h3>{poll.label}</h3>
+      <span>{moment(poll.created).format("DD/MM")}</span>
+      <span>{timeLeft}</span>
+      <span>{poll.isOrderCreated ? "Order created" : "Not yet!"}</span>
+    </Link>
+  );
+};
 
-export default PollItem
+export default PollItem;

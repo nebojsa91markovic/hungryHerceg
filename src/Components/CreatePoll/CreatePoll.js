@@ -1,36 +1,37 @@
 import React, { useEffect } from "react";
-import { useState } from 'react';
+import { useState } from "react";
 import Autocomplete from "../Autocomplete/Autocomplete";
-import ApiKey from "../../services/ApiKey/ApiKey"
+import ApiKey from "../../services/ApiKey/ApiKey";
 import ApiBase from "../../services/ApiBase/ApiBase";
 import axios from "axios";
-import { useHistory } from 'react-router-dom';
-import './createPoll.css';
-import RestaurantCollection from "../../collections/RestaurantCollection"
-import PollsCollection from "../../collections/PollsCollection"
-import { v4 as uuidv4 } from 'uuid';
-import Moment from 'react-moment';
-import moment from 'moment';
+import { useHistory } from "react-router-dom";
+import "./createPoll.css";
+import RestaurantCollection from "../../collections/RestaurantCollection";
+import PollsCollection from "../../collections/PollsCollection";
+import { v4 as uuidv4 } from "uuid";
+import Moment from "react-moment";
+import moment from "moment";
 import { useCookies } from "react-cookie";
 
 const CreatePoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
 
   const [allRestaurants, setAllRestaurants] = useState([]);
-  const [selectedRestaurants, setSelectedRestaurants] = useState([{ restaurantId: 0 }]);
-  const [label, setLabel] = useState('');
-  const [date, setDate] = useState('');
+  const [selectedRestaurants, setSelectedRestaurants] = useState([
+    { restaurantId: 0 },
+  ]);
+  const [label, setLabel] = useState("");
+  const [date, setDate] = useState("");
   const history = useHistory();
-  const user = localStorage.getItem('userName');
+  const user = localStorage.getItem("userName");
 
   const config = {
     headers: {
-      "Authorization": "Bearer " + ApiKey
-    }
+      Authorization: "Bearer " + ApiKey,
+    },
   };
 
   useEffect(() => {
-
     let allRestaurants = [];
     RestaurantCollection.get().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
@@ -40,10 +41,8 @@ const CreatePoll = () => {
       setAllRestaurants(allRestaurants);
     });
 
-    setDate(moment().format('MMMM Do YYYY, h:mm:ss a'));
-    
+    setDate(moment().format("MMMM Do YYYY, h:mm:ss a"));
   }, []);
-
 
   // let d = new Date();
   // let datetime = d.getFullYear() + '-'
@@ -56,62 +55,68 @@ const CreatePoll = () => {
   //   let date1 = moment().format('MMMM Do YYYY, h:mm:ss a')
   //   console.log(date1, 'ovo je date')
 
-
   const createNewPoll = (e) => {
-
     e.preventDefault();
-    console.log(selectedRestaurants, 'prvi')
-    console.log(selectedRestaurants[1], 'drugi')
+    console.log(selectedRestaurants, "prvi");
+    console.log(selectedRestaurants[1], "drugi");
 
-    let restaurants = selectedRestaurants.slice(1).map(selectedRestaurant => selectedRestaurant.restaurantId);
-console.log(restaurants, 'ovde smo')
+    let restaurants = selectedRestaurants
+      .slice(1)
+      .map((selectedRestaurant) => selectedRestaurant.restaurantId);
+    console.log(restaurants, "ovde smo");
     let pollId = uuidv4();
 
-
-
-
-
-    PollsCollection.doc(pollId).set({
-      // created: moment().format('MMMM Do YYYY, h:mm:ss a'),
-      created: moment().format(),
-      createBy: cookies.user,
-      label: label,
-      restaurants: selectedRestaurants.slice(1),
-      active: true,
-      id: pollId,
-      voters: [],
-      isOrderCreated: false
-    }, {merge: true})
-    .then(() => {
-      history.push(`poll/${pollId}`);
-  })
-
-  }
-
+    PollsCollection.doc(pollId)
+      .set(
+        {
+          // created: moment().format('MMMM Do YYYY, h:mm:ss a'),
+          created: moment().format(),
+          createBy: cookies.user,
+          label: label,
+          restaurants: selectedRestaurants.slice(1),
+          active: true,
+          id: pollId,
+          voters: [],
+          isOrderCreated: false,
+        },
+        { merge: true }
+      )
+      .then(() => {
+        history.push(`poll/${pollId}`);
+      });
+  };
 
   return (
     <div className="polls">
       <form onSubmit={createNewPoll}>
         <label className="poll-label">Naziv ankete</label>
-        <input className="poll-input" type="text" placeholder="radna subota" onChange={(e) => setLabel(e.target.value)} />
+        <input
+          className="poll-input"
+          type="text"
+          placeholder="radna subota"
+          onChange={(e) => setLabel(e.target.value)}
+        />
         <br />
         <input type="date" />
         <input type="time" />
-        <span >Datum i vreme: {date}</span>
+        <span>Datum i vreme: {date}</span>
         <br />
         {/* <span >Datum i vreme: {datetime}</span>
         <br /> */}
-        {selectedRestaurants.map(selected => {
+        {selectedRestaurants.map((selected) => {
           return (
-            <Autocomplete key={selected.restaurantId} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} allRestaurants={allRestaurants}  />
-          )
+            <Autocomplete
+              key={selected.restaurantId}
+              selectedRestaurants={selectedRestaurants}
+              setSelectedRestaurants={setSelectedRestaurants}
+              allRestaurants={allRestaurants}
+            />
+          );
         })}
         <input type="submit" className="submit-button" />
-
       </form>
     </div>
   );
 };
 
 export default CreatePoll;
-

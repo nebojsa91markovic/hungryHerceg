@@ -41,20 +41,35 @@ const CreatePoll = () => {
     console.log(restaurants, "ovde smo");
     let pollId = uuidv4();
 
-    PollsCollection.doc(pollId)
-      .set({
-        created: moment(`${date}T${time}`).format(),
-        createBy: cookies.user,
-        label: label,
-        restaurants: selectedRestaurants.slice(1),
-        active: true,
-        id: pollId,
-        voters: [],
-        isOrderCreated: false,
-      })
-      .then(() => {
-        history.push(`poll/${pollId}`);
-      });
+    let arrCheck = [
+      date,
+      time,
+      cookies.user,
+      label,
+      selectedRestaurants.slice(1),
+    ];
+
+    arrCheck.forEach((elem) => {
+      console.log();
+      if (elem === 0) {
+        return;
+      } else {
+        PollsCollection.doc(pollId)
+          .set({
+            created: moment(`${date}T${time}`).format(),
+            createBy: cookies.user,
+            label: label,
+            restaurants: selectedRestaurants.slice(1),
+            active: true,
+            id: pollId,
+            voters: [],
+            isOrderCreated: false,
+          })
+          .then(() => {
+            history.push(`poll/${pollId}`);
+          });
+      }
+    });
   };
 
   return (

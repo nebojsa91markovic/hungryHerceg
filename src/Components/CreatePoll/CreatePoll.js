@@ -64,6 +64,8 @@ const CreatePoll = () => {
         <input
           className="poll-input"
           type="text"
+          minLength="5"
+          maxLength="15"
           placeholder="Poll Name..."
           onChange={(e) => setLabel(e.target.value)}
         />

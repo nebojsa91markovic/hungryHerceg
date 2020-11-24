@@ -82,9 +82,9 @@ const ViewOrder = () => {
         />
         <RestoranItems items={menuItems} />
 
-        {/* <AppProvider>
+        <AppProvider>
           <Cart />
-        </AppProvider> */}
+        </AppProvider>
 
         <ShowAllOrders />
       </section>

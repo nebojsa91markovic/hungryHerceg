@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import ApiBase from "../../services/ApiBase/ApiBase";
 import ApiKey from "../../services/ApiKey/ApiKey";
@@ -10,9 +10,11 @@ import firebase from "firebase/app";
 import { useCookies } from "react-cookie";
 import Timer from "../Timer/Timer";
 import moment from "moment";
+import { PollsContext } from "../../Context/PollsContext";
 
 const ViewPoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
+  const { polls, dispatch } = useContext(PollsContext);
 
   const pollId = useParams().pollId;
   const [poll, setPoll] = useState([]);
@@ -26,6 +28,8 @@ const ViewPoll = () => {
       Authorization: "Bearer " + ApiKey,
     },
   };
+
+  // dispatch({ type: "ALL_POLLS", payload: { allPolls: arrAllPolls } });
 
   const addOrder = () => {
     OrdersCollection.doc()
@@ -46,60 +50,77 @@ const ViewPoll = () => {
   };
 
   const finishPoll = () => {
-    PollsCollection.doc(pollId)
-      .get()
-      .then((response) => {
-        if (response.data().createBy === cookies.user) {
-          PollsCollection.doc(pollId).update({
-            active: false,
-          });
-          alert("zavrseno");
-        } else alert("nisi admin");
-      });
+    dispatch({
+      type: "FINISHED_POLL",
+      payload: poll,
+    });
+
+    // PollsCollection.doc(pollId)
+    //   .get()
+    //   .then((response) => {
+    //     if (response.data().createBy === cookies.user) {
+    //       PollsCollection.doc(pollId).update({
+    //         active: false,
+    //       });
+    //       alert("zavrseno");
+    //     } else alert("nisi admin");
+    //   });
   };
 
   const addVote = (event) => {
     event.preventDefault();
-    PollsCollection.doc(pollId)
-      .get()
-      .then((response) => {
-        return response.data();
-      })
-      .then((data) => {
-        let newRestaurantVoteState = [...data.restaurants];
-        let prevState = [...data.restaurants];
 
-        newRestaurantVoteState = newRestaurantVoteState.filter(
-          (restaurant) => restaurant.restaurantId === vote
-        );
+    dispatch({
+      type: "ADDVOTE_POLL",
+      payload: poll,
+      userId: cookies.user,
+      vote: vote,
+    });
 
-        let index = prevState.indexOf(newRestaurantVoteState[0]);
+    setVoted(true);
 
-        newRestaurantVoteState[0].votes += 1;
-        prevState[index] = newRestaurantVoteState[0];
-        if (data.active) {
-          PollsCollection.doc(pollId)
-            .update({
-              restaurants: prevState,
-              voters: firebase.firestore.FieldValue.arrayUnion("dusan"),
-            })
-            .then(() => {
-              setVoted(true);
-            });
-        } else {
-          alert("Ova anketa je istekla, glasanje nije moguce");
-        }
-      });
+    // PollsCollection.doc(pollId)
+    //   .get()
+    //   .then((response) => {
+    //     return response.data();
+    //   })
+    //   .then((data) => {
+    //     let newRestaurantVoteState = [...data.restaurants];
+    //     let prevState = [...data.restaurants];
+
+    //     newRestaurantVoteState = newRestaurantVoteState.filter(
+    //       (restaurant) => restaurant.restaurantId === vote
+    //     );
+
+    //     let index = prevState.indexOf(newRestaurantVoteState[0]);
+
+    //     newRestaurantVoteState[0].votes += 1;
+    //     prevState[index] = newRestaurantVoteState[0];
+    //     if (data.active) {
+    //       PollsCollection.doc(pollId)
+    //         .update({
+    //           restaurants: prevState,
+    //           voters: firebase.firestore.FieldValue.arrayUnion("dusan"),
+    //         })
+    //         .then(() => {
+    //           setVoted(true);
+    //         });
+    //     } else {
+    //       alert("Ova anketa je istekla, glasanje nije moguce");
+    //     }
+    //   });
   };
 
   const getPoll = () => {
     console.log(pollId);
+    // return polls.filter((poll) => poll.id === pollId)[0];
 
-    PollsCollection.doc(pollId)
-      .get()
-      .then((response) => {
-        setPoll(response.data());
-      });
+    setPoll(polls.filter((poll) => poll.id === pollId)[0]);
+    // PollsCollection.doc(pollId)
+    //   .get()
+    //   .then((response) => {
+    //     setPoll(response.data());
+    //   });
   };
 
   useEffect(() => {

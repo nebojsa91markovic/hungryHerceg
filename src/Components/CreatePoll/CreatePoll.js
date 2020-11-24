@@ -41,59 +41,41 @@ const CreatePoll = () => {
     console.log(restaurants, "ovde smo");
     let pollId = uuidv4();
 
-    let arrCheck = [
-      date,
-      time,
-      cookies.user,
-      label,
-      selectedRestaurants.slice(1),
-    ];
-
-    arrCheck.forEach((elem) => {
-      console.log();
-      if (elem === 0) {
-        return;
-      } else {
-        PollsCollection.doc(pollId)
-          .set({
-            created: moment(`${date}T${time}`).format(),
-            createBy: cookies.user,
-            label: label,
-            restaurants: selectedRestaurants.slice(1),
-            active: true,
-            id: pollId,
-            voters: [],
-            isOrderCreated: false,
-          })
-          .then(() => {
-            history.push(`poll/${pollId}`);
-          });
-      }
-    });
+    PollsCollection.doc(pollId)
+      .set({
+        created: moment(`${date}T${time}`).format(),
+        createBy: cookies.user,
+        label: label,
+        restaurants: selectedRestaurants.slice(1),
+        active: true,
+        id: pollId,
+        voters: [],
+        isOrderCreated: false,
+      })
+      .then(() => {
+        history.push(`poll/${pollId}`);
+      });
   };
 
   return (
     <div className="polls">
       <form onSubmit={createNewPoll}>
-        <label className="poll-label">Poll name:</label>
+        <label className="poll-label">Naziv ankete</label>
         <input
           className="poll-input"
           type="text"
-          placeholder="Poll Name..."
+          placeholder="radna subota"
           onChange={(e) => setLabel(e.target.value)}
         />
         <br />
         <div className="setTime">
-          <label className="poll-starts">Poll starts at: </label>
-          <br />
+          <label>Poll start at: </label>
           <input
-          className="date-time-input"
             type="date"
             name="pollStartsAt"
             onChange={(event) => setDate(event.target.value)}
           />
           <input
-             className="date-time-input"
             type="time"
             name="pollStartsAt"
             onChange={(event) => setTime(event.target.value)}

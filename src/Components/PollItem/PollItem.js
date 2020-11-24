@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 
 import moment from "moment";
 
 const PollItem = ({ poll }) => {
-  const [timeLeft, setTimeLeft] = useState(
-    moment(poll.created).add(2, "hours").fromNow()
-  );
+  const finishAt = moment(poll.created).add(2, "hours");
+
+  const [timeLeft, setTimeLeft] = useState(finishAt.fromNow());
+
+  const handleTimeLeft = () => {
+    const sec = 1000;
+    console.log(finishAt);
+    if (moment().isBefore(finishAt)) {
+      setTimeout(() => setTimeLeft(finishAt.fromNow()), sec * 60);
+    }
+  };
+
+  useEffect(() => {
+    handleTimeLeft();
+  }, []);
+
   return (
     <Link className="pollItem" to={`/poll/${poll.id}`}>
       <h3>{poll.label}</h3>

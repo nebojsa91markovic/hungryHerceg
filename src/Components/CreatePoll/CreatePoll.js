@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Autocomplete from "../Autocomplete/Autocomplete";
-import ApiKey from "../../services/ApiKey/ApiKey";
-import ApiBase from "../../services/ApiBase/ApiBase";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
-import "./createPoll.css";
 import RestaurantCollection from "../../collections/RestaurantCollection";
 import PollsCollection from "../../collections/PollsCollection";
 import { v4 as uuidv4 } from "uuid";
-import Moment from "react-moment";
 import moment from "moment";
 import { useCookies } from "react-cookie";
+
+import "./style.css";
 
 const CreatePoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
@@ -22,14 +19,8 @@ const CreatePoll = () => {
   ]);
   const [label, setLabel] = useState("");
   const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
   const history = useHistory();
-  const user = localStorage.getItem("userName");
-
-  const config = {
-    headers: {
-      Authorization: "Bearer " + ApiKey,
-    },
-  };
 
   useEffect(() => {
     let allRestaurants = [];
@@ -37,28 +28,12 @@ const CreatePoll = () => {
       querySnapshot.forEach(function (doc) {
         allRestaurants.push(doc.data());
       });
-      console.log(allRestaurants);
       setAllRestaurants(allRestaurants);
     });
-
-    setDate(moment().format("MMMM Do YYYY, h:mm:ss a"));
   }, []);
-
-  // let d = new Date();
-  // let datetime = d.getFullYear() + '-'
-  //   + (d.getMonth() + 1) + '-'
-  //   + d.getDate() + ' '
-  //   + d.getHours() + ':'
-  //   + d.getMinutes() + ':'
-  //   + d.getSeconds();
-
-  //   let date1 = moment().format('MMMM Do YYYY, h:mm:ss a')
-  //   console.log(date1, 'ovo je date')
 
   const createNewPoll = (e) => {
     e.preventDefault();
-    console.log(selectedRestaurants, "prvi");
-    console.log(selectedRestaurants[1], "drugi");
 
     let restaurants = selectedRestaurants
       .slice(1)
@@ -67,20 +42,16 @@ const CreatePoll = () => {
     let pollId = uuidv4();
 
     PollsCollection.doc(pollId)
-      .set(
-        {
-          // created: moment().format('MMMM Do YYYY, h:mm:ss a'),
-          created: moment().format(),
-          createBy: cookies.user,
-          label: label,
-          restaurants: selectedRestaurants.slice(1),
-          active: true,
-          id: pollId,
-          voters: [],
-          isOrderCreated: false,
-        },
-        { merge: true }
-      )
+      .set({
+        created: moment(`${date}T${time}`).format(),
+        createBy: cookies.user,
+        label: label,
+        restaurants: selectedRestaurants.slice(1),
+        active: true,
+        id: pollId,
+        voters: [],
+        isOrderCreated: false,
+      })
       .then(() => {
         history.push(`poll/${pollId}`);
       });
@@ -97,12 +68,20 @@ const CreatePoll = () => {
           onChange={(e) => setLabel(e.target.value)}
         />
         <br />
-        <input type="date" />
-        <input type="time" />
-        <span>Datum i vreme: {date}</span>
+        <div className="setTime">
+          <label>Poll start at: </label>
+          <input
+            type="date"
+            name="pollStartsAt"
+            onChange={(event) => setDate(event.target.value)}
+          />
+          <input
+            type="time"
+            name="pollStartsAt"
+            onChange={(event) => setTime(event.target.value)}
+          />
+        </div>
         <br />
-        {/* <span >Datum i vreme: {datetime}</span>
-        <br /> */}
         {selectedRestaurants.map((selected) => {
           return (
             <Autocomplete

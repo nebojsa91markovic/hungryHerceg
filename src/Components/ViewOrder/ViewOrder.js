@@ -87,7 +87,7 @@ const ViewOrder = () => {
           myCart={myCart}
           setMyCart={setMyCart}
         />
-        {/* <AppProvider>
+        <AppProvider>
           <Cart />
         </AppProvider>
 

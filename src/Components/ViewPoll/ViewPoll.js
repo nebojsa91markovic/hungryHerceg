@@ -170,7 +170,7 @@ const ViewPoll = () => {
     return ( 
         
         <div className="polls">
-            <h3 className="poll-name">Naziv ankete: {poll.label}</h3>
+            <h3 className="poll-name">Poll name: {poll.label}</h3>
             {duration && <Timer duration={duration} pollId={pollId}/>}
             {voted === false
             ?

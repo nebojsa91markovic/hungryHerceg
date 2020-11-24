@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
+import NavBarName from '../NavBarName/NavBarName';
 import './style.css';
 
 const NavBar = () => {
@@ -29,6 +30,7 @@ const NavBar = () => {
         else return (
 
             <div className="userLogin-wrapper">
+                {/* <NavBarName /> */}
                 <Link to='/'>
                     <button onClick={handleLogout} className="userLogin-button">LOG OUT</button>
                 </Link>

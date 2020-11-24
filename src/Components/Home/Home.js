@@ -24,7 +24,7 @@ const Home = () => {
       </Link>
 
       <Switch>
-        <Route component={AllPolls} exact path="/polls" />
+        <Route component={AllPolls} exact path={["/polls", "/home"]} />
         <PrivateRoute component={AllOrders} exact path="/orders" />
       </Switch>
       <ViewOrder />

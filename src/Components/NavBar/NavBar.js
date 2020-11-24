@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./style.css";
 import NavBarName from "../NavBarName/NavBarName";
 

@@ -1,47 +1,51 @@
-import React from 'react';
-import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
-import NavBarName from '../NavBarName/NavBarName';
-import './style.css';
+import React from "react";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
+import "./style.css";
+import { useCookies } from "react-cookie";
 
 const NavBar = () => {
+    const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
-    const location = useLocation()
-    const history = useHistory()
+    const location = useLocation();
+    const history = useHistory();
 
     const handleLogout = () => {
-        localStorage.removeItem('status')
-        history.push('/')
-    }
+        removeCookie("user");
+        localStorage.removeItem("status");
+        history.push("/");
+    };
 
     const showButtons = () => {
-
-        if (location.pathname === "/" || location.pathname === "/login" || location.pathname === "/signup") {
+        if (
+            location.pathname === "/" ||
+            location.pathname === "/login" ||
+            location.pathname === "/signup"
+        ) {
             return (
                 <div className="userLogin-wrapper">
-                    <Link to='/login'>
+                    <Link to="/login">
                         <button className="userLogin-button">LOG IN</button>
                     </Link>
-                    <Link to='/signup'>
+                    <Link to="/signup">
                         <button className="userLogin-button">SIGN UP</button>
                     </Link>
                 </div>
-            )
-        }
-        else return (
-
-            <div className="userLogin-wrapper">
-                {/* <NavBarName /> */}
-                <Link to='/'>
-                    <button onClick={handleLogout} className="userLogin-button">LOG OUT</button>
-                </Link>
-            </div>
-        )
-    }
+            );
+        } else
+            return (
+                <div className="userLogin-wrapper">
+                    <Link to="/">
+                        <button onClick={handleLogout} className="userLogin-button">
+                            LOG OUT
+            </button>
+                    </Link>
+                </div>
+            );
+    };
 
     return (
-
         <div className="navBar">
-            <Link to='/home'>
+            <Link to="/home">
                 <div className="logo"></div>
             </Link>
             {showButtons()}
@@ -52,8 +56,8 @@ const NavBar = () => {
             <button>Settings</button>
             <span>Welcome, $John Doe$</span>
         </div> */}
-        </div >
+        </div>
     );
-}
+};
 
 export default NavBar;

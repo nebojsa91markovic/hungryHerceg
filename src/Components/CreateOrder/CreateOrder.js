@@ -3,15 +3,40 @@ import OrdersCollection from "../../collections/OrdersCollection";
 import PollsCollection from "../../collections/PollsCollection";
 import moment from "moment";
 import { useCookies } from "react-cookie";
+import Autocomplete from "../Autocomplete/Autocomplete";
 
 const CreateOrder = () => {
   const [cookies] = useCookies(["user"]);
 
   const [pollName, setPollName] = useState("");
-  const [restaurantWon, setRestaurantWon] = useState("");
+  const [restaurantWon, setRestaurantWon] = useState(0);
+
+  const dotayFinishedPollsArray = [
+            {id: 1,
+            name: 'Rucak za subotu',
+            restaurantWon: 4},
+            {id: 2,
+            name: 'Sta cemo da jedemo',
+            restaurantWon: 2},
+            {id: 3,
+            name: 'Treca anketa',
+            restaurantWon: 3}
+          ]
+  
+  // const restaurantsWonArray = [
+  //   {idRestaurant: 1,
+  //   name: 'Picerija Bucko',
+  //   meals: ['Parce pice', 'Cela pica', 'Pica sa slaninom']},
+  //   {idRestaurant : 2,
+  //   name: 'Leskovacki rostilj',
+  //   melas: ['Gurmanska pljeskavica', 'Burger', 'Pomfrit']},
+  //   {idRestaurant : 2,
+  //   name: 'Kineska hrana',
+  //   melas: ['Piletina sa kikirikije', 'Slatko-ljuta supa', 'Nudle sa svinjetinom']}
+  // ]
 
   const addOrder = () => {
-    if (pollName.trim("").length === 0 || restaurantWon.trim("").length === 0) {
+    if (pollName.trim("").length === 0 || restaurantWon === 0) {
       alert("Please insert valid informations");
       return;
     }
@@ -38,9 +63,16 @@ const CreateOrder = () => {
 
   return (
     <div className="polls">
+      <h3>Start an order</h3>
       {/* Ljubica */}
       {/* izaberi anketu */}
-      <input
+      <Autocomplete 
+        allPolls={dotayFinishedPollsArray} 
+        setPollName={setPollName} 
+        setRestaurantWon={setRestaurantWon} 
+        placeholder='Choose a poll'
+      />
+      {/* <input
         className="poll-input"
         type="text"
         onChange={(event) => setRestaurantWon(event.target.value)}
@@ -49,9 +81,9 @@ const CreateOrder = () => {
         className="poll-input"
         type="text"
         onChange={(event) => setPollName(event.target.value)}
-      />
+      /> */}
       <button className="submit-button" onClick={addOrder}>
-        Push
+        Create an order
       </button>
     </div>
   );

@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import ApiBase from "../../services/ApiBase/ApiBase";
+import ApiKey from "../../services/ApiKey/ApiKey";
 import "./style.css";
 import PollsCollection from "../../collections/PollsCollection";
 import OrdersCollection from "../../collections/OrdersCollection";
@@ -14,9 +16,34 @@ const ViewPoll = () => {
 
   const pollId = useParams().pollId;
   const [poll, setPoll] = useState([]);
+  const [allPolls, setAllPolls] = useState([]);
   const [vote, setVote] = useState("");
   const [voted, setVoted] = useState(false);
   const [duration, setDuration] = useState(0);
+
+  const config = {
+    headers: {
+      Authorization: "Bearer " + ApiKey,
+    },
+  };
+
+  const addOrder = () => {
+    OrdersCollection.doc()
+      .set(
+        {
+          created: "now",
+          createBy: "tesla@tesla.com",
+          label: "pollName",
+          restaurantId: "20ce30a6-fe28-s4c75-a37a-5499851af079",
+          active: true,
+          allMeals: [],
+        },
+        { merge: true }
+      )
+      .then(() => {
+        console.log("order upisan");
+      });
+  };
 
   const finishPoll = () => {
     PollsCollection.doc(pollId)
@@ -26,8 +53,8 @@ const ViewPoll = () => {
           PollsCollection.doc(pollId).update({
             active: false,
           });
-          alert("Poll is finished!");
-        } else alert("You didn't created this poll, so you can't finish it!");
+          alert("zavrseno");
+        } else alert("nisi admin");
       });
   };
 
@@ -60,12 +87,14 @@ const ViewPoll = () => {
               setVoted(true);
             });
         } else {
-          alert("Voting for this poll is expired.");
+          alert("Ova anketa je istekla, glasanje nije moguce");
         }
       });
   };
 
   const getPoll = () => {
+    console.log(pollId);
+
     PollsCollection.doc(pollId)
       .get()
       .then((response) => {
@@ -75,13 +104,25 @@ const ViewPoll = () => {
 
   useEffect(() => {
     getPoll();
+    // axios.get(`${ApiBase}polls/${pollId}`)
+    //     .then(response => {
+    //         console.log(response.data)
+    //         setPoll(response.data);
+    //     });
   }, [voted]);
+
+  // useEffect(() => {
+  //     axios.get(`${ApiBase}polls`, config)
+  //         .then(response => {
+  //             console.log(response.data);
+  //             setAllPolls(response.data);
+  //         })
+  // }, []);
+
+  // console.log('OVO JE ANKETA', poll);
 
   useEffect(() => {
     setDuration(-moment().diff(timeLeft(), "seconds"));
-    // let c = moment(poll.created);
-    // let e = moment(poll.created).add("30", "minutes");
-    // setDuration(c.diff(e, "seconds"));
   }, [poll]);
 
   const timeLeft = () => {
@@ -101,7 +142,7 @@ const ViewPoll = () => {
           <ul className="poll-vote-list">
             {poll.restaurants &&
               poll.restaurants.map((restaurant) => (
-                <li key={restaurant.restaurantId}>
+                <li className="poll-item" key={restaurant.restaurantId}>
                   <label htmlFor={restaurant.restaurantId}>
                     {restaurant.restaurantName}
                   </label>
@@ -116,23 +157,27 @@ const ViewPoll = () => {
               ))}
           </ul>
         </div>
-        <input type="submit" />
+        <input className="submit-button" type="submit" />
       </form>
     );
   };
 
   const finishPollButton = () => {
     if (poll.createBy === cookies.user) {
-      return <button onClick={finishPoll}>Finish poll</button>;
+      return (
+        <button className="submit-button" onClick={finishPoll}>
+          Finish poll
+        </button>
+      );
     }
   };
 
   const showResults = () => {
     return (
       <>
-        <h1>RESULTS</h1>
+        <h1 className="poll-results">RESULTS</h1>
         {poll.restaurants.map((restaurant) => (
-          <li key={restaurant.restaurantId}>
+          <li className="poll-item" key={restaurant.restaurantId}>
             <span>
               {restaurant.restaurantName}|| {restaurant.votes}
             </span>
@@ -146,9 +191,9 @@ const ViewPoll = () => {
 
   return (
     <div className="polls">
-      <h3>Naziv ankete: {poll.label}</h3>
+      <h3 className="poll-name">Poll name: {poll.label}</h3>
       {duration && <Timer duration={duration} pollId={pollId} />}
-      {!voted ? showVoting() : showResults()}
+      {voted === false ? showVoting() : showResults()}
     </div>
   );
 };

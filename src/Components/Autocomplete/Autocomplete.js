@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { v1 as uuidv1 } from 'uuid';
 import './autocomplete.css';
 
-const Autocomplete = ({ selectedRestaurants, setSelectedRestaurants, allRestaurants }) => {
+const Autocomplete = ({ selectedRestaurants, setSelectedRestaurants, allRestaurants, allPolls, setPollName, setRestaurantWon, placeholder }) => {
 
   const [filter, setFilter] = useState('');
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -16,18 +16,25 @@ const Autocomplete = ({ selectedRestaurants, setSelectedRestaurants, allRestaura
     // console.log(e.target.value);
     setText(e.target.innerText);
     setFilter('');
-    let tmp = [...selectedRestaurants];
-    let newEntry = {  restaurantId: e.target.value, restaurantName: e.target.innerText, votes: 0 };
-    tmp.push(newEntry);
     setChosen(e.target.value);
-    // console.log(tmp);
-    setSelectedRestaurants(tmp);
-    setDisabled(true);
-    // setDeleteBtn('show');
+    if(setSelectedRestaurants !== undefined){
+      let tmp = [...selectedRestaurants];
+      let newEntry = {  restaurantId: e.target.value, restaurantName: e.target.innerText, votes: 0 };
+      tmp.push(newEntry);
+      setSelectedRestaurants(tmp);
+      setDisabled(true);
+    }else if(setPollName !== undefined){
+      setPollName(e.target.innerText);
+      setRestaurantWon(allPolls.filter(poll => poll.id == e.target.value)[0].restaurantWon);
+    }
   }
 
-  let notSelected = allRestaurants.filter(restaurant => !selectedRestaurants.map(selected => selected.restaurantId).includes(restaurant.id));
-  let filtered = notSelected.filter(restaurant => restaurant.name.toLowerCase().includes(filter.toLowerCase()));
+  if(allRestaurants !== undefined){
+      let notSelected = allRestaurants.filter(restaurant => !selectedRestaurants.map(selected => selected.restaurantId).includes(restaurant.id));
+      var filtered = notSelected.filter(restaurant => restaurant.name.toLowerCase().includes(filter.toLowerCase()));
+  }else if(allPolls !== undefined){
+      var filtered = allPolls.filter(poll => poll.name.toLowerCase().includes(filter.toLocaleLowerCase()));
+  }
 
   useEffect(() => {
     filter !== '' ?
@@ -39,7 +46,7 @@ const Autocomplete = ({ selectedRestaurants, setSelectedRestaurants, allRestaura
   return (
 
     <div className='autocomplete-wrapper'>
-      <input className='poll-input' type='text' onChange={(e) => { setFilter(e.target.value); setText(e.target.value) }} value={text} placeholder='Choose a restaurant' disabled={disabled} />
+      <input className='poll-input' type='text' onChange={(e) => { setFilter(e.target.value); setText(e.target.value) }} value={text} placeholder={placeholder} disabled={disabled} />
       <br />
       <div id='ingredients'>
         <ul className='search-results'>{filteredOptions.map(el =>

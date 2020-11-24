@@ -13,11 +13,12 @@ const WelcomePage = () => {
   const history = useHistory();
 
   const isLogin = () => {
-    if (cookies.user === undefined) {
-      return false;
-    } else {
-      history.push("/home");
-    }
+    console.log(cookies.user);
+    // if (cookies.user === undefined) {
+    //   return false;
+    // } else {
+    //   history.push("/home");
+    // }
   };
 
   const showText = () => {
@@ -38,7 +39,7 @@ const WelcomePage = () => {
 
       {isLogin()}
       {showText()}
-      {isLogin()}
+      {/* {isLogin()} */}
       <Switch>
         <Route component={Login} exact path="/login" />
         <Route component={SignUp} exact path="/signup" />

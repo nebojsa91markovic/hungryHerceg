@@ -9,14 +9,14 @@
   background: rgba(128, 128, 128, 0.288);
 }
 
-input[type="date"],
+/* input[type="date"],
 input[type="time"] {
   width: auto !important;
-}
+} */
 
 .date-time-input {
   border: 2px solid white;
-  width: 46%;
+  width: 45%;
   margin: auto;
   outline: none;
   background-color: rgba(255, 255, 255, 0.582);
@@ -67,6 +67,14 @@ input[type="time"] {
     width: 100%;
     margin: auto;
     margin-top: 1em;
+  }
+  .date-time-input {
+    border: 2px solid white;
+    width: 50%;
+    margin: auto;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.582);
+    color: black;
   }
 }
 

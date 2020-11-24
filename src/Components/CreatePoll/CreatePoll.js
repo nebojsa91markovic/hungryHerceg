@@ -9,6 +9,7 @@ import moment from "moment";
 import { useCookies } from "react-cookie";
 
 import "./style.css";
+import BackButton from "../BackButton/BackButton";
 
 const CreatePoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
@@ -58,48 +59,51 @@ const CreatePoll = () => {
   };
 
   return (
-    <div className="polls">
-      <form onSubmit={createNewPoll}>
-        <label className="poll-label">Poll Name</label>
-        <input
-          className="poll-input"
-          type="text"
-          minLength="5"
-          maxLength="15"
-          placeholder="Poll Name..."
-          onChange={(e) => setLabel(e.target.value)}
-        />
-        <br />
-        <div className="setTime">
-          <label className="poll-starts">Poll starts at: </label>
+    <div className="polls-wrapper">
+      <BackButton />
+      <div className="polls">
+        <form onSubmit={createNewPoll}>
+          <label className="poll-label">Poll Name</label>
+          <input
+            className="poll-input"
+            type="text"
+            minLength="5"
+            maxLength="15"
+            placeholder="Poll Name..."
+            onChange={(e) => setLabel(e.target.value)}
+          />
           <br />
-          <input
-            className="date-time-input"
-            type="date"
-            name="pollStartsAt"
-            onChange={(event) => setDate(event.target.value)}
-          />
-          <input
-            className="date-time-input"
-            type="time"
-            name="pollStartsAt"
-            onChange={(event) => setTime(event.target.value)}
-          />
-        </div>
-        <br />
-        {selectedRestaurants.map((selected) => {
-          return (
-            <Autocomplete
-              key={selected.restaurantId}
-              selectedRestaurants={selectedRestaurants}
-              setSelectedRestaurants={setSelectedRestaurants}
-              allRestaurants={allRestaurants}
-              placeholder='Choose a restaurant'
+          <div className="setTime">
+            <label className="poll-starts">Poll starts at: </label>
+            <br />
+            <input
+              className="date-time-input"
+              type="date"
+              name="pollStartsAt"
+              onChange={(event) => setDate(event.target.value)}
             />
-          );
-        })}
-        <input type="submit" className="submit-button" />
-      </form>
+            <input
+              className="date-time-input"
+              type="time"
+              name="pollStartsAt"
+              onChange={(event) => setTime(event.target.value)}
+            />
+          </div>
+          <br />
+          {selectedRestaurants.map((selected) => {
+            return (
+              <Autocomplete
+                key={selected.restaurantId}
+                selectedRestaurants={selectedRestaurants}
+                setSelectedRestaurants={setSelectedRestaurants}
+                allRestaurants={allRestaurants}
+                placeholder='Choose a restaurant'
+              />
+            );
+          })}
+          <input type="submit" className="submit-button" value="Create" />
+        </form>
+      </div>
     </div>
   );
 };

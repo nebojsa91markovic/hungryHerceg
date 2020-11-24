@@ -4,6 +4,7 @@ import PollsCollection from "../../collections/PollsCollection";
 import moment from "moment";
 import { useCookies } from "react-cookie";
 import Autocomplete from "../Autocomplete/Autocomplete";
+import BackButton from "../BackButton/BackButton";
 
 const CreateOrder = () => {
   const [cookies] = useCookies(["user"]);
@@ -12,17 +13,23 @@ const CreateOrder = () => {
   const [restaurantWon, setRestaurantWon] = useState(0);
 
   const dotayFinishedPollsArray = [
-            {id: 1,
-            name: 'Rucak za subotu',
-            restaurantWon: 4},
-            {id: 2,
-            name: 'Sta cemo da jedemo',
-            restaurantWon: 2},
-            {id: 3,
-            name: 'Treca anketa',
-            restaurantWon: 3}
-          ]
-  
+    {
+      id: 1,
+      name: 'Rucak za subotu',
+      restaurantWon: 4
+    },
+    {
+      id: 2,
+      name: 'Sta cemo da jedemo',
+      restaurantWon: 2
+    },
+    {
+      id: 3,
+      name: 'Treca anketa',
+      restaurantWon: 3
+    }
+  ]
+
   // const restaurantsWonArray = [
   //   {idRestaurant: 1,
   //   name: 'Picerija Bucko',
@@ -62,17 +69,18 @@ const CreateOrder = () => {
   };
 
   return (
-    <div className="polls">
-      <h3>Start an order</h3>
-      {/* Ljubica */}
-      {/* izaberi anketu */}
-      <Autocomplete 
-        allPolls={dotayFinishedPollsArray} 
-        setPollName={setPollName} 
-        setRestaurantWon={setRestaurantWon} 
-        placeholder='Choose a poll'
-      />
-      {/* <input
+    <div className="polls-wrapper">
+      <BackButton />
+      <div className="polls">
+        <h3>Start an order</h3>
+        {/* izaberi anketu */}
+        <Autocomplete
+          allPolls={dotayFinishedPollsArray}
+          setPollName={setPollName}
+          setRestaurantWon={setRestaurantWon}
+          placeholder='Choose a poll'
+        />
+        {/* <input
         className="poll-input"
         type="text"
         onChange={(event) => setRestaurantWon(event.target.value)}
@@ -82,9 +90,10 @@ const CreateOrder = () => {
         type="text"
         onChange={(event) => setPollName(event.target.value)}
       /> */}
-      <button className="submit-button" onClick={addOrder}>
-        Create an order
+        <button className="submit-button" onClick={addOrder}>
+          Create an order
       </button>
+      </div>
     </div>
   );
 };

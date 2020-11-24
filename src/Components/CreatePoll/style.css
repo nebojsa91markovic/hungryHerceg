@@ -1,12 +1,16 @@
+.polls-wrapper {
+    margin-top: 5%;
+}
+
 .polls {
-  color: white;
-  padding: 3em;
-  width: 40%;
-  margin: auto;
-  margin-top: 10%;
-  border-radius: 20px;
-  border: 2px solid white;
-  background: rgba(128, 128, 128, 0.288);
+    color: white;
+    padding: 3em;
+    width: 40%;
+    margin: auto;
+    margin-top: 2%;
+    border-radius: 20px;
+    border: 2px solid white;
+    background: rgba(128, 128, 128, 0.288);
 }
 
 /* input[type="date"],
@@ -15,87 +19,88 @@ input[type="time"] {
 } */
 
 .date-time-input {
-  border: 2px solid white;
-  width: 45%;
-  margin: auto;
-  outline: none;
-  background-color: rgba(255, 255, 255, 0.582);
-  color: black;
-}
-
-.submit-button {
-  background-color: #f0af00;
-  color: black;
-  width: 30%;
-  height: 3em;
-  font-size: 20px;
-  font-weight: bolder;
-  border-style: none;
-  border-radius: 10px;
-  border-width: 3px;
-  margin-top: 1em;
-  outline: none;
-}
-.poll-label {
-  font-size: 30px;
-}
-.poll-input {
-  width: 100%;
-  text-align: center;
-  border: 2px solid white;
-  background-color: rgba(255, 255, 255, 0.582);
-  color: black;
-  height: 3em;
-  outline: none;
-}
-
-@media screen and (max-width: 600px) {
-  .polls {
-    color: white;
-    padding: 2em;
-    width: 90%;
-    margin: auto;
-  }
-
-  .submit-button {
-    height: 2em;
-  }
-  .poll-label {
-    font-size: 30px;
-  }
-  .poll-input {
-    width: 100%;
-    margin: auto;
-    margin-top: 1em;
-  }
-  .date-time-input {
     border: 2px solid white;
-    width: 50%;
+    width: 45%;
     margin: auto;
     outline: none;
     background-color: rgba(255, 255, 255, 0.582);
     color: black;
-  }
+}
+
+.submit-button {
+    background-color: #f0af00;
+    color: black;
+    width: 30%;
+    height: 3em;
+    font-size: 20px;
+    font-weight: bolder;
+    border-style: none;
+    border-radius: 10px;
+    border-width: 3px;
+    margin-top: 1em;
+    outline: none;
+}
+.poll-label {
+    font-size: 30px;
+}
+.poll-input {
+    width: 100%;
+    text-align: center;
+    border: 2px solid white;
+    background-color: rgba(255, 255, 255, 0.582);
+    color: black;
+    height: 3em;
+    outline: none;
+}
+
+@media screen and (max-width: 600px) {
+    .polls {
+        color: white;
+        padding: 2em;
+        width: 90%;
+        margin: auto;
+        margin-top: 1%;
+    }
+
+    .submit-button {
+        height: 2em;
+    }
+    .poll-label {
+        font-size: 30px;
+    }
+    .poll-input {
+        width: 100%;
+        margin: auto;
+        margin-top: 1em;
+    }
+    .date-time-input {
+        border: 2px solid white;
+        width: 50%;
+        margin: auto;
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.582);
+        color: black;
+    }
 }
 
 @media screen and (min-width: 600px) and (max-width: 1000px) {
-  .polls {
-    color: white;
-    padding: 2em;
-    width: 80%;
-    margin: auto;
-    margin-top: 15%;
-  }
+    .polls {
+        color: white;
+        padding: 2em;
+        width: 80%;
+        margin: auto;
+        margin-top: 15%;
+    }
 
-  .submit-button {
-    height: 2em;
-  }
-  .poll-label {
-    font-size: 30px;
-  }
-  .poll-input {
-    width: 100%;
-    margin: auto;
-    margin-top: 1em;
-  }
+    .submit-button {
+        height: 2em;
+    }
+    .poll-label {
+        font-size: 30px;
+    }
+    .poll-input {
+        width: 100%;
+        margin: auto;
+        margin-top: 1em;
+    }
 }

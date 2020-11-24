@@ -4,7 +4,7 @@
 }
 
 .navbar-name > button {
-    background-color: black;
+    background-color: transparent;
     border: none;
     font-size: 20px;
     color: #f0af00;

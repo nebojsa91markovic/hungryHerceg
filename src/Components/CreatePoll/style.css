@@ -9,6 +9,11 @@
   background: rgba(128, 128, 128, 0.288);
 }
 
+input[type="date"],
+input[type="time"] {
+  width: auto !important;
+}
+
 .date-time-input {
   border: 2px solid white;
   width: 46%;

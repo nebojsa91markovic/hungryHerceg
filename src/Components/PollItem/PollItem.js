@@ -1,15 +1,34 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './style.css';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./style.css";
+
+import moment from "moment";
 
 const PollItem = ({ poll }) => {
-    return (
-        <Link className="pollItem" to={`/poll/${poll.id}`}>
-            <h3>Name: {poll.label}</h3>
-            <span>Created: {poll.created}</span>
-            <span>Status: {poll.active + ''}</span>
-        </Link>
-    )
-}
+  const finishAt = moment(poll.created).add(2, "hours");
 
-export default PollItem
+  const [timeLeft, setTimeLeft] = useState(finishAt.fromNow());
+
+  const handleTimeLeft = () => {
+    const sec = 1000;
+    console.log(finishAt);
+    if (moment().isBefore(finishAt)) {
+      setTimeout(() => setTimeLeft(finishAt.fromNow()), sec * 60);
+    }
+  };
+
+  useEffect(() => {
+    handleTimeLeft();
+  }, []);
+
+  return (
+    <Link className="pollItem" to={`/poll/${poll.id}`}>
+      <h3>{poll.label}</h3>
+      <span>{moment(poll.created).format("DD/MM")}</span>
+      <span>{timeLeft}</span>
+      <span>{poll.isOrderCreated ? "Order created" : "Not yet!"}</span>
+    </Link>
+  );
+};
+
+export default PollItem;

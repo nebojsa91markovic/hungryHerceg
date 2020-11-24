@@ -1,7 +1,8 @@
 import React from "react";
 import CartItem from "./CartItem";
 import { useGlobalContext } from "./context";
-import numeral from "numeral";
+import numeral from "../../services/numeral";
+numeral.locale("srb");
 
 const CartContainer = () => {
   const { cart, total, clearCart } = useGlobalContext();
@@ -34,10 +35,7 @@ const CartContainer = () => {
         <hr />
         <div className="cart-total">
           <h4>
-            total{" "}
-            <span>
-              {total} din {numeral(total).format("$0,0.00")}
-            </span>
+            total <span>{numeral(total).format("$ 0,0.00")}</span>
           </h4>
         </div>
         <button className="filter-btn" onClick={clearCart}>

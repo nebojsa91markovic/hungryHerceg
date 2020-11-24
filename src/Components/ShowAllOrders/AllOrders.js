@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { ExportCSV } from "../../services/ExportCSV";
+import numeral from "../../services/numeral";
+numeral.locale("srb");
+
 function AllOrders({ items }) {
   return (
     <div className="menu section">
@@ -22,7 +25,8 @@ function AllOrders({ items }) {
               <td>{name}</td>
               <td>{amount}</td>
               <td>{note}</td>
-              <td>{price}</td>
+              {/* <td>{price}</td> */}
+              <td>{numeral(price).format("$ 0,0.00")}</td>
             </tr>
           );
         })}

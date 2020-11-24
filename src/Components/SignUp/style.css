@@ -92,3 +92,50 @@ label {
     transition: 0.5s;
   }
 }
+
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+  .signUp-wrapper {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    border-style: solid;
+    background-color: rgba(128, 128, 128, 0.288);
+    padding: 1%;
+    border-radius: 10px;
+  }
+  label {
+    font-size: 20px;
+  }
+  .signUp-input {
+    width: 95%;
+    height: 2.3em;
+    background-color: rgba(255, 255, 255, 0.582);
+    border-style: none;
+    border-radius: 10px;
+    color: #000000;
+    font-family: "Arial Black";
+    font-size: 20px;
+    outline: none;
+    padding-left: 3%;
+  }
+
+  .signUp-input-button {
+    background-color: #f0af00;
+    color: black;
+    width: 40%;
+    height: 2em;
+    font-size: 20px;
+    font-weight: bolder;
+    border-style: none;
+    border-radius: 10px;
+    border-width: 3px;
+    margin-top: 1em;
+    outline: none;
+  }
+
+  .signUp-input-button:hover {
+    width: 40%;
+    height: 2em;
+    transition: 0.5s;
+  }
+}

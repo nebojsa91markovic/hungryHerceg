@@ -136,11 +136,11 @@ const ViewPoll = () => {
                 {/* vote mode */}
                 <div className="restaurantList">
                     <ul className="poll-vote-list">
-                        {poll.restaurants && poll.restaurants.map(restaurant => <li key={restaurant.restaurantId}><label htmlFor={restaurant.restaurantId}>{restaurant.restaurantName}</label><input type="radio" id={restaurant.restaurantId} name="restaurant" value={restaurant.restaurantId} onChange={(e) => setVote(e.target.value)} /></li>)}
+                        {poll.restaurants && poll.restaurants.map(restaurant => <li className="poll-item" key={restaurant.restaurantId}><label htmlFor={restaurant.restaurantId}>{restaurant.restaurantName}</label><input type="radio" id={restaurant.restaurantId} name="restaurant" value={restaurant.restaurantId} onChange={(e) => setVote(e.target.value)} /></li>)}
                     </ul>
 
                 </div>
-                <input type="submit" />
+                <input className="submit-button" type="submit" />
             </form>
         )
 
@@ -149,7 +149,7 @@ const ViewPoll = () => {
     const finishPollButton = () => {
         if(poll.createBy === cookies.user){
             return(
-                <button onClick={finishPoll}>Finish poll</button>
+                <button className="submit-button" onClick={finishPoll}>Finish poll</button>
             )
         }
     }
@@ -158,8 +158,8 @@ const ViewPoll = () => {
 
         return(
             <>
-            <h1>RESULTS</h1>
-            {poll.restaurants.map(restaurant => <li key={restaurant.restaurantId}><span>{restaurant.restaurantName}|| {restaurant.votes}</span></li>)}
+            <h1 className="poll-results">RESULTS</h1>
+            {poll.restaurants.map(restaurant => <li className="poll-item" key={restaurant.restaurantId}><span>{restaurant.restaurantName}|| {restaurant.votes}</span></li>)}
             {finishPollButton()}
 
             </>
@@ -170,7 +170,7 @@ const ViewPoll = () => {
     return ( 
         
         <div className="polls">
-            <h3>Naziv ankete: {poll.label}</h3>
+            <h3 className="poll-name">Poll name: {poll.label}</h3>
             {duration && <Timer duration={duration} pollId={pollId}/>}
             {voted === false
             ?

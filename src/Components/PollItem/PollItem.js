@@ -5,7 +5,7 @@ import "./style.css";
 import moment from "moment";
 
 const PollItem = ({ poll }) => {
-  const finishAt = moment(poll.created).add(2, "hours");
+  const finishAt = moment(poll.created).add(30, "minutes");
 
   const [timeLeft, setTimeLeft] = useState(finishAt.fromNow());
 

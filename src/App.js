@@ -10,6 +10,7 @@ import ViewPoll from "./Components/ViewPoll/ViewPoll";
 import CreateOrder from "./Components/CreateOrder/CreateOrder";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import PollsContextProvider from "./Context/PollsContext";
+import OrdersContextProvider from "./Context/OrdersContext";
 
 function App() {
   return (
@@ -17,21 +18,27 @@ function App() {
       <Router>
         <NavBar />
         <PollsContextProvider>
-          <Switch>
-            <PrivateRoute
-              component={Home}
-              exact
-              path={["/home", "/polls", "/orders"]}
-            />
-            <PrivateRoute component={CreatePoll} exact path="/create-poll" />
-            <PrivateRoute component={CreateOrder} exact path="/create-order" />
-            <PrivateRoute component={ViewPoll} exact path="/poll/:pollId" />
-            <Route
-              component={WelcomePage}
-              exact
-              path={["/", "/signup", "/login"]}
-            />
-          </Switch>
+          <OrdersContextProvider>
+            <Switch>
+              <PrivateRoute
+                component={Home}
+                exact
+                path={["/home", "/polls", "/orders"]}
+              />
+              <PrivateRoute component={CreatePoll} exact path="/create-poll" />
+              <PrivateRoute
+                component={CreateOrder}
+                exact
+                path="/create-order"
+              />
+              <PrivateRoute component={ViewPoll} exact path="/poll/:pollId" />
+              <Route
+                component={WelcomePage}
+                exact
+                path={["/", "/signup", "/login"]}
+              />
+            </Switch>
+          </OrdersContextProvider>
         </PollsContextProvider>
         <Footer />
       </Router>

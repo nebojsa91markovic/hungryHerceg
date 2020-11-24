@@ -7,10 +7,13 @@ import ViewOrder from "../ViewOrder/ViewOrder";
 import About from "../About/About";
 import "./style.css";
 import { PollsContext } from "../../Context/PollsContext";
+import { OrdersContext } from "../../Context/OrdersContext";
 import PollsCollection from "../../collections/PollsCollection";
+import OrdersCollection from "../../collections/OrdersCollection";
 
 const Home = () => {
   const { polls, dispatch } = useContext(PollsContext);
+  const { orders, dispatchOrders } = useContext(OrdersContext);
 
   const getAllPolls = () => {
     let arrAllPolls = [];
@@ -21,6 +24,17 @@ const Home = () => {
       });
     });
     dispatch({ type: "ALL_POLLS", payload: { allPolls: arrAllPolls } });
+
+    let arrAllOrders = [];
+    OrdersCollection.get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        arrAllOrders.push(doc.data());
+      });
+    });
+    dispatchOrders({
+      type: "ALL_ORDERS",
+      payload: { allOrders: arrAllOrders },
+    });
   };
 
   useEffect(() => {

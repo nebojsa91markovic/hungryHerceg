@@ -13,8 +13,8 @@ export const OrdersReducer = (state, action) => {
         .set(action.payload)
         .then(() => console.log("usepsno dodat order"));
       return [...state, action.payload];
-    case "FINISHED_ORDER":
-      return prevState;
+    // case "FINISHED_ORDER":
+    //   return prevState;
 
     case "REMOVE_ORDER":
       OrdersCollection.doc(action.payload.id)

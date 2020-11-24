@@ -92,6 +92,7 @@ const CreatePoll = () => {
               selectedRestaurants={selectedRestaurants}
               setSelectedRestaurants={setSelectedRestaurants}
               allRestaurants={allRestaurants}
+              placeholder='Choose a restaurant'
             />
           );
         })}

@@ -12,6 +12,8 @@ import { AppProvider } from "../Cart/context";
 import ShowAllOrders from "../ShowAllOrders/ShowAllOrders";
 
 const ViewOrder = () => {
+  const [myCart, setMyCart] = useState([]);
+
   const newMeals = {
     consumer: "Bata",
     payloads: [
@@ -80,9 +82,12 @@ const ViewOrder = () => {
           filterItems={filterItems}
           categories={categories}
         />
-        <RestoranItems items={menuItems} />
-
-        <AppProvider>
+        <RestoranItems
+          items={menuItems}
+          myCart={myCart}
+          setMyCart={setMyCart}
+        />
+        {/* <AppProvider>
           <Cart />
         </AppProvider>
 

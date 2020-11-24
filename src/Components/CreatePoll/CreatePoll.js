@@ -60,7 +60,7 @@ const CreatePoll = () => {
   return (
     <div className="polls">
       <form onSubmit={createNewPoll}>
-        <label className="poll-label">Poll name:</label>
+        <label className="poll-label">Poll Name</label>
         <input
           className="poll-input"
           type="text"
@@ -72,13 +72,13 @@ const CreatePoll = () => {
           <label className="poll-starts">Poll starts at: </label>
           <br />
           <input
-          className="date-time-input"
+            className="date-time-input"
             type="date"
             name="pollStartsAt"
             onChange={(event) => setDate(event.target.value)}
           />
           <input
-             className="date-time-input"
+            className="date-time-input"
             type="time"
             name="pollStartsAt"
             onChange={(event) => setTime(event.target.value)}

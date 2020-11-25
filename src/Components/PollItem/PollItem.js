@@ -23,7 +23,7 @@ const PollItem = ({ poll }) => {
 
   return (
     <Link className="pollItem" to={`/poll/${poll.id}`}>
-      <h3>{poll.label}</h3>
+      <span className='span-label'>{poll.label}</span>
       <span>{moment(poll.created).format("DD/MM")}</span>
       <span>{timeLeft}</span>
       <span>{poll.isOrderCreated ? "Order created" : "Not yet!"}</span>

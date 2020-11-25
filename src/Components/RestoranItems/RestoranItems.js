@@ -14,17 +14,9 @@ const RestoranItems = ({ items, myCart, setMyCart }) => {
         note: note.value,
         title: mealTitle.value,
         price: mealPrice.value,
-        amount: amount.value,
+        amount: amount.value === "" ? 1 : amount.value,
       },
     ]);
-
-    // const s = {
-    //   id: mealId.value,
-    //   note: note.value,
-    //   title: mealTitle.value,
-    //   price: mealPrice.value,
-    //   amount: amount.value,
-    // };
   };
 
   return (

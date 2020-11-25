@@ -11,6 +11,8 @@ import { useCookies } from "react-cookie";
 import Timer from "../Timer/Timer";
 import moment from "moment";
 import { PollsContext } from "../../Context/PollsContext";
+import { useHistory } from "react-router-dom";
+
 
 const ViewPoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
@@ -21,7 +23,9 @@ const ViewPoll = () => {
   const [allPolls, setAllPolls] = useState([]);
   const [vote, setVote] = useState("");
   const [voted, setVoted] = useState(false);
+  const [step, setStep] = useState('voting');
   const [duration, setDuration] = useState(0);
+  const history = useHistory();
 
   const config = {
     headers: {
@@ -29,16 +33,35 @@ const ViewPoll = () => {
     },
   };
 
+
   // dispatch({ type: "ALL_POLLS", payload: { allPolls: arrAllPolls } });
+
+  const goHome = () => {
+    history.push('/home');
+  }
+
+  const mostVotes = () => {
+    PollsCollection.doc(pollId)
+    .get()
+    .then((response) => {
+      // console.log(response.data().restaurants);
+      // console.log(response.data().restaurants.sort((a, b) => a.votes - b.votes).slice(-1));
+      return response.data().restaurants.sort((a, b) => a.votes - b.votes).slice(-1)[0].restaurantId;
+    })
+  }
+
+  // console.log(mostVotes());
+
+
 
   const addOrder = () => {
     OrdersCollection.doc()
       .set(
         {
-          created: "now",
-          createBy: "tesla@tesla.com",
-          label: "pollName",
-          restaurantId: "20ce30a6-fe28-s4c75-a37a-5499851af079",
+          created: moment().format(),
+          createBy: cookies.user,
+          label: poll.label,
+          restaurantId: mostVotes(),
           active: true,
           allMeals: [],
         },
@@ -65,6 +88,22 @@ const ViewPoll = () => {
     //       alert("zavrseno");
     //     } else alert("nisi admin");
     //   });
+
+    PollsCollection.doc(pollId)
+      .get()
+      .then((response) => {
+        if (response.data().createBy === cookies.user) {
+          PollsCollection.doc(pollId).update({
+            active: false,
+          })
+          .then(() => {
+            alert("zavrseno");
+            setStep('finished');
+            // history.push('/home');
+            
+          })
+        } else alert("nisi admin");
+      });
   };
 
   const addVote = (event) => {
@@ -109,6 +148,7 @@ const ViewPoll = () => {
     //       alert("Ova anketa je istekla, glasanje nije moguce");
     //     }
     //   });
+
   };
 
   const getPoll = () => {
@@ -130,7 +170,7 @@ const ViewPoll = () => {
     //         console.log(response.data)
     //         setPoll(response.data);
     //     });
-  }, [voted]);
+  }, [step]);
 
   // useEffect(() => {
   //     axios.get(`${ApiBase}polls`, config)
@@ -194,10 +234,12 @@ const ViewPoll = () => {
   };
 
   const showResults = () => {
+    let sortedRestaurants = poll.restaurants.sort((a, b) => b.votes - a.votes);
+
     return (
       <>
         <h1 className="poll-results">RESULTS</h1>
-        {poll.restaurants.map((restaurant) => (
+        {sortedRestaurants.map((restaurant) => (
           <li className="poll-item" key={restaurant.restaurantId}>
             <span>
               {restaurant.restaurantName}|| {restaurant.votes}
@@ -210,11 +252,23 @@ const ViewPoll = () => {
   };
   console.log(-moment().diff(timeLeft(), "seconds"));
 
+  const startNewOrder = () => {
+    return (
+      <>
+      <p>Poll is finished</p>
+      <p>Do you want to create an order for this poll?</p>
+      <button className='submit-button' onClick={goHome}>No</button>
+      <button className='submit-button make-order-btn' onClick={addOrder}>Yes</button>
+      </>
+    )
+  }
+
   return (
     <div className="polls">
       <h3 className="poll-name">Poll name: {poll.label}</h3>
-      {duration && <Timer duration={duration} pollId={pollId} />}
-      {voted === false ? showVoting() : showResults()}
+      {duration > 0 ? <Timer duration={duration} pollId={pollId}/> : <span className='timer'>Isteklo</span>}
+      {/* {voted === false ? showVoting() : showResults()} */}
+      {step === 'results' ? showResults() : step === 'finished' ?  startNewOrder() : showVoting()}
     </div>
   );
 };

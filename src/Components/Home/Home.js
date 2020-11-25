@@ -103,7 +103,6 @@ const Home = () => {
         <Route component={AllPolls} exact path={["/polls", "/home"]} />
         <PrivateRoute component={AllOrders} exact path="/orders" />
       </Switch>
-      <ViewOrder />
       <About />
     </div>
   );

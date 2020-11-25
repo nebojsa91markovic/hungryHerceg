@@ -198,21 +198,6 @@ const ViewPoll = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="polls">
-      <h3 className="poll-name">Poll name: {poll.label}</h3>
-      {duration > 0 ? (
-        <Timer duration={duration} pollId={pollId} />
-      ) : (
-          <span className="timer">Isteklo</span>
-        )}
-      {/* {voted === false ? showVoting() : showResults()} */}
-      {step === "results"
-        ? showResults()
-        : step === "finished"
-          ? startNewOrder()
-          : showVoting()}
-=======
     <div className="polls-wrapper">
       <BackButton />
       <div className="polls">
@@ -220,16 +205,15 @@ const ViewPoll = () => {
         {duration > 0 ? (
           <Timer duration={duration} pollId={pollId} />
         ) : (
-          <span className="timer">Isteklo</span>
-        )}
+            <span className="timer">Isteklo</span>
+          )}
         {/* {voted === false ? showVoting() : showResults()} */}
         {step === "results"
           ? showResults()
           : step === "finished"
-          ? startNewOrder()
-          : showVoting()}
+            ? startNewOrder()
+            : showVoting()}
       </div>
->>>>>>> 00117b25968cff92cf776b76a5d91fc65465c633
     </div>
   );
 };

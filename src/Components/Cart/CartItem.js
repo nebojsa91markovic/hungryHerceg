@@ -10,8 +10,8 @@ const CartItem = ({ id, note, title, price, amount }) => {
     <article className="cart-item">
       <h4 className="h4-Capitalize">{title}</h4>
       {/* remove button */}
-      <button className="filter-btn" onClick={() => remove(id)}>
-        remove
+      <button className="remove-btn" onClick={() => remove(id)}>
+        X
       </button>
       <p className="amount">{amount}</p>
       {/* <h4 className='item-price'>{price} din</h4> */}

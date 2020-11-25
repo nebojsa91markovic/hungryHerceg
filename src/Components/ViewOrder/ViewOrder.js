@@ -11,10 +11,15 @@ import Cart from "../Cart/Cart";
 import { AppProvider } from "../Cart/context";
 import ShowAllOrders from "../ShowAllOrders/ShowAllOrders";
 import { OrdersContext } from "../../Context/OrdersContext";
+import BackButton from "../BackButton/BackButton";
+import { AiFillCaretUp } from "react-icons/ai";
 
 const ViewOrder = () => {
   const [myCart, setMyCart] = useState([]);
   const { orders, dispatchOrders } = useContext(OrdersContext);
+
+
+  const [isClicked, setIsClicked] = useState(false)
 
   const newMeals = {
     consumer: "Nebojsa Markovic",
@@ -54,10 +59,11 @@ const ViewOrder = () => {
   };
 
   const getAllMeals = () => {
-    RestaurantCollection.doc("7RzppUo5Bg70pgbrZ8x0")
+    RestaurantCollection.doc("068e8950-ad3d-456b-b09a-190db1fb2abe")
       .get()
       .then((response) => {
         setMenuItems(response.data().meals);
+        console.log(menuItems, 'itemi')
         return response.data().meals;
       });
   };
@@ -82,30 +88,38 @@ const ViewOrder = () => {
   };
 
   return (
-    <main>
-      <button onClick={addOrder}>Add meal to order</button>
-      <section className="menu section">
-        <div className="title">
-          <h2>tesla menu</h2>
-          <div className="underline"></div>
-        </div>
+    <div className="order-wrapper">
 
-        <FilterRestoranItems
-          filterItems={filterItems}
-          categories={categories}
-        />
-        <RestoranItems
-          items={menuItems}
-          myCart={myCart}
-          setMyCart={setMyCart}
-        />
-        <AppProvider>
-          <Cart myCart={myCart} setMyCart={setMyCart} />
-        </AppProvider>
+      <BackButton />
+      <main>
+        <button onClick={addOrder}>Add meal to order</button>
+        <section className="menu section">
+          <div className="title">
+            <h2>tesla menu</h2>
+            <div className="underline"></div>
+          </div>
 
-        <ShowAllOrders />
-      </section>
-    </main>
+          <FilterRestoranItems
+            filterItems={filterItems}
+            categories={categories}
+          />
+          <RestoranItems
+            items={menuItems}
+            myCart={myCart}
+            setMyCart={setMyCart}
+          />
+          <AppProvider>
+            <Cart myCart={myCart} setMyCart={setMyCart} isClicked={isClicked} />
+          </AppProvider>
+
+          {/* <ShowAllOrders /> */}
+        </section>
+      </main>
+      <div onClick={() => setIsClicked(!isClicked)} className="show-cart">
+        <span>CART</span>
+        <AiFillCaretUp className="caret-up" />
+      </div>
+    </div>
   );
 };
 

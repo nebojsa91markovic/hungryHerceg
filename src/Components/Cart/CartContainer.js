@@ -15,6 +15,10 @@ const CartContainer = ({ myCart, setMyCart }) => {
     );
   }
 
+  const removeItem = (id) => {
+    setMyCart(myCart.filter((item) => item.id !== id));
+  };
+
   const clearCart = () => {
     setMyCart([]);
   };

@@ -30,11 +30,11 @@ const AllPolls = () => {
 
   return (
     <div className="allPolls">
-      <div className="pollItem">
-        <h3>Name: </h3>
-        <span>Date: </span>
-        <span>Ends in:</span>
-        <span>Ordered:</span>
+      <div className="pollItem-header">
+        <span>Name </span>
+        <span>Date </span>
+        <span>Ends in</span>
+        <span>Ordered</span>
       </div>
       {polls.map((poll) => (
         <PollItem key={poll.id} poll={poll} />

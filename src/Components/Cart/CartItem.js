@@ -3,8 +3,8 @@ import { useGlobalContext } from "./context";
 import numeral from "../../services/numeral";
 numeral.locale("srb");
 
-const CartItem = ({ id, note, title, price, amount }) => {
-  const { remove } = useGlobalContext();
+const CartItem = ({ id, note, title, price, amount, removeItem }) => {
+  //const { remove } = useGlobalContext();
 
   return (
     <article className="cart-item">

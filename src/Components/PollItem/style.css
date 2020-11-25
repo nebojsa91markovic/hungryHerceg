@@ -21,7 +21,7 @@
 }
 
 .pollItem {
-	background-color: rgba(33, 33, 31, 0.8);
+	background-color: rgba(33, 33, 31, 0.9);
 	color: rgb(255, 255, 255);
 	border: 1px solid #f0af00;
 	flex-direction: column;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import RestoranItems from "../RestoranItems/RestoranItems";
 import FilterRestoranItems from "../FilterRestoranItems/FilterRestoranItems";
 import items from "./data";
@@ -10,12 +10,14 @@ import firebase from "firebase/app";
 import Cart from "../Cart/Cart";
 import { AppProvider } from "../Cart/context";
 import ShowAllOrders from "../ShowAllOrders/ShowAllOrders";
+import { OrdersContext } from "../../Context/OrdersContext";
 
 const ViewOrder = () => {
   const [myCart, setMyCart] = useState([]);
+  const { orders, dispatchOrders } = useContext(OrdersContext);
 
   const newMeals = {
-    consumer: "Bata",
+    consumer: "Nebojsa Markovic",
     payloads: [
       {
         quantity: 2,
@@ -38,9 +40,16 @@ const ViewOrder = () => {
 
   const addOrder = () => {
     console.log("test1");
-    OrdersCollection.doc("89cHkUJiwrqiXW8v10TY").update({
-      allMeals: firebase.firestore.FieldValue.arrayUnion(newMeals),
+
+    dispatchOrders({
+      type: "ADD_ORDER",
+      payload: newMeals,
+      orderId: "89cHkUJiwrqiXW8v10TY",
     });
+
+    // OrdersCollection.doc("89cHkUJiwrqiXW8v10TY").update({
+    //   allMeals: firebase.firestore.FieldValue.arrayUnion(newMeals),
+    // });
     addFavoriteMeal();
   };
 
@@ -52,7 +61,10 @@ const ViewOrder = () => {
         return response.data().meals;
       });
   };
-  //getAllMeals()
+
+  useEffect(() => {
+    getAllMeals();
+  }, []);
 
   const allCategories = ["all", ...new Set(items.map((item) => item.category))];
   console.log(allCategories);

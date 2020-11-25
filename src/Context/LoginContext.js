@@ -1,10 +1,10 @@
 import React, { createContext, useReducer } from "react";
-import {LoginReducer} from "../Reducers/LoginReducer"
+import { LoginReducer } from "../Reducers/LoginReducer";
 
 export const LoginContext = createContext();
 
 const LoginContextProvider = (props) => {
-  const [isLogedIn, dispatch] = useReducer(LoginReducer);
+  const [isLogedIn, dispatchLogin] = useReducer(LoginReducer);
 
   return (
     <LoginContext.Provider value={{ isLogedIn, dispatch }}>

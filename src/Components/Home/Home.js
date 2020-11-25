@@ -8,18 +8,22 @@ import About from "../About/About";
 import "./style.css";
 import { PollsContext } from "../../Context/PollsContext";
 import { OrdersContext } from "../../Context/OrdersContext";
+import { RestaurantsContext } from "../../Context/RestaurantsContext";
 import PollsCollection from "../../collections/PollsCollection";
 import OrdersCollection from "../../collections/OrdersCollection";
+import RestaurantCollection from "../../collections/RestaurantCollection";
 import moment from "moment";
 const Home = () => {
   const { polls, dispatch } = useContext(PollsContext);
   const { orders, dispatchOrders } = useContext(OrdersContext);
+  const { restaurants, dispatchRestaurants } = useContext(RestaurantsContext);
+
+  let today = moment().subtract(1, "days").endOf("day").format();
+  let tomorrow = moment().add(1, "days").startOf("day").format();
 
   const getAllPolls = () => {
     let arrAllPolls = [];
 
-    let today = moment().subtract(1, "days").endOf("day").format();
-    let tomorrow = moment().add(1, "days").startOf("day").format();
     PollsCollection.where("created", ">", today.toString())
       .where("created", "<", tomorrow.toString())
       .orderBy("created")
@@ -31,7 +35,9 @@ const Home = () => {
         });
       });
     dispatch({ type: "ALL_POLLS", payload: { allPolls: arrAllPolls } });
+  };
 
+  const getAllOrders = () => {
     let arrAllOrders = [];
     OrdersCollection.where("created", ">", today.toString())
       .where("created", "<", tomorrow.toString())
@@ -48,8 +54,23 @@ const Home = () => {
     });
   };
 
+  const getAllRestaurants = () => {
+    let arrAllRestaurants = [];
+    RestaurantCollection.get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        arrAllRestaurants.push(doc.data());
+      });
+    });
+    dispatchRestaurants({
+      type: "ALL_RESTAURANTS",
+      payload: { allRestaurants: arrAllRestaurants },
+    });
+  };
+
   useEffect(() => {
     getAllPolls();
+    getAllOrders();
+    getAllRestaurants();
   }, []);
   return (
     <div className="main">

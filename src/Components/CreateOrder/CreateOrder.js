@@ -33,7 +33,7 @@ const CreateOrder = () => {
   //   melas: ['Piletina sa kikirikije', 'Slatko-ljuta supa', 'Nudle sa svinjetinom']}
   // ]
 
-  const addOrder = () => {
+  const createOrder = () => {
     // if (orderName.trim("").length === 0 || restaurantWon === 0) {
     //   alert("Please insert valid informations");
     //   return;
@@ -43,7 +43,7 @@ const CreateOrder = () => {
     let orderId = uuidv4();
 
     dispatchOrders({
-      type: "ADD_ORDER",
+      type: "CREATE_ORDER",
       payload: {
         created: moment().format(),
         createBy: cookies.user,
@@ -96,7 +96,7 @@ const CreateOrder = () => {
         type="text"
         onChange={(event) => setOrderName(event.target.value)}
       /> */}
-        <button className="submit-button" onClick={addOrder}>
+        <button className="submit-button" onClick={createOrder}>
           Create an order
         </button>
       </div>

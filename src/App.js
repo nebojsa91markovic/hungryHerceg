@@ -11,6 +11,7 @@ import CreateOrder from "./Components/CreateOrder/CreateOrder";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import PollsContextProvider from "./Context/PollsContext";
 import OrdersContextProvider from "./Context/OrdersContext";
+import RestaurantsContextProvider from "./Context/RestaurantsContext";
 
 function App() {
   return (
@@ -19,25 +20,31 @@ function App() {
         <NavBar />
         <PollsContextProvider>
           <OrdersContextProvider>
-            <Switch>
-              <PrivateRoute
-                component={Home}
-                exact
-                path={["/home", "/polls", "/orders"]}
-              />
-              <PrivateRoute component={CreatePoll} exact path="/create-poll" />
-              <PrivateRoute
-                component={CreateOrder}
-                exact
-                path="/create-order"
-              />
-              <PrivateRoute component={ViewPoll} exact path="/poll/:pollId" />
-              <Route
-                component={WelcomePage}
-                exact
-                path={["/", "/signup", "/login"]}
-              />
-            </Switch>
+            <RestaurantsContextProvider>
+              <Switch>
+                <PrivateRoute
+                  component={Home}
+                  exact
+                  path={["/home", "/polls", "/orders"]}
+                />
+                <PrivateRoute
+                  component={CreatePoll}
+                  exact
+                  path="/create-poll"
+                />
+                <PrivateRoute
+                  component={CreateOrder}
+                  exact
+                  path="/create-order"
+                />
+                <PrivateRoute component={ViewPoll} exact path="/poll/:pollId" />
+                <Route
+                  component={WelcomePage}
+                  exact
+                  path={["/", "/signup", "/login"]}
+                />
+              </Switch>
+            </RestaurantsContextProvider>
           </OrdersContextProvider>
         </PollsContextProvider>
         <Footer />

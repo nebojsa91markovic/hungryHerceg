@@ -10,7 +10,7 @@ export const PollsReducer = (state, action) => {
       console.log(state, action, 222);
 
       PollsCollection.doc(action.payload.id)
-        .set(action.payload)
+        .add(action.payload)
         .then(() => console.log("usepsno dodat poll"));
       return [...state, action.payload];
     case "ADDVOTE_POLL":

@@ -27,7 +27,7 @@ const CartContainer = ({ myCart, setMyCart }) => {
     let totalSum = 0;
     myCart.forEach((element) => {
       const { amount, price } = element;
-      totalSum += amount * price;
+      totalSum += amount * price * 100;
     });
     return totalSum;
   };
@@ -55,7 +55,6 @@ const CartContainer = ({ myCart, setMyCart }) => {
           return <CartItem key={item.id} {...item} />;
         })}
       </div>
-
     </section>
   );
 };

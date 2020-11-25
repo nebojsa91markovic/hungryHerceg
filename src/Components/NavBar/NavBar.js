@@ -1,10 +1,19 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import "./style.css";
 import NavBarName from "../NavBarName/NavBarName";
+import { useCookies } from "react-cookie";
 
 const NavBar = () => {
   const location = useLocation();
+  const [cookies] = useCookies(["user"]);
+  const history = useHistory();
+
+  const handleHomeUrl = (event) => {
+    event.preventDefault();
+    if (cookies.user !== undefined && cookies.user !== "undefined")
+      history.push("/home");
+  };
 
   const showButtons = () => {
     if (
@@ -37,9 +46,7 @@ const NavBar = () => {
 
   return (
     <div className="navBar">
-      <Link to="/home">
-        <div className="logo"></div>
-      </Link>
+      <div className="logo" onClick={handleHomeUrl}></div>
       {showButtons()}
       {/* kad nije ulogovan */}
 

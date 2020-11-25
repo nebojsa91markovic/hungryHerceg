@@ -9,7 +9,7 @@ export const OrdersReducer = (state, action) => {
       return action.payload.allOrders;
     case "CREATE_ORDER":
       console.log(state, action, 222);
-
+      console.log(action.payload, action.payload.id);
       OrdersCollection.doc(action.payload.id)
         .set(action.payload)
         .then(() => console.log("usepsno dodat order"));

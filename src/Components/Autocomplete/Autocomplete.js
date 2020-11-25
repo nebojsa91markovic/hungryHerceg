@@ -18,7 +18,13 @@ const Autocomplete = ({
   const [text, setText] = useState("");
   const [chosen, setChosen] = useState("");
   const [disabled, setDisabled] = useState(false);
-
+  console.log(
+    selectedRestaurants,
+    allRestaurants,
+    allOrders,
+    placeholder,
+    "aaaaaaaaaa"
+  );
   const handleClick = (e) => {
     // console.log(e.target.value);
     setText(e.target.innerText);
@@ -86,7 +92,7 @@ const Autocomplete = ({
                 value={el.id}
                 onClick={handleClick}
               >
-                {el.label}
+                {el.name}
               </button>
             </li>
           ))}

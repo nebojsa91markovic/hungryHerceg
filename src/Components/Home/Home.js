@@ -13,11 +13,12 @@ import PollsCollection from "../../collections/PollsCollection";
 import OrdersCollection from "../../collections/OrdersCollection";
 import RestaurantCollection from "../../collections/RestaurantCollection";
 import moment from "moment";
+import { Cookies, useCookies } from "react-cookie";
 const Home = () => {
   const { polls, dispatch } = useContext(PollsContext);
   const { orders, dispatchOrders } = useContext(OrdersContext);
   const { restaurants, dispatchRestaurants } = useContext(RestaurantsContext);
-
+  const [cookies] = useCookies("user");
   const history = useHistory();
 
   let today = moment().subtract(1, "days").endOf("day").format();

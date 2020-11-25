@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./style.css";
-import PollsCollection from "../../collections/PollsCollection";
-import OrdersCollection from "../../collections/OrdersCollection";
 import { useCookies } from "react-cookie";
 import Timer from "../Timer/Timer";
 import moment from "moment";
@@ -32,15 +30,6 @@ const ViewPoll = () => {
   const mostVotes = () => {
     return poll.restaurants.sort((a, b) => a.votes - b.votes).slice(-1)[0]
       .restaurantId;
-
-    PollsCollection.doc(pollId)
-      .get()
-      .then((response) => {
-        return response
-          .data()
-          .restaurants.sort((a, b) => a.votes - b.votes)
-          .slice(-1)[0].restaurantId;
-      });
   };
 
   //preko reducer kreiranje ordera preko poll-a
@@ -71,20 +60,21 @@ const ViewPoll = () => {
       type: "FINISHED_POLL",
       payload: poll,
     });
-    PollsCollection.doc(pollId)
-      .get()
-      .then((response) => {
-        if (response.data().createBy === cookies.user) {
-          PollsCollection.doc(pollId)
-            .update({
-              active: false,
-            })
-            .then(() => {
-              alert("zavrseno");
-              setStep("finished");
-            });
-        } else alert("nisi admin");
-      });
+    setStep("finished");
+    // PollsCollection.doc(pollId)
+    //   .get()
+    //   .then((response) => {
+    //     if (response.data().createBy === cookies.user) {
+    //       PollsCollection.doc(pollId)
+    //         .update({
+    //           active: false,
+    //         })
+    //         .then(() => {
+    //           alert("zavrseno");
+    //           setStep("finished");
+    //         });
+    //     } else alert("nisi admin");
+    //   });
   };
 
   const addVote = (event) => {
@@ -127,6 +117,16 @@ const ViewPoll = () => {
     } else return 0;
   };
 
+  const finishPollButton = () => {
+    if (poll.createBy === cookies.user) {
+      return (
+        <button className="submit-button" onClick={finishPoll}>
+          Finish poll
+        </button>
+      );
+    }
+  };
+
   const showVoting = () => {
     return (
       <form onSubmit={addVote}>
@@ -153,16 +153,6 @@ const ViewPoll = () => {
         <input className="submit-button" type="submit" />
       </form>
     );
-  };
-
-  const finishPollButton = () => {
-    if (poll.createBy === cookies.user) {
-      return (
-        <button className="submit-button" onClick={finishPoll}>
-          Finish poll
-        </button>
-      );
-    }
   };
 
   const showResults = () => {

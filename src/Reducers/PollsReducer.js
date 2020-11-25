@@ -93,8 +93,8 @@ export const PollsReducer = (state, action) => {
             PollsCollection.doc(action.payload.id).update({
               active: false,
             });
-            alert("zavrseno");
-          } else alert("nisi admin");
+            alert("Poll is now finished!");
+          } else alert("Only creator of this poll can finish it!");
         });
 
       let prevState = [...state];

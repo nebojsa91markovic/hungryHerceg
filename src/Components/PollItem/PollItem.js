@@ -11,7 +11,6 @@ const PollItem = ({ poll }) => {
 
   const handleTimeLeft = () => {
     const sec = 1000;
-    console.log(finishAt);
     if (moment().isBefore(finishAt)) {
       setTimeout(() => setTimeLeft(finishAt.fromNow()), sec * 60);
     }
@@ -23,7 +22,7 @@ const PollItem = ({ poll }) => {
 
   return (
     <Link className="pollItem" to={`/poll/${poll.id}`}>
-      <span className='span-label'>{poll.label}</span>
+      <span className="span-label">{poll.label}</span>
       <span>{moment(poll.created).format("DD/MM")}</span>
       <span>{timeLeft}</span>
       <span>{poll.isOrderCreated ? "Order created" : "Not yet!"}</span>

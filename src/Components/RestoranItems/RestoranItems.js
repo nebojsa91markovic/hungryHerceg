@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import numeral from "../../services/numeral";
+numeral.locale("srb");
 
 const RestoranItems = ({ items, myCart, setMyCart }) => {
   // const [mealPrice, setMealPrice] = useState(0)
@@ -29,7 +31,9 @@ const RestoranItems = ({ items, myCart, setMyCart }) => {
             <div className="item-info">
               <header>
                 <h4>{title}</h4>
-                <h4 className="price">${price}</h4>
+                <h4 className="price">
+                  {numeral(price * 100).format("$ 0,0.00")}
+                </h4>
               </header>
               <p className="item-text">{desc}</p>
               <form onSubmit={handleSubmit}>

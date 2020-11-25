@@ -14,8 +14,10 @@ import OrdersCollection from "../../collections/OrdersCollection";
 import RestaurantCollection from "../../collections/RestaurantCollection";
 import moment from "moment";
 import { Cookies, useCookies } from "react-cookie";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import firebase from "firebase";
 const Home = () => {
-
   const { polls, dispatch } = useContext(PollsContext);
   const { orders, dispatchOrders } = useContext(OrdersContext);
   const { restaurants, dispatchRestaurants } = useContext(RestaurantsContext);
@@ -84,6 +86,7 @@ const Home = () => {
     getAllRestaurants();
     goToPolls();
   }, []);
+
   return (
     <div className="main">
       <Link className="pollButton" to="/polls">

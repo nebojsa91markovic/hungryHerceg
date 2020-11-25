@@ -15,6 +15,10 @@ const CartContainer = ({ myCart, setMyCart }) => {
     );
   }
 
+  const removeItem = (id) => {
+    setMyCart(myCart.filter((item) => item.id !== id));
+  };
+
   const clearCart = () => {
     setMyCart([]);
   };
@@ -37,7 +41,7 @@ const CartContainer = ({ myCart, setMyCart }) => {
 
       <div>
         {myCart.map((item) => {
-          return <CartItem key={item.id} {...item} />;
+          return <CartItem key={item.id} {...item} removeItem={removeItem} />;
         })}
       </div>
 

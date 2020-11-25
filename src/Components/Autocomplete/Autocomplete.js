@@ -93,6 +93,7 @@ const Autocomplete = ({
                 onClick={handleClick}
               >
                 {el.name}
+                {el.label}
               </button>
             </li>
           ))}

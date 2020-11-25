@@ -53,6 +53,7 @@ const CreateOrder = () => {
         allMeals: [],
         id: orderId,
       },
+      pollId: "",
     });
 
     // newDocRef

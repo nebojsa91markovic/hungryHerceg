@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./style.css";
-import PollsCollection from "../../collections/PollsCollection";
-import OrdersCollection from "../../collections/OrdersCollection";
 import { useCookies } from "react-cookie";
 import Timer from "../Timer/Timer";
 import moment from "moment";
@@ -10,6 +8,7 @@ import { PollsContext } from "../../Context/PollsContext";
 import { OrdersContext } from "../../Context/OrdersContext";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import BackButton from "../BackButton/BackButton";
 
 const ViewPoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
@@ -32,15 +31,6 @@ const ViewPoll = () => {
   const mostVotes = () => {
     return poll.restaurants.sort((a, b) => a.votes - b.votes).slice(-1)[0]
       .restaurantId;
-
-    PollsCollection.doc(pollId)
-      .get()
-      .then((response) => {
-        return response
-          .data()
-          .restaurants.sort((a, b) => a.votes - b.votes)
-          .slice(-1)[0].restaurantId;
-      });
   };
 
   //preko reducer kreiranje ordera preko poll-a
@@ -71,20 +61,21 @@ const ViewPoll = () => {
       type: "FINISHED_POLL",
       payload: poll,
     });
-    PollsCollection.doc(pollId)
-      .get()
-      .then((response) => {
-        if (response.data().createBy === cookies.user) {
-          PollsCollection.doc(pollId)
-            .update({
-              active: false,
-            })
-            .then(() => {
-              alert("zavrseno");
-              setStep("finished");
-            });
-        } else alert("nisi admin");
-      });
+    setStep("finished");
+    // PollsCollection.doc(pollId)
+    //   .get()
+    //   .then((response) => {
+    //     if (response.data().createBy === cookies.user) {
+    //       PollsCollection.doc(pollId)
+    //         .update({
+    //           active: false,
+    //         })
+    //         .then(() => {
+    //           alert("zavrseno");
+    //           setStep("finished");
+    //         });
+    //     } else alert("nisi admin");
+    //   });
   };
 
   const addVote = (event) => {
@@ -105,6 +96,13 @@ const ViewPoll = () => {
     console.log(pollId);
 
     setPoll(polls.filter((poll) => poll.id === pollId)[0]);
+    setTimeout(() => {
+      checkVoting();
+    }, 500);
+  };
+
+  const checkVoting = () => {
+    console.log("check", poll);
   };
 
   useEffect(() => {
@@ -125,6 +123,16 @@ const ViewPoll = () => {
       let endTime = moment(created).add(pollDuration).format();
       return endTime;
     } else return 0;
+  };
+
+  const finishPollButton = () => {
+    if (poll.createBy === cookies.user) {
+      return (
+        <button className="submit-button" onClick={finishPoll}>
+          Finish poll
+        </button>
+      );
+    }
   };
 
   const showVoting = () => {
@@ -155,16 +163,6 @@ const ViewPoll = () => {
     );
   };
 
-  const finishPollButton = () => {
-    if (poll.createBy === cookies.user) {
-      return (
-        <button className="submit-button" onClick={finishPoll}>
-          Finish poll
-        </button>
-      );
-    }
-  };
-
   const showResults = () => {
     let sortedRestaurants = poll.restaurants.sort((a, b) => b.votes - a.votes);
 
@@ -174,7 +172,7 @@ const ViewPoll = () => {
         {sortedRestaurants.map((restaurant) => (
           <li className="poll-item" key={restaurant.restaurantId}>
             <span>
-              {restaurant.restaurantName}|| {restaurant.votes}
+              {restaurant.restaurantName} || {restaurant.votes}
             </span>
           </li>
         ))}
@@ -200,6 +198,7 @@ const ViewPoll = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="polls">
       <h3 className="poll-name">Poll name: {poll.label}</h3>
       {duration > 0 ? (
@@ -213,6 +212,24 @@ const ViewPoll = () => {
         : step === "finished"
           ? startNewOrder()
           : showVoting()}
+=======
+    <div className="polls-wrapper">
+      <BackButton />
+      <div className="polls">
+        <h3 className="poll-name">Poll name: {poll.label}</h3>
+        {duration > 0 ? (
+          <Timer duration={duration} pollId={pollId} />
+        ) : (
+          <span className="timer">Isteklo</span>
+        )}
+        {/* {voted === false ? showVoting() : showResults()} */}
+        {step === "results"
+          ? showResults()
+          : step === "finished"
+          ? startNewOrder()
+          : showVoting()}
+      </div>
+>>>>>>> 00117b25968cff92cf776b76a5d91fc65465c633
     </div>
   );
 };

@@ -1,41 +1,41 @@
 .autocomplete-wrapper {
-    width: 30vw;
-    margin: 5px auto;
+	width: 100%;
+	margin: 5px 0;
 }
 
 .autocomplete-input {
-    width: 29vw;
+	width: 29vw;
 }
 
 .hide {
-    display: none;
+	display: none;
 }
 
 .show {
-    display: inline;
+	display: inline;
 }
 
 #ingredients {
-    max-height: 300px;
-    overflow: auto;
+	max-height: 300px;
+	overflow: auto;
 }
 
 .search-results {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
 
 .search-result-button {
-    width: 95%;
-    height: 25px;
-    text-align: left;
-    background-color: white;
-    border: none;
-    border-radius: 5px;
-    margin-top: 3px;
+	width: 95%;
+	height: 25px;
+	text-align: left;
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+	margin-top: 3px;
 }
 
 .search-result-button:hover {
-    background-color: #e9ecef;
+	background-color: #e9ecef;
 }

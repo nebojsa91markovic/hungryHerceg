@@ -11,6 +11,7 @@ import { useCookies } from "react-cookie";
 import Timer from "../Timer/Timer";
 import moment from "moment";
 import { PollsContext } from "../../Context/PollsContext";
+import BackButton from "../BackButton/BackButton";
 
 const ViewPoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
@@ -211,10 +212,13 @@ const ViewPoll = () => {
   console.log(-moment().diff(timeLeft(), "seconds"));
 
   return (
-    <div className="polls">
-      <h3 className="poll-name">Poll name: {poll.label}</h3>
-      {duration && <Timer duration={duration} pollId={pollId} />}
-      {voted === false ? showVoting() : showResults()}
+    <div className="polls-wrapper">
+      <BackButton />
+      <div className="polls">
+        <h3 className="poll-name">Poll name: {poll.label}</h3>
+        {duration && <Timer duration={duration} pollId={pollId} />}
+        {voted === false ? showVoting() : showResults()}
+      </div>
     </div>
   );
 };

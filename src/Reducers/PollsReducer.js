@@ -10,7 +10,7 @@ export const PollsReducer = (state, action) => {
       console.log(state, action, 222);
 
       PollsCollection.doc(action.payload.id)
-        .add(action.payload)
+        .set(action.payload)
         .then(() => console.log("usepsno dodat poll"));
       return [...state, action.payload];
     case "ADDVOTE_POLL":
@@ -79,7 +79,7 @@ export const PollsReducer = (state, action) => {
       let arrAllPolls = [];
       PollsCollection.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          arrAllPolls.push(doc.payload());
+          arrAllPolls.push(doc.data());
         });
       });
       return arrAllPolls;

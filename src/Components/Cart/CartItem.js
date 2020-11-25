@@ -15,7 +15,9 @@ const CartItem = ({ id, note, title, price, amount }) => {
       </button>
       <p className="amount">{amount}</p>
       {/* <h4 className='item-price'>{price} din</h4> */}
-      <h4 className="item-price">{numeral(price).format("0,0.00 $")} </h4>
+      <h4 className="item-price">
+        {numeral(price * amount).format("0,0.00 $")}{" "}
+      </h4>
 
       <div>
         <p className="cart-note">{note}</p>

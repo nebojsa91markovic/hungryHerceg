@@ -1,7 +1,6 @@
 body {
   background: url("./food-background.jpg") fixed no-repeat;
   background-size: cover;
-  font-family: "Arial Black";
 }
 
 .h1-welcome-page {
@@ -31,7 +30,6 @@ body {
 
 @media screen and (max-width: 500px) {
   body {
-    font-family: "Arial Black";
     background-image: url("./background-mobile3.jpeg");
     background-position: center center;
     background-attachment: fixed;

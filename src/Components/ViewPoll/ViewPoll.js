@@ -7,11 +7,7 @@ import { useCookies } from "react-cookie";
 import Timer from "../Timer/Timer";
 import moment from "moment";
 import { PollsContext } from "../../Context/PollsContext";
-<<<<<<< HEAD
-import BackButton from "../BackButton/BackButton";
-=======
 import { OrdersContext } from "../../Context/OrdersContext";
->>>>>>> b66046f42dcdbc46fed2369f2d7ef6c9bda7e920
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
@@ -34,22 +30,8 @@ const ViewPoll = () => {
 
   //restoran pobedio
   const mostVotes = () => {
-<<<<<<< HEAD
-    PollsCollection.doc(pollId)
-      .get()
-      .then((response) => {
-        // console.log(response.data().restaurants);
-        // console.log(response.data().restaurants.sort((a, b) => a.votes - b.votes).slice(-1));
-        return response.data().restaurants.sort((a, b) => a.votes - b.votes).slice(-1)[0].restaurantId;
-      })
-  }
-
-  // console.log(mostVotes());
-
-=======
     return poll.restaurants.sort((a, b) => a.votes - b.votes).slice(-1)[0]
       .restaurantId;
->>>>>>> b66046f42dcdbc46fed2369f2d7ef6c9bda7e920
 
     PollsCollection.doc(pollId)
       .get()
@@ -93,17 +75,6 @@ const ViewPoll = () => {
       .get()
       .then((response) => {
         if (response.data().createBy === cookies.user) {
-<<<<<<< HEAD
-          PollsCollection.doc(pollId).update({
-            active: false,
-          })
-            .then(() => {
-              alert("zavrseno");
-              setStep('finished');
-              // history.push('/home');
-
-            })
-=======
           PollsCollection.doc(pollId)
             .update({
               active: false,
@@ -112,7 +83,6 @@ const ViewPoll = () => {
               alert("zavrseno");
               setStep("finished");
             });
->>>>>>> b66046f42dcdbc46fed2369f2d7ef6c9bda7e920
         } else alert("nisi admin");
       });
   };
@@ -219,46 +189,30 @@ const ViewPoll = () => {
       <>
         <p>Poll is finished</p>
         <p>Do you want to create an order for this poll?</p>
-<<<<<<< HEAD
-        <button className='submit-button' onClick={goHome}>No</button>
-        <button className='submit-button make-order-btn' onClick={addOrder}>Yes</button>
-=======
         <button className="submit-button" onClick={goHome}>
           No
         </button>
         <button className="submit-button make-order-btn" onClick={addOrder}>
           Yes
         </button>
->>>>>>> b66046f42dcdbc46fed2369f2d7ef6c9bda7e920
       </>
     );
   };
 
   return (
-<<<<<<< HEAD
-    <div className="polls-wrapper">
-      <BackButton />
-      <div className="polls">
-        <h3 className="poll-name">Poll name: {poll.label}</h3>
-        {duration > 0 ? <Timer duration={duration} pollId={pollId} /> : <span className='timer'>Isteklo</span>}
-        {/* {voted === false ? showVoting() : showResults()} */}
-        {step === 'results' ? showResults() : step === 'finished' ? startNewOrder() : showVoting()}
-      </div>
-=======
     <div className="polls">
       <h3 className="poll-name">Poll name: {poll.label}</h3>
       {duration > 0 ? (
         <Timer duration={duration} pollId={pollId} />
       ) : (
-        <span className="timer">Isteklo</span>
-      )}
+          <span className="timer">Isteklo</span>
+        )}
       {/* {voted === false ? showVoting() : showResults()} */}
       {step === "results"
         ? showResults()
         : step === "finished"
-        ? startNewOrder()
-        : showVoting()}
->>>>>>> b66046f42dcdbc46fed2369f2d7ef6c9bda7e920
+          ? startNewOrder()
+          : showVoting()}
     </div>
   );
 };

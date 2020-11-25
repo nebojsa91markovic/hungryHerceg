@@ -1,32 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import OrdersCollection from "../../collections/OrdersCollection"
-import OrderItem from '../OrderItem/OrderItem';
+import React, { useEffect, useState, useContext } from "react";
+import OrdersCollection from "../../collections/OrdersCollection";
+import OrderItem from "../OrderItem/OrderItem";
+import { useCookies } from "react-cookie";
+import { OrdersContext } from "../../Context/OrdersContext";
 
 const AllOrders = () => {
+  const [cookies] = useCookies(["user"]);
 
-    const [orders, setOrders] = useState([])
+  const { orders, dispatchOrders } = useContext(OrdersContext);
 
-    const getAllOrders = () => {
-        let arrAllOrders = [];
-        OrdersCollection.get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    arrAllOrders.push(doc.data());
-                });
-                setOrders(arrAllOrders)
-            });
-    }
+  //   const [orders, setOrders] = useState([]);
 
-    useEffect(() => {
-        getAllOrders()
-    }, [])
+  //   const getAllOrders = () => {
+  //     let arrAllOrders = [];
+  //     OrdersCollection.get().then(function (querySnapshot) {
+  //       querySnapshot.forEach(function (doc) {
+  //         arrAllOrders.push(doc.data());
+  //       });
+  //       setOrders(arrAllOrders);
+  //     });
+  //   };
 
+  //   useEffect(() => {
+  //    // getAllOrders();
+  //     console.log(orders)
+  //   }, []);
 
-    return (
-        <div className="allPolls">
-            {orders.map(order => <OrderItem order={order} />)}
-        </div >
-    );
-}
+  return (
+    <div className="allPolls">
+      <div className="orderItem">
+        <h3>Name: </h3>
+        <span>Ends in:</span>
+        <span>Ordered:</span>
+      </div>
+      {orders.map((order, index) => (
+        <OrderItem order={order} id={cookies.user} index={index} />
+      ))}
+    </div>
+  );
+};
 
 export default AllOrders;

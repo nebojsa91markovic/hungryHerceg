@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Link, Route, Router, Switch } from "react-router-dom";
+import { Link, Route, Router, Switch, useHistory } from "react-router-dom";
 import AllOrders from "../AllOrders/AllOrders";
 import AllPolls from "../AllPolls/AllPolls";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -13,11 +13,14 @@ import PollsCollection from "../../collections/PollsCollection";
 import OrdersCollection from "../../collections/OrdersCollection";
 import RestaurantCollection from "../../collections/RestaurantCollection";
 import moment from "moment";
+import { Cookies, useCookies } from "react-cookie";
 const Home = () => {
 
   const { polls, dispatch } = useContext(PollsContext);
   const { orders, dispatchOrders } = useContext(OrdersContext);
   const { restaurants, dispatchRestaurants } = useContext(RestaurantsContext);
+  const [cookies] = useCookies("user");
+  const history = useHistory();
 
   let today = moment().subtract(1, "days").endOf("day").format();
   let tomorrow = moment().add(1, "days").startOf("day").format();
@@ -27,7 +30,7 @@ const Home = () => {
 
     PollsCollection.where("created", ">", today.toString())
       .where("created", "<", tomorrow.toString())
-      .orderBy("created")
+      .orderBy("created", "desc")
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
@@ -42,7 +45,7 @@ const Home = () => {
     let arrAllOrders = [];
     OrdersCollection.where("created", ">", today.toString())
       .where("created", "<", tomorrow.toString())
-      .orderBy("created")
+      .orderBy("created", "desc")
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
@@ -68,10 +71,18 @@ const Home = () => {
     });
   };
 
+  const goToPolls = () => {
+    const sec = 1000;
+    setTimeout(() => {
+      history.push("/home");
+    }, sec);
+  };
+
   useEffect(() => {
     getAllPolls();
     getAllOrders();
     getAllRestaurants();
+    goToPolls();
   }, []);
   return (
     <div className="main">

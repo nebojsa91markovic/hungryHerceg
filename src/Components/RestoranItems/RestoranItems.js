@@ -1,10 +1,22 @@
 import React, { useState, useContext } from "react";
 
 const RestoranItems = ({ items, myCart, setMyCart }) => {
+  // const [mealPrice, setMealPrice] = useState(0)
+  // const [mealPrice, setMealPrice] = useState(0)
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { amount, note, mealId } = event.target;
-    setMyCart([...myCart, [amount.value, note.value, mealId.value]]);
+    const { amount, note, mealId, mealTitle, mealPrice } = event.target;
+    setMyCart([
+      ...myCart,
+      {
+        id: mealId.value,
+        note: note.value,
+        title: mealTitle.value,
+        price: mealPrice.value,
+        amount: amount.value === "" ? 1 : amount.value,
+      },
+    ]);
   };
 
   return (
@@ -21,6 +33,20 @@ const RestoranItems = ({ items, myCart, setMyCart }) => {
               </header>
               <p className="item-text">{desc}</p>
               <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  value={title}
+                  name="mealTitle"
+                  disabled
+                  hidden
+                />
+                <input
+                  type="text"
+                  value={price}
+                  name="mealPrice"
+                  disabled
+                  hidden
+                />
                 <input type="text" value={id} name="mealId" disabled hidden />
                 <input
                   type="number"

@@ -1,4 +1,5 @@
 import OrdersCollection from "../collections/OrdersCollection";
+import PollsCollection from "../collections/PollsCollection";
 import firebase from "firebase";
 
 export const OrdersReducer = (state, action) => {
@@ -9,10 +10,16 @@ export const OrdersReducer = (state, action) => {
       return action.payload.allOrders;
     case "CREATE_ORDER":
       console.log(state, action, 222);
-
+      console.log(action.payload, action.payload.id);
       OrdersCollection.doc(action.payload.id)
         .set(action.payload)
         .then(() => console.log("usepsno dodat order"));
+      console.log(action.pollId, "pollid");
+      PollsCollection.doc(action.pollId)
+        .update({
+          isOrderCreated: true,
+        })
+        .then(() => console.log("order set to true"));
       return [...state, action.payload];
     // case "FINISHED_ORDER":
     //   return prevState;

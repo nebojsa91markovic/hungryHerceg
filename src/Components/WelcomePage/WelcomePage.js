@@ -14,6 +14,11 @@ const WelcomePage = () => {
 
   const isLogin = () => {
     console.log(cookies.user);
+    setTimeout(() => {
+      if (cookies.user !== undefined && cookies.user !== "undefined")
+        history.push("/home");
+    }, 500);
+
     // if (cookies.user === undefined) {
     //   return false;
     // } else {

@@ -44,7 +44,7 @@ const ViewOrder = () => {
     dispatchOrders({
       type: "ADD_ORDER",
       payload: newMeals,
-      orderId: "89cHkUJiwrqiXW8v10TY",
+      pollId: "89cHkUJiwrqiXW8v10TY",
     });
 
     // OrdersCollection.doc("89cHkUJiwrqiXW8v10TY").update({
@@ -100,7 +100,7 @@ const ViewOrder = () => {
           setMyCart={setMyCart}
         />
         <AppProvider>
-          <Cart />
+          <Cart myCart={myCart} setMyCart={setMyCart} />
         </AppProvider>
 
         <ShowAllOrders />

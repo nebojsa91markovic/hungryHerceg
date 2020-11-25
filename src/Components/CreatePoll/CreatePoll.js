@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import { useCookies } from "react-cookie";
 import { PollsContext } from "../../Context/PollsContext";
+import { RestaurantsContext } from "../../Context/RestaurantsContext";
 
 import "./style.css";
 import BackButton from "../BackButton/BackButton";
@@ -15,6 +16,7 @@ import BackButton from "../BackButton/BackButton";
 const CreatePoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
   const { polls, dispatch } = useContext(PollsContext);
+  const { restaurants, dispatchRestaurants } = useContext(RestaurantsContext);
 
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [selectedRestaurants, setSelectedRestaurants] = useState([
@@ -113,7 +115,7 @@ const CreatePoll = () => {
                 key={selected.restaurantId}
                 selectedRestaurants={selectedRestaurants}
                 setSelectedRestaurants={setSelectedRestaurants}
-                allRestaurants={allRestaurants}
+                allRestaurants={restaurants.allRestaurants}
                 placeholder="Choose a restaurant"
               />
             );

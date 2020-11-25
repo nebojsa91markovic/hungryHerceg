@@ -9,16 +9,32 @@ const RestoranItems = ({ items, myCart, setMyCart }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const { amount, note, mealId, mealTitle, mealPrice } = event.target;
-    setMyCart([
-      ...myCart,
-      {
-        id: mealId.value,
-        note: note.value,
-        title: mealTitle.value,
-        price: mealPrice.value,
-        amount: amount.value === "" ? 1 : amount.value,
-      },
-    ]);
+
+    let newAmount = amount.value === "" ? 1 : amount.value;
+
+    let bool = false;
+    let newState;
+    myCart.forEach((element, index) => {
+      if (element.id === mealId.value) {
+        bool = true;
+      }
+      newState[index].amount += newAmount;
+    });
+
+    if (!bool) {
+      setMyCart([
+        ...myCart,
+        {
+          id: mealId.value,
+          note: note.value,
+          title: mealTitle.value,
+          price: mealPrice.value,
+          amount: amount.value === "" ? 1 : amount.value,
+        },
+      ]);
+    } else {
+      setMyCart(newState);
+    }
   };
 
   return (

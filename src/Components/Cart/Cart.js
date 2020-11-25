@@ -3,7 +3,7 @@ import { useGlobalContext } from "./context";
 import NavbarCart from "./NavbarCart";
 import CartContainer from "./CartContainer";
 
-function Cart() {
+function Cart({ myCart, setMyCart }) {
   const { loading } = useGlobalContext();
 
   if (loading) {
@@ -17,7 +17,7 @@ function Cart() {
   return (
     <main>
       <NavbarCart />
-      <CartContainer />
+      <CartContainer myCart={myCart} setMyCart={setMyCart} />
     </main>
   );
 }

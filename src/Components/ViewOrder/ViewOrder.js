@@ -100,7 +100,7 @@ const ViewOrder = () => {
           setMyCart={setMyCart}
         />
         <AppProvider>
-          <Cart />
+          <Cart myCart={myCart} setMyCart={setMyCart} />
         </AppProvider>
 
         <ShowAllOrders />

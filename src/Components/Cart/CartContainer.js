@@ -4,7 +4,7 @@ import { useGlobalContext } from "./context";
 import numeral from "../../services/numeral";
 numeral.locale("srb");
 
-const CartContainer = () => {
+const CartContainer = ({ myCart, setMyCart }) => {
   const { cart, total, clearCart } = useGlobalContext();
 
   if (cart.length === 0) {
@@ -26,7 +26,7 @@ const CartContainer = () => {
       </header>
 
       <div>
-        {cart.map((item) => {
+        {myCart.map((item) => {
           return <CartItem key={item.id} {...item} />;
         })}
       </div>

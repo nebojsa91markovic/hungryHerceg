@@ -22,7 +22,7 @@
 
 .pollItem {
 	background-color: rgba(33, 33, 31, 0.8);
-	color: rgba(255, 255, 255, 0.6);
+	color: rgb(255, 255, 255);
 	border: 1px solid #f0af00;
 	flex-direction: column;
 	align-items: center;
@@ -40,7 +40,7 @@
 .pollItem .span-label {
 	text-transform: capitalize;
 	color: #f0af00;
-	font-weight: bold;
+	font-weight: bolder;
 }
 
 .pollItem span {

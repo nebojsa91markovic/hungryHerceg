@@ -86,18 +86,20 @@ const Home = () => {
   }, []);
   return (
     <div className="main">
-      <Link className="pollButton" to="/polls">
-        Active Polls
+      <div className='pollButton-container'>
+        <Link className="pollButton" to="/polls">
+          Active Polls
       </Link>
-      <Link className="pollButton" to="/create-poll">
-        Create Poll
+        <Link className="pollButton" to="/create-poll">
+          Create Poll
       </Link>
-      <Link className="pollButton" to="/orders">
-        Active Orders
+        <Link className="pollButton" to="/orders">
+          Active Orders
       </Link>
-      <Link className="pollButton" to="/create-order">
-        Create Order
+        <Link className="pollButton" to="/create-order">
+          Create Order
       </Link>
+      </div>
 
       <Switch>
         <Route component={AllPolls} exact path={["/polls", "/home"]} />

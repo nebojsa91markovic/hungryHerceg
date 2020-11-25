@@ -1,58 +1,105 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import OrdersCollection from "../../collections/OrdersCollection";
 import PollsCollection from "../../collections/PollsCollection";
 import moment from "moment";
 import { useCookies } from "react-cookie";
+import Autocomplete from "../Autocomplete/Autocomplete";
+import BackButton from "../BackButton/BackButton";
+import { OrdersContext } from "../../Context/OrdersContext";
+import { v4 as uuidv4 } from "uuid";
 
 const CreateOrder = () => {
   const [cookies] = useCookies(["user"]);
+  const { orders, dispatchOrders } = useContext(OrdersContext);
 
-  const [pollName, setPollName] = useState("");
-  const [restaurantWon, setRestaurantWon] = useState("");
+  const [orderName, setOrderName] = useState("");
+  const [restaurantWon, setRestaurantWon] = useState(0);
 
-  const addOrder = () => {
-    if (pollName.trim("").length === 0 || restaurantWon.trim("").length === 0) {
-      alert("Please insert valid informations");
-      return;
-    }
-    let newDocRef = OrdersCollection.doc();
+  const dotayFinishedPollsArray = [
+    { id: 1, name: "Rucak za subotu", restaurantWon: 4 },
+    { id: 2, name: "Sta cemo da jedemo", restaurantWon: 2 },
+    { id: 3, name: "Treca anketa", restaurantWon: 3 },
+  ];
 
-    newDocRef
-      .set({
+  // const restaurantsWonArray = [
+  //   {idRestaurant: 1,
+  //   name: 'Picerija Bucko',
+  //   meals: ['Parce pice', 'Cela pica', 'Pica sa slaninom']},
+  //   {idRestaurant : 2,
+  //   name: 'Leskovacki rostilj',
+  //   melas: ['Gurmanska pljeskavica', 'Burger', 'Pomfrit']},
+  //   {idRestaurant : 2,
+  //   name: 'Kineska hrana',
+  //   melas: ['Piletina sa kikirikije', 'Slatko-ljuta supa', 'Nudle sa svinjetinom']}
+  // ]
+
+  const createOrder = () => {
+    // if (orderName.trim("").length === 0 || restaurantWon === 0) {
+    //   alert("Please insert valid informations");
+    //   return;
+    // }
+    // let newDocRef = OrdersCollection.doc();
+
+    let orderId = uuidv4();
+
+    dispatchOrders({
+      type: "CREATE_ORDER",
+      payload: {
         created: moment().format(),
         createBy: cookies.user,
-        label: pollName,
+        label: orderName,
         restaurantId: restaurantWon,
         active: true,
         allMeals: [],
-        id: newDocRef.id,
-      })
-      .then(() => {
-        PollsCollection.doc("bb394d29-d3a8-45a9-b009-e7b90db94fc3").update({
-          isOrderCreated: true,
-        });
+        id: orderId,
+      },
+    });
 
-        console.log("Order created");
-      });
+    // newDocRef
+    //   .set({
+    //     created: moment().format(),
+    //     createBy: cookies.user,
+    //     label: orderName,
+    //     restaurantId: restaurantWon,
+    //     active: true,
+    //     allMeals: [],
+    //     id: newDocRef.id,
+    //   })
+    //   .then(() => {
+    //     PollsCollection.doc("bb394d29-d3a8-45a9-b009-e7b90db94fc3").update({
+    //       isOrderCreated: true,
+    //     });
+
+    //     console.log("Order created");
+    //   });
   };
 
   return (
-    <div className="polls">
-      {/* Ljubica */}
-      {/* izaberi anketu */}
-      <input
+    <div className="polls-wrapper">
+      <BackButton />
+      <div className="polls">
+        <h3>Start an order</h3>
+        {/* izaberi anketu */}
+        <Autocomplete
+          allOrders={orders}
+          setOrderName={setOrderName}
+          setRestaurantWon={setRestaurantWon}
+          placeholder="Choose a order"
+        />
+        {/* <input
         className="poll-input"
         type="text"
         onChange={(event) => setRestaurantWon(event.target.value)}
       />
       <input
-        className="poll-input"
+        className="order-input"
         type="text"
-        onChange={(event) => setPollName(event.target.value)}
-      />
-      <button className="submit-button" onClick={addOrder}>
-        Push
-      </button>
+        onChange={(event) => setOrderName(event.target.value)}
+      /> */}
+        <button className="submit-button" onClick={createOrder}>
+          Create an order
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import PollsCollection from "../../collections/PollsCollection";
 import PollItem from "../PollItem/PollItem";
+import { PollsContext } from "../../Context/PollsContext";
 
 const AllPolls = () => {
-  const [polls, setPolls] = useState([]);
+  const { polls, dispatch } = useContext(PollsContext);
+  // const [polls, setPolls] = useState([]);
 
   const finishOrder = () => {
     PollsCollection.doc("1c207585-ee01-4b1d-94d1-f4fb694e4191").update({
@@ -11,19 +13,20 @@ const AllPolls = () => {
     });
   };
 
-  const getAllPolls = () => {
-    let arrAllPolls = [];
-    PollsCollection.get().then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        arrAllPolls.push(doc.data());
-      });
-      setPolls(arrAllPolls);
-    });
-  };
+  // const getAllPolls = () => {
+  //   let arrAllPolls = [];
+  //   PollsCollection.get().then(function (querySnapshot) {
+  //     querySnapshot.forEach(function (doc) {
+  //       arrAllPolls.push(doc.data());
+  //     });
+  //     setPolls(arrAllPolls);
+  //   });
+  // };
 
-  useEffect(() => {
-    getAllPolls();
-  }, []);
+  // useEffect(() => {
+  //   setPolls(polls)
+  //   //getAllPolls();
+  // }, []);
 
   return (
     <div className="allPolls">

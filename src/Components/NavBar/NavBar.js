@@ -1,19 +1,10 @@
 import React from "react";
-import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./style.css";
-import { useCookies } from "react-cookie";
+import NavBarName from "../NavBarName/NavBarName";
 
 const NavBar = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-
   const location = useLocation();
-  const history = useHistory();
-
-  const handleLogout = () => {
-    removeCookie("user");
-    localStorage.removeItem("status");
-    history.push("/");
-  };
 
   const showButtons = () => {
     if (
@@ -33,13 +24,14 @@ const NavBar = () => {
       );
     } else
       return (
-        <div className="userLogin-wrapper">
-          <Link to="/">
-            <button onClick={handleLogout} className="userLogin-button">
-              LOG OUT
-            </button>
-          </Link>
-        </div>
+        <>
+          <NavBarName />
+          {/* <Link to="/">
+                        <button onClick={handleLogout} className="userLogin-button">
+                            LOG OUT
+                        </button>
+                    </Link> */}
+        </>
       );
   };
 

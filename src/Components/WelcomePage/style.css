@@ -22,7 +22,8 @@ body {
   width: 90%;
   margin: auto;
   margin-top: 0%;
-  /* text-shadow: -2px -2px 3px rgba(240, 176, 0, 1); */
+  text-shadow: -2px -2px 3px black;
+  /* rgba(240, 176, 0, 1) */
   color: white;
   display: flex;
   justify-content: space-between;

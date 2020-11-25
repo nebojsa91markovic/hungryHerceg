@@ -29,7 +29,7 @@ const Home = () => {
 
     PollsCollection.where("created", ">", today.toString())
       .where("created", "<", tomorrow.toString())
-      .orderBy("created")
+      .orderBy("created", "desc")
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
@@ -44,7 +44,7 @@ const Home = () => {
     let arrAllOrders = [];
     OrdersCollection.where("created", ">", today.toString())
       .where("created", "<", tomorrow.toString())
-      .orderBy("created")
+      .orderBy("created", "desc")
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {

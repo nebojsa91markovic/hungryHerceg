@@ -58,6 +58,7 @@ const ViewPoll = () => {
         allMeals: [],
         id: orderId,
       },
+      pollId: pollId,
     });
 
     alert("Order Successfully added!");

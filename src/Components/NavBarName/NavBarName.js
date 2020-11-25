@@ -6,59 +6,59 @@ import "./style.css";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 
 const NavBarName = () => {
-  const [cookies, removeCookie] = useCookies(["user"]);
-  const [user, setUser] = useState({});
-  const [isClicked, setIsClicked] = useState(false);
-  const history = useHistory();
+    const [cookies, removeCookie] = useCookies(["user"]);
+    const [user, setUser] = useState({});
+    const [isClicked, setIsClicked] = useState(false);
+    const history = useHistory();
 
-  useEffect(() => {
-    if (cookies.user === undefined) history.push("/");
-    UsersCollection.doc(cookies.user)
-      .get()
-      .then((response) => {
-        setUser(response.data());
-        console.log(user);
-      });
-  }, []);
+    useEffect(() => {
+        if (cookies.user === undefined) history.push("/");
+        UsersCollection.doc(cookies.user)
+            .get()
+            .then((response) => {
+                setUser(response.data());
+                console.log(user);
+            });
+    }, []);
 
-  const handleLogout = () => {
-    removeCookie("user");
-    history.push("/");
-  };
+    const handleLogout = () => {
+        removeCookie("user");
+        history.push("/");
+    };
 
-  const handleBackButton = () => {
-    if (window.innerWidth <= 600)
-      return (
-        <button className="dropdown-links" onClick={toggleMenu}>
-          <AiFillCaretUp />
-        </button>
-      );
-  };
-  const toggleMenu = () => {
-    setIsClicked(!isClicked);
-  };
+    const handleBackButton = () => {
+        if (window.innerWidth <= 600)
+            return (
+                <button className="dropdown-links" onClick={toggleMenu}>
+                    <AiFillCaretUp />
+                </button>
+            );
+    };
+    const toggleMenu = () => {
+        setIsClicked(!isClicked);
+    };
 
-  return (
-    <div className="navbar-name">
-      <button onClick={toggleMenu}>
-        {user.firstName} {user.lastName} <AiFillCaretDown />
-      </button>
-
-      {isClicked ? (
-        <div className="dropdown-list">
-          <Link to="/settings">
-            <button className="dropdown-links" onClick={toggleMenu}>
-              SETTINGS
+    return (
+        <div className="navbar-name">
+            <button onClick={toggleMenu}>
+                {user.firstName} {user.lastName} <AiFillCaretDown />
             </button>
-          </Link>
-          <button className="dropdown-links" onClick={handleLogout}>
-            LOG OUT
+
+            {isClicked ? (
+                <div className="dropdown-list">
+                    <Link to="/settings">
+                        <button className="dropdown-links" onClick={toggleMenu}>
+                            SETTINGS
+            </button>
+                    </Link>
+                    <button className="dropdown-links" onClick={handleLogout}>
+                        LOG OUT
           </button>
-          {handleBackButton()}
+                    {handleBackButton()}
+                </div>
+            ) : null}
         </div>
-      ) : null}
-    </div>
-  );
+    );
 };
 
 export default NavBarName;

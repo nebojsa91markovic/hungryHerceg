@@ -205,14 +205,14 @@ const ViewPoll = () => {
         {duration > 0 ? (
           <Timer duration={duration} pollId={pollId} />
         ) : (
-          <span className="timer">Isteklo</span>
-        )}
+            <span className="timer">Isteklo</span>
+          )}
         {/* {voted === false ? showVoting() : showResults()} */}
         {step === "results"
           ? showResults()
           : step === "finished"
-          ? startNewOrder()
-          : showVoting()}
+            ? startNewOrder()
+            : showVoting()}
       </div>
     </div>
   );

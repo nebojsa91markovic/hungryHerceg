@@ -38,13 +38,6 @@ const CartContainer = ({ myCart, setMyCart }) => {
         <h2>your order</h2>
         <div className="underline"></div>
       </header>
-
-      <div>
-        {myCart.map((item) => {
-          return <CartItem key={item.id} {...item} removeItem={removeItem} />;
-        })}
-      </div>
-
       <footer>
         <hr />
         <div className="cart-total">
@@ -56,6 +49,13 @@ const CartContainer = ({ myCart, setMyCart }) => {
           clear cart
         </button>
       </footer>
+
+      <div className="cart-items">
+        {myCart.map((item) => {
+          return <CartItem key={item.id} {...item} />;
+        })}
+      </div>
+
     </section>
   );
 };

@@ -3,7 +3,7 @@ import { useGlobalContext } from "./context";
 import NavbarCart from "./NavbarCart";
 import CartContainer from "./CartContainer";
 
-function Cart({ myCart, setMyCart }) {
+const Cart = ({ myCart, setMyCart, isClicked }) => {
   const { loading } = useGlobalContext();
 
   if (loading) {
@@ -14,11 +14,12 @@ function Cart({ myCart, setMyCart }) {
     );
   }
 
+
   return (
-    <main>
+    <div className={`cart-wrapper${isClicked ? '-clicked' : ''}`}>
       <NavbarCart myCart={myCart} />
       <CartContainer myCart={myCart} setMyCart={setMyCart} />
-    </main>
+    </div>
   );
 }
 

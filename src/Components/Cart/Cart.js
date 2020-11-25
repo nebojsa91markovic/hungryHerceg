@@ -16,7 +16,7 @@ function Cart({ myCart, setMyCart }) {
 
   return (
     <main>
-      <NavbarCart />
+      <NavbarCart myCart={myCart} />
       <CartContainer myCart={myCart} setMyCart={setMyCart} />
     </main>
   );

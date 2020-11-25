@@ -1,13 +1,10 @@
 import React from "react";
 import CartItem from "./CartItem";
-import { useGlobalContext } from "./context";
 import numeral from "../../services/numeral";
 numeral.locale("srb");
 
 const CartContainer = ({ myCart, setMyCart }) => {
-  const { cart, total, clearCart } = useGlobalContext();
-
-  if (cart.length === 0) {
+  if (myCart.length === 0) {
     return (
       <section className="cart">
         <header>
@@ -17,6 +14,19 @@ const CartContainer = ({ myCart, setMyCart }) => {
       </section>
     );
   }
+
+  const clearCart = () => {
+    setMyCart([]);
+  };
+
+  const getTotal = () => {
+    let totalSum = 0;
+    myCart.forEach((element) => {
+      const { amount, price } = element;
+      totalSum += amount * price;
+    });
+    return totalSum;
+  };
 
   return (
     <section className="cart">
@@ -35,7 +45,7 @@ const CartContainer = ({ myCart, setMyCart }) => {
         <hr />
         <div className="cart-total">
           <h4>
-            total <span>{numeral(total).format("$ 0,0.00")}</span>
+            total <span>{numeral(getTotal()).format("$ 0,0.00")}</span>
           </h4>
         </div>
         <button className="filter-btn" onClick={clearCart}>

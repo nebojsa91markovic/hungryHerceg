@@ -1,5 +1,5 @@
 body {
-  background: url("./food-background.jpeg") center center fixed no-repeat;
+  background: url("./food-background.jpeg") fixed no-repeat;
   background-size: cover;
   font-family: "Arial Black";
 }

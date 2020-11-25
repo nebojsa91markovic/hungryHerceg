@@ -8,6 +8,7 @@ import { PollsContext } from "../../Context/PollsContext";
 import { OrdersContext } from "../../Context/OrdersContext";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import BackButton from "../BackButton/BackButton";
 
 const ViewPoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
@@ -95,6 +96,13 @@ const ViewPoll = () => {
     console.log(pollId);
 
     setPoll(polls.filter((poll) => poll.id === pollId)[0]);
+    setTimeout(() => {
+      checkVoting();
+    }, 500);
+  };
+
+  const checkVoting = () => {
+    console.log("check", poll);
   };
 
   useEffect(() => {
@@ -164,7 +172,7 @@ const ViewPoll = () => {
         {sortedRestaurants.map((restaurant) => (
           <li className="poll-item" key={restaurant.restaurantId}>
             <span>
-              {restaurant.restaurantName}|| {restaurant.votes}
+              {restaurant.restaurantName} || {restaurant.votes}
             </span>
           </li>
         ))}
@@ -190,19 +198,22 @@ const ViewPoll = () => {
   };
 
   return (
-    <div className="polls">
-      <h3 className="poll-name">Poll name: {poll.label}</h3>
-      {duration > 0 ? (
-        <Timer duration={duration} pollId={pollId} />
-      ) : (
-        <span className="timer">Isteklo</span>
-      )}
-      {/* {voted === false ? showVoting() : showResults()} */}
-      {step === "results"
-        ? showResults()
-        : step === "finished"
-        ? startNewOrder()
-        : showVoting()}
+    <div className="polls-wrapper">
+      <BackButton />
+      <div className="polls">
+        <h3 className="poll-name">Poll name: {poll.label}</h3>
+        {duration > 0 ? (
+          <Timer duration={duration} pollId={pollId} />
+        ) : (
+          <span className="timer">Isteklo</span>
+        )}
+        {/* {voted === false ? showVoting() : showResults()} */}
+        {step === "results"
+          ? showResults()
+          : step === "finished"
+          ? startNewOrder()
+          : showVoting()}
+      </div>
     </div>
   );
 };

@@ -12,13 +12,11 @@ const NavBarName = () => {
     const [user, setUser] = useState({})
     const [isClicked, setIsClicked] = useState(false)
     const history = useHistory();
-    const menuRef = useRef()
 
     useEffect(() => {
         UsersCollection.doc(cookies.user).get().then(response => {
             setUser(response.data())
             console.log(user);
-            console.log(menuRef.current);
         })
     }, [])
 

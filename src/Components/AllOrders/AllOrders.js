@@ -10,10 +10,10 @@ const AllOrders = () => {
 
   return (
     <div className="allPolls">
-      <div className="orderItem">
-        <h3>Name: </h3>
-        <span>Ends in:</span>
-        <span>Ordered:</span>
+      <div className="orderItem-header">
+        <span>Name </span>
+        <span>Ends in</span>
+        <span>Ordered</span>
       </div>
       {orders.map((order, index) => (
         <OrderItem order={order} id={cookies.user} index={index} />

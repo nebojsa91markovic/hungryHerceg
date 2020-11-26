@@ -77,11 +77,13 @@ export const PollsReducer = (state, action) => {
       //     });
 
       let arrAllPolls = [];
-      PollsCollection.get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          arrAllPolls.push(doc.data());
+      setTimeout(() => {
+        PollsCollection.get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            arrAllPolls.push(doc.data());
+          });
         });
-      });
+      }, 2000);
       return arrAllPolls;
 
     case "FINISHED_POLL":

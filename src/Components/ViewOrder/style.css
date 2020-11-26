@@ -268,16 +268,16 @@ CART
   height: 45vh;
   position: fixed;
   left: 0;
-  bottom: -100vh;
+  top: -100vh;
   background-color: #21211f;
   transition: 0.5s ease;
 }
 
 .cart-wrapper-clicked {
-  width: 45vh;
-  height: 45vh;
+  width: 65vh;
+  height: 85vh;
   left: 0;
-  bottom: 10vh;
+  top: 7vh;
   position: fixed;
   background-color: #21211f;
   transition: 0.5s ease;
@@ -286,7 +286,7 @@ CART
   min-height: calc(100vh - 120px);
   width: 90%;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-bottom: 10px;
   padding: 2rem 0;
   max-width: var(--fixed-width);
 }
@@ -317,7 +317,7 @@ CART
   position: fixed;
   justify-content: space-between;
   align-items: center;
-  bottom: 0;
+  top: 0;
   left: 0;
   height: 7vh;
   width: 10vw;
@@ -337,7 +337,7 @@ CART
 }
 
 .cart-items {
-  height: 20vh;
+  height: 50vh;
   overflow: scroll;
 }
 
@@ -349,7 +349,7 @@ CART
     background-color: #21211f;
     position: fixed;
     left: 0;
-    bottom: -100vh;
+    top: -100vh;
     transition: ease 0.8s;
   }
 
@@ -364,7 +364,7 @@ CART
     background-color: #21211f;
     position: fixed;
     left: 0;
-    bottom: 8vh;
+    top: 8vh;
     transition: ease 0.8s;
   }
 
@@ -454,7 +454,7 @@ Navbar for Cart
   margin-top: 5rem;
 }
 nav {
-  background: var(--clr-grey-5);
+  background: var(--clr-grey-1);
   padding: 1.25rem 2rem;
   height: 6vh;
 }
@@ -477,6 +477,7 @@ nav h3 {
 nav svg {
   width: 1.5rem;
   fill: var(--clr-white);
+  z-index: 1000;
 }
 .amount-container {
   position: absolute;

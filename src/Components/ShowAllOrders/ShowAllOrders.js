@@ -35,7 +35,7 @@ function ShowAllOrders() {
               name: meal.title,
               amount: meal.amount,
               note: meal.note,
-              price: meal.price * 100,
+              price: meal.price * meal.amount * 100,
             };
             tableArray.push(newObj);
           });

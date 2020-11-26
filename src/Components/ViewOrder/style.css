@@ -340,7 +340,7 @@ CART
 .show-cart {
 	display: flex;
 	position: fixed;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	top: 0;
 	left: 0;
@@ -396,7 +396,7 @@ CART
 	.show-cart {
 		display: flex;
 		position: fixed;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items: center;
 		bottom: 0;
 		left: 0;

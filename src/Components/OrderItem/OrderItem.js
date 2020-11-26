@@ -22,7 +22,7 @@ const OrderItem = ({ order, id, index }) => {
     <Link className="orderItem" to={`/order/${order.restaurantId}`}>
       {/* <h3>Name: {order.label}</h3>
             <span>Status: {order.active + ''}</span> */}
-      <h3>{order.label}</h3>
+      <span className='span-orderLabel'>{order.label}</span>
       {/* <span>{moment(order.created).format("DD/MM")}</span> */}
       <span>{timeLeft}</span>
       <span>{haveIOrdered() ? "You have ordered" : "Not yet!"}</span>

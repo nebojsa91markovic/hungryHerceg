@@ -3,12 +3,10 @@ import PollsCollection from "../collections/PollsCollection";
 import firebase from "firebase";
 
 export const OrdersReducer = (state, action) => {
-  console.log("action", action);
   switch (action.type) {
     case "ALL_ORDERS":
       return action.payload.allOrders;
     case "CREATE_ORDER":
-      console.log(action, action.payload.createBy);
       const {
         active,
         allMeals,

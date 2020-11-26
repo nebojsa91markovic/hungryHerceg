@@ -1,16 +1,19 @@
 import React, { useState, useContext } from "react";
 import moment from "moment";
 import { useCookies } from "react-cookie";
-import Autocomplete from "../Autocomplete/Autocomplete";
+import AutoComplete2 from "../Autocomplete/AutoComplete2";
 import BackButton from "../BackButton/BackButton";
 import { OrdersContext } from "../../Context/OrdersContext";
 import { v4 as uuidv4 } from "uuid";
 import { PollsContext } from "../../Context/PollsContext";
 import style from "./style.css";
+import { useHistory } from "react-router-dom";
 const CreateOrder = () => {
   const [cookies] = useCookies(["user"]);
   const { orders, dispatchOrders } = useContext(OrdersContext);
   const { polls, dispatch } = useContext(PollsContext);
+
+  const history = useHistory();
 
   const [orderName, setOrderName] = useState("");
   const [restaurantWon, setRestaurantWon] = useState("");
@@ -53,18 +56,17 @@ const CreateOrder = () => {
         allMeals: [],
         id: orderId,
       },
-      pollId: "",
+      pollId: pollId,
     });
+    history.push(`/order/${orderId}`);
   };
 
   const filteredPolls = () => {
     let newArray = polls.filter((poll) => !poll.active);
 
     newArray = newArray.filter((poll) => !poll.isOrderCreated);
-    console.log(newArray);
     return newArray;
   };
-
   filteredPolls();
   return (
     <div className="polls-wrapper">
@@ -72,8 +74,8 @@ const CreateOrder = () => {
       <div className="polls">
         <h3>Select a poll from which you want to proceed with order:</h3>
         {/* izaberi anketu */}
-        <Autocomplete
-          allOrders={filteredPolls}
+        <AutoComplete2
+          allPolls={filteredPolls}
           setOrderName={setOrderName}
           setRestaurantWon={setRestaurantWon}
           setPollId={setPollId}

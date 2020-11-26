@@ -23,9 +23,11 @@ function ShowAllOrders() {
   const setTable = () => {
     let tableArray = [];
 
-    OrdersCollection.doc("26d79253-ad3f-4a9e-aa0f-e2fff7991931")
+    //OrdersCollection.doc("26d79253-ad3f-4a9e-aa0f-e2fff7991931")
+    OrdersCollection.doc("038a9a9e-64c3-4606-9c18-cc280d3066b5")
       .get()
       .then((response) => {
+        console.log(response);
         console.log(response.data());
 
         response.data().allMeals.forEach((order) => {

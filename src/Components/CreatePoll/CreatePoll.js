@@ -60,6 +60,8 @@ const CreatePoll = () => {
     history.push(`poll/${pollId}`);
   };
 
+  const setOrderName = (e) => {};
+
   return (
     <div className="polls-wrapper">
       <BackButton />
@@ -81,12 +83,15 @@ const CreatePoll = () => {
             <input
               className="date-time-input"
               type="date"
+              min={moment().format("YYYY-MM-DD")}
               name="pollStartsAt"
               onChange={(event) => setDate(event.target.value)}
             />
             <input
               className="date-time-input"
               type="time"
+              min="06:00"
+              // max="20:00"
               name="pollStartsAt"
               onChange={(event) => setTime(event.target.value)}
             />

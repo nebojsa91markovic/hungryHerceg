@@ -2,6 +2,7 @@ import PollsCollection from "../collections/PollsCollection";
 import firebase from "firebase/app";
 
 export const PollsReducer = (state, action) => {
+  console.log(action);
   switch (action.type) {
     case "ALL_POLLS":
       return action.payload.allPolls;
@@ -75,17 +76,17 @@ export const PollsReducer = (state, action) => {
           });
         });
       }, 2000);
-      setTimeout(() => {
-        return arrAllPolls;
-      }, 3000);
-
+      setTimeout(() => {}, 1500);
+      return arrAllPolls;
     case "FINISHED_POLL":
+      console.log(action);
       PollsCollection.doc(action.payload.id)
         .get()
         .then((response) => {
           if (response.data().createBy === action.payload.createBy) {
             PollsCollection.doc(action.payload.id).update({
               active: false,
+              restaurantId: action.restaurantId,
             });
             alert("Poll is now finished!");
           } else alert("Only creator of this poll can finish it!");

@@ -13,13 +13,37 @@ const Login = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("1");
+  const [errorUsername, setErrorUsername] = useState('')
+  const [errorPassword, setErrorPassword] = useState('')
 
   const history = useHistory();
+
+  function validateEmail (email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+const ErrorLogin = (username, password, setErrorUsername, setErrorPassword) => {
+  if(validateEmail(username) === false) {
+    return(
+      setErrorUsername("Invalid username")
+    )
+  } else if(password.length < 3){
+    return(
+      setErrorPassword("Invalid password")
+    )
+  }
+}
+
+const ConditionsLogin = (username, password) => validateEmail(username)=== true 
+                                        && password.length > 2  
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     let allUsers = [];
+
+    if (ConditionsLogin(username, password)) {
     UsersCollection.get().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
         allUsers.push(doc.data());
@@ -32,6 +56,11 @@ const Login = () => {
         }
       });
     });
+  } else {
+    return(
+      ErrorLogin(username, password, setErrorUsername, setErrorPassword)
+     )
+  }
   };
 
   return (
@@ -44,6 +73,7 @@ const Login = () => {
           type="email"
           onChange={(event) => setUsername(event.target.value)}
         />
+        <p>{errorUsername}</p>
         <br></br>
         <label>Password:</label>
         <br></br>
@@ -52,6 +82,7 @@ const Login = () => {
           type="password"
           onChange={(event) => setPassword(event.target.value)}
         />
+        <p>{errorPassword}</p>
         <br></br>
         <input className="logIn-input-button" type="submit" value="LOG IN" />
       </form>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import RestoranItems from "../RestoranItems/RestoranItems";
 import FilterRestoranItems from "../FilterRestoranItems/FilterRestoranItems";
 import items from "./data";
@@ -14,41 +14,8 @@ import "./style.css";
 
 const ViewOrder = () => {
   const [myCart, setMyCart] = useState([]);
-  const { orders, dispatchOrders } = useContext(OrdersContext);
 
   const [isClicked, setIsClicked] = useState(false);
-
-  const newMeals = {
-    consumer: "Nebojsa Markovic",
-    payloads: [
-      {
-        quantity: 2,
-        mealId: "d53e202a-3s17c-4bad-99d5-1b7a446f9e26",
-      },
-      {
-        quantity: 1,
-        mealId: "d53e202a-3s17c-4bad-99d5-1b7a446f9e26",
-      },
-    ],
-  };
-
-  const addFavoriteMeal = () => {
-    FavoriteMealsCollection.doc("AWOvrTz4ITrTxeomq48A").update({
-      pizza: 1,
-    });
-  };
-
-  const addOrder = () => {
-    dispatchOrders({
-      type: "ADD_ORDER",
-      payload: newMeals,
-      orderId: "07a398e4-696a-4f06-8fa9-f13ca7b79c3f",
-    });
-
-    alert("Meal successfully added!");
-
-    addFavoriteMeal();
-  };
 
   const getAllMeals = () => {
     RestaurantCollection.doc("068e8950-ad3d-456b-b09a-190db1fb2abe")
@@ -81,7 +48,6 @@ const ViewOrder = () => {
     <div className="order-wrapper">
       <BackButton />
       <main>
-        <button onClick={addOrder}>Add meal to order</button>
         <section className="menu section">
           <div className="title">
             <h2>tesla menu</h2>

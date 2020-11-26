@@ -22,7 +22,7 @@ const Autocomplete = ({
     setText(e.target.innerText);
     setFilter("");
     setChosen(e.target.value);
-    setRestaurantWon(e.target.value);
+    if (setRestaurantWon !== undefined) setRestaurantWon(e.target.value);
     if (setSelectedRestaurants !== undefined) {
       let tmp = [...selectedRestaurants];
       let newEntry = {

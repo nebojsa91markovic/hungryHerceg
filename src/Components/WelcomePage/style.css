@@ -1,5 +1,14 @@
 body {
-  background: url("./food-background.jpg") fixed no-repeat;
+  background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0) 41%,
+        rgba(0, 0, 0, 0.542454481792717) 89%,
+        rgba(0, 0, 0, 1) 100%,
+        rgba(34, 34, 34, 1) 100%
+      )
+      fixed,
+    url("./food-background.jpg") fixed no-repeat;
   background-size: cover;
 }
 

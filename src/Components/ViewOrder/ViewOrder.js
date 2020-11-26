@@ -3,7 +3,6 @@ import RestoranItems from "../RestoranItems/RestoranItems";
 import FilterRestoranItems from "../FilterRestoranItems/FilterRestoranItems";
 import items from "./data";
 import RestaurantCollection from "../../collections/RestaurantCollection";
-import FavoriteMealsCollection from "../../collections/FavoriteMealsCollection";
 import Cart from "../Cart/Cart";
 import { AppProvider } from "../Cart/context";
 import ShowAllOrders from "../ShowAllOrders/ShowAllOrders";

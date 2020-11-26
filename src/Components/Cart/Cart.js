@@ -30,7 +30,7 @@ const Cart = ({ myCart, setMyCart, isClicked }) => {
   };
 
   const addFavoriteMeal = () => {
-    FavoriteMealsCollection.doc(cookies.user).update({
+    FavoriteMealsCollection.doc("AWOvrTz4ITrTxeomq48A").update({
       pizza: 1,
     });
   };

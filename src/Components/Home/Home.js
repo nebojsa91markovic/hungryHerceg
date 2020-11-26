@@ -76,6 +76,16 @@ const Home = () => {
     }, sec);
   };
 
+  const update = () => {
+    OrdersCollection.doc().onSnapshot(() => {
+      getAllOrders();
+    });
+
+    PollsCollection.doc().onSnapshot(() => {
+      getAllPolls();
+    });
+  };
+
   useEffect(() => {
     getAllPolls();
     getAllOrders();

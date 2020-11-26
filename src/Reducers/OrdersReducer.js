@@ -3,14 +3,16 @@ import PollsCollection from "../collections/PollsCollection";
 import firebase from "firebase";
 
 export const OrdersReducer = (state, action) => {
+  console.log("action", action);
   switch (action.type) {
     case "ALL_ORDERS":
       return action.payload.allOrders;
     case "CREATE_ORDER":
+      console.log(action, action.payload.createBy);
       const {
         active,
         allMeals,
-        createdBy,
+        createBy,
         created,
         id,
         label,
@@ -20,7 +22,7 @@ export const OrdersReducer = (state, action) => {
         .set({
           active,
           allMeals,
-          createdBy,
+          createBy,
           created,
           id,
           label,
@@ -31,6 +33,7 @@ export const OrdersReducer = (state, action) => {
         .update({
           isOrderCreated: true,
         })
+        .then(() => alert("order is created by poll"))
         .then(() => alert("Order is now created!"));
       return [...state, action.payload];
     // case "FINISHED_ORDER":

@@ -9,6 +9,7 @@ const Autocomplete = ({
   allRestaurants,
   allOrders,
   setPollName,
+  setOrderName,
   setRestaurantWon,
   setPollId,
   placeholder,
@@ -20,9 +21,18 @@ const Autocomplete = ({
   const [disabled, setDisabled] = useState(false);
   const handleClick = (e) => {
     setText(e.target.innerText);
+    setOrderName(e.target.innerText);
     setFilter("");
     setChosen(e.target.value);
-    if (setRestaurantWon !== undefined) setRestaurantWon(e.target.value);
+    //if (setRestaurantWon !== undefined) setRestaurantWon(e.target.value);
+
+    let chosenPoll = allOrders.filter(
+      (poll) => poll.restaurantId == e.target.value
+    )[0];
+
+    setRestaurantWon(chosenPoll.restaurantId);
+    setPollId(chosenPoll.id);
+    console.log(chosenPoll);
     if (setSelectedRestaurants !== undefined) {
       let tmp = [...selectedRestaurants];
       let newEntry = {
@@ -35,10 +45,6 @@ const Autocomplete = ({
       setDisabled(true);
     } else if (setPollName !== undefined) {
       setPollName(e.target.innerText);
-      // setRestaurantWon(
-      //   allOrders.filter((poll) => poll.restaurantId == e.target.value)[0]
-      //     .restaurantWon
-      // );
     }
   };
 
@@ -53,7 +59,7 @@ const Autocomplete = ({
       restaurant.name.toLowerCase().includes(filter.toLowerCase())
     );
   } else if (allOrders !== undefined) {
-    var filtered = allOrders.filter((poll) =>
+    var filtered = allOrders().filter((poll) =>
       poll.label.toLowerCase().includes(filter.toLocaleLowerCase())
     );
   }

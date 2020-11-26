@@ -5,10 +5,12 @@ import Autocomplete from "../Autocomplete/Autocomplete";
 import BackButton from "../BackButton/BackButton";
 import { OrdersContext } from "../../Context/OrdersContext";
 import { v4 as uuidv4 } from "uuid";
-
+import { PollsContext } from "../../Context/PollsContext";
+import style from "./style.css";
 const CreateOrder = () => {
   const [cookies] = useCookies(["user"]);
   const { orders, dispatchOrders } = useContext(OrdersContext);
+  const { polls, dispatch } = useContext(PollsContext);
 
   const [orderName, setOrderName] = useState("");
   const [restaurantWon, setRestaurantWon] = useState("");
@@ -55,18 +57,27 @@ const CreateOrder = () => {
     });
   };
 
+  const filteredPolls = () => {
+    let newArray = polls.filter((poll) => !poll.active);
+
+    newArray = newArray.filter((poll) => !poll.isOrderCreated);
+    console.log(newArray);
+    return newArray;
+  };
+
+  filteredPolls();
   return (
     <div className="polls-wrapper">
       <BackButton />
       <div className="polls">
-        <h3>Start an order</h3>
+        <h3>Select a poll from which you want to proceed with order:</h3>
         {/* izaberi anketu */}
         <Autocomplete
-          allOrders={orders}
+          allOrders={filteredPolls}
           setOrderName={setOrderName}
           setRestaurantWon={setRestaurantWon}
           setPollId={setPollId}
-          placeholder="Choose a order"
+          placeholder="Choose poll"
         />
         <button className="submit-button" onClick={createOrder}>
           Create an order

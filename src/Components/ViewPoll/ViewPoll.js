@@ -9,6 +9,7 @@ import { OrdersContext } from "../../Context/OrdersContext";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import BackButton from "../BackButton/BackButton";
+import PollsCollection from "../../collections/PollsCollection";
 
 const ViewPoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
@@ -18,6 +19,7 @@ const ViewPoll = () => {
   const history = useHistory();
 
   const pollId = useParams().pollId;
+  console.log(pollId);
   const [poll, setPoll] = useState([]);
   const [vote, setVote] = useState("");
   const [step, setStep] = useState("voting");
@@ -40,12 +42,13 @@ const ViewPoll = () => {
   //preko reducer kreiranje ordera preko poll-a
   const addOrder = () => {
     let orderId = uuidv4();
-
+    let creator = cookies.user;
+    console.log("creator", cookies.user);
     dispatchOrders({
       type: "CREATE_ORDER",
       payload: {
         created: moment().format(),
-        createBy: cookies.user,
+        createBy: `${creator}`,
         label: poll.label,
         restaurantId: mostVotes(),
         active: true,

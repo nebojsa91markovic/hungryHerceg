@@ -2,21 +2,15 @@ import PollsCollection from "../collections/PollsCollection";
 import firebase from "firebase/app";
 
 export const PollsReducer = (state, action) => {
-  console.log(state, action.payload, 111);
   switch (action.type) {
     case "ALL_POLLS":
       return action.payload.allPolls;
     case "ADD_POLL":
-      console.log(state, action, 222);
-
       PollsCollection.doc(action.payload.id)
         .set(action.payload)
-        .then(() => console.log("usepsno dodat poll"));
+        .then(() => alert("Poll added successfully!"));
       return [...state, action.payload];
     case "ADDVOTE_POLL":
-      console.log(state, action, 333);
-      console.log("prvo");
-
       PollsCollection.doc(action.payload.id)
         .get()
         .then((response) => {
@@ -35,15 +29,12 @@ export const PollsReducer = (state, action) => {
           newRestaurantVoteState[0].votes += 1;
           prevState[index] = newRestaurantVoteState[0];
           if (data.active) {
-            console.log(action.payload.id);
             PollsCollection.doc(action.payload.id)
               .update({
                 restaurants: prevState,
                 voters: firebase.firestore.FieldValue.arrayUnion(action.userId),
               })
-              .then(() => {
-                console.log("voted");
-              });
+              .then(() => {});
           } else {
             alert("Ova anketa je istekla, glasanje nije moguce");
           }
@@ -84,10 +75,11 @@ export const PollsReducer = (state, action) => {
           });
         });
       }, 2000);
-      return arrAllPolls;
+      setTimeout(() => {
+        return arrAllPolls;
+      }, 3000);
 
     case "FINISHED_POLL":
-      console.log(action.payload);
       PollsCollection.doc(action.payload.id)
         .get()
         .then((response) => {
@@ -100,18 +92,13 @@ export const PollsReducer = (state, action) => {
         });
 
       let prevState = [...state];
-      console.log([...state], prevState);
       let newState = [...state].filter(
         (poll) => poll.id === action.payload.id
       )[0];
-      console.log(newState);
       let index = prevState.indexOf(newState);
 
       newState.active = false;
       prevState[index] = newState;
-      // let newState = prevState.filter(prev => prev.)
-      console.log(index);
-      console.log(prevState);
       return prevState;
     case "ISORDER_CREATED":
       // const { name, email, phone, id } = action.customer;

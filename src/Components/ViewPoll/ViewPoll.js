@@ -29,8 +29,12 @@ const ViewPoll = () => {
 
   //restoran pobedio
   const mostVotes = () => {
-    return poll.restaurants.sort((a, b) => a.votes - b.votes).slice(-1)[0]
+    let res = poll.restaurants.sort((a, b) => a.votes - b.votes).slice(-1)[0]
       .restaurantId;
+    if (res === "" || res === undefined) {
+      res = poll.restaurants[0];
+    }
+    return res;
   };
 
   //preko reducer kreiranje ordera preko poll-a
@@ -62,20 +66,6 @@ const ViewPoll = () => {
       payload: poll,
     });
     setStep("finished");
-    // PollsCollection.doc(pollId)
-    //   .get()
-    //   .then((response) => {
-    //     if (response.data().createBy === cookies.user) {
-    //       PollsCollection.doc(pollId)
-    //         .update({
-    //           active: false,
-    //         })
-    //         .then(() => {
-    //           alert("zavrseno");
-    //           setStep("finished");
-    //         });
-    //     } else alert("nisi admin");
-    //   });
   };
 
   const addVote = (event) => {
@@ -88,21 +78,11 @@ const ViewPoll = () => {
       vote: vote,
     });
     setStep("results");
-    //setPoll(polls.filter((poll) => poll.id === pollId)[0]);
-    console.log(poll, "ssssss");
   };
 
   const getPoll = () => {
-    console.log(pollId);
-
     setPoll(polls.filter((poll) => poll.id === pollId)[0]);
-    setTimeout(() => {
-      checkVoting();
-    }, 500);
-  };
-
-  const checkVoting = () => {
-    console.log("check", poll);
+    setTimeout(() => {}, 500);
   };
 
   useEffect(() => {
@@ -118,7 +98,6 @@ const ViewPoll = () => {
   useEffect(() => {}, []);
 
   const timeLeft = () => {
-    console.log(poll.created, "poll created");
     if (poll.created !== undefined) {
       let created = poll.created;
       let pollDuration = { minutes: 30 };
@@ -182,7 +161,6 @@ const ViewPoll = () => {
       </>
     );
   };
-  // console.log(-moment().diff(timeLeft(), "seconds"));
 
   const startNewOrder = () => {
     return (

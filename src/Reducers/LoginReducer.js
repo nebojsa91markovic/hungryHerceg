@@ -20,8 +20,6 @@ export const LoginReducer = (action) => {
     return status;
   };
 
-  console.log("something");
-  console.log(action);
   switch (action) {
     case "CHECK_DATA":
       return checkLoginStatus();

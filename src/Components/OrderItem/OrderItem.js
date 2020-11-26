@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import "./style.css";
 
-const OrderItem = ({ order, id, index }) => {
+const OrderItem = ({ order, id }) => {
   const finishAt = moment(order.created).add(30, "minutes");
-  const [timeLeft, setTimeLeft] = useState(finishAt.fromNow());
+  const [timeLeft] = useState(finishAt.fromNow());
 
   const haveIOrdered = () => {
     let bool = false;
@@ -20,10 +20,7 @@ const OrderItem = ({ order, id, index }) => {
 
   return (
     <Link className="orderItem" to={`/order/${order.restaurantId}`}>
-      {/* <h3>Name: {order.label}</h3>
-            <span>Status: {order.active + ''}</span> */}
       <h3>{order.label}</h3>
-      {/* <span>{moment(order.created).format("DD/MM")}</span> */}
       <span>{timeLeft}</span>
       <span>{haveIOrdered() ? "You have ordered" : "Not yet!"}</span>
     </Link>

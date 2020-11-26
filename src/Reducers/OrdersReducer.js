@@ -3,28 +3,39 @@ import PollsCollection from "../collections/PollsCollection";
 import firebase from "firebase";
 
 export const OrdersReducer = (state, action) => {
-  console.log("STIGLI SMO U ORDERS");
-  console.log(state, action.payload, 111);
   switch (action.type) {
     case "ALL_ORDERS":
       return action.payload.allOrders;
     case "CREATE_ORDER":
-      console.log(state, action, 222);
-      console.log(action.payload, action.payload.id);
+      const {
+        active,
+        allMeals,
+        createdBy,
+        created,
+        id,
+        label,
+        restaurantId,
+      } = action.payload;
       OrdersCollection.doc(action.payload.id)
-        .set(action.payload)
-        .then(() => console.log("usepsno dodat order"));
-      console.log(action.pollId, "pollid");
+        .set({
+          active,
+          allMeals,
+          createdBy,
+          created,
+          id,
+          label,
+          restaurantId,
+        })
+        .then(() => alert("Order successfully added!"));
       PollsCollection.doc(action.pollId)
         .update({
           isOrderCreated: true,
         })
-        .then(() => console.log("order set to true"));
+        .then(() => alert("Order is now created!"));
       return [...state, action.payload];
     // case "FINISHED_ORDER":
     //   return prevState;
     case "ADD_ORDER":
-      console.log("ADD ORDER", action, state, action.payload);
       OrdersCollection.doc(action.orderId).update({
         allMeals: firebase.firestore.FieldValue.arrayUnion(action.payload),
       });

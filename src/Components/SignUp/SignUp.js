@@ -32,14 +32,6 @@ const SignUp = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submit test");
-
-    const data = {
-      email,
-      firstName,
-      lastName,
-      password,
-    };
 
     let newDocRef = UsersCollection.doc();
 
@@ -56,7 +48,6 @@ const SignUp = () => {
         { merge: true }
       )
       .then(() => {
-        console.log("user upisan");
         createFavoriteMeals(newDocRef.id);
         handleCookie(newDocRef.id);
         history.push("/home");

@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import "./autocomplete.css";
 
 const Autocomplete = ({
@@ -11,6 +10,7 @@ const Autocomplete = ({
   allOrders,
   setPollName,
   setRestaurantWon,
+  setPollId,
   placeholder,
 }) => {
   const [filter, setFilter] = useState("");
@@ -18,18 +18,11 @@ const Autocomplete = ({
   const [text, setText] = useState("");
   const [chosen, setChosen] = useState("");
   const [disabled, setDisabled] = useState(false);
-  console.log(
-    selectedRestaurants,
-    allRestaurants,
-    allOrders,
-    placeholder,
-    "aaaaaaaaaa"
-  );
   const handleClick = (e) => {
-    // console.log(e.target.value);
     setText(e.target.innerText);
     setFilter("");
     setChosen(e.target.value);
+    setRestaurantWon(e.target.value);
     if (setSelectedRestaurants !== undefined) {
       let tmp = [...selectedRestaurants];
       let newEntry = {
@@ -42,9 +35,10 @@ const Autocomplete = ({
       setDisabled(true);
     } else if (setPollName !== undefined) {
       setPollName(e.target.innerText);
-      setRestaurantWon(
-        allOrders.filter((poll) => poll.id == e.target.value)[0].restaurantWon
-      );
+      // setRestaurantWon(
+      //   allOrders.filter((poll) => poll.restaurantId == e.target.value)[0]
+      //     .restaurantWon
+      // );
     }
   };
 
@@ -89,11 +83,12 @@ const Autocomplete = ({
               <button
                 className="search-result-button"
                 type="button"
-                value={el.id}
+                value={el.restaurantId}
                 onClick={handleClick}
               >
                 {el.name}
                 {el.label}
+                <span hidden>{el.pollId}</span>
               </button>
             </li>
           ))}

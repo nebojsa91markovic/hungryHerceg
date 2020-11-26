@@ -2,17 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import RestoranItems from "../RestoranItems/RestoranItems";
 import FilterRestoranItems from "../FilterRestoranItems/FilterRestoranItems";
 import items from "./data";
-import "./style.css";
-import OrdersCollection from "../../collections/OrdersCollection";
 import RestaurantCollection from "../../collections/RestaurantCollection";
 import FavoriteMealsCollection from "../../collections/FavoriteMealsCollection";
-import firebase from "firebase/app";
 import Cart from "../Cart/Cart";
 import { AppProvider } from "../Cart/context";
 import ShowAllOrders from "../ShowAllOrders/ShowAllOrders";
 import { OrdersContext } from "../../Context/OrdersContext";
 import BackButton from "../BackButton/BackButton";
 import { AiFillCaretUp } from "react-icons/ai";
+import "./style.css";
 
 const ViewOrder = () => {
   const [myCart, setMyCart] = useState([]);
@@ -35,16 +33,12 @@ const ViewOrder = () => {
   };
 
   const addFavoriteMeal = () => {
-    console.log("test2");
-
     FavoriteMealsCollection.doc("AWOvrTz4ITrTxeomq48A").update({
       pizza: 1,
     });
   };
 
   const addOrder = () => {
-    console.log("test1");
-
     dispatchOrders({
       type: "ADD_ORDER",
       payload: newMeals,
@@ -53,9 +47,6 @@ const ViewOrder = () => {
 
     alert("Meal successfully added!");
 
-    // OrdersCollection.doc("89cHkUJiwrqiXW8v10TY").update({
-    //   allMeals: firebase.firestore.FieldValue.arrayUnion(newMeals),
-    // });
     addFavoriteMeal();
   };
 
@@ -64,7 +55,6 @@ const ViewOrder = () => {
       .get()
       .then((response) => {
         setMenuItems(response.data().meals);
-        console.log(menuItems, "itemi");
         return response.data().meals;
       });
   };
@@ -74,7 +64,6 @@ const ViewOrder = () => {
   }, []);
 
   const allCategories = ["all", ...new Set(items.map((item) => item.category))];
-  console.log(allCategories);
 
   const [menuItems, setMenuItems] = useState(items);
   const [categories, setCategories] = useState(allCategories);

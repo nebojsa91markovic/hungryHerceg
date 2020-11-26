@@ -1,6 +1,4 @@
 import React, { useState, useContext } from "react";
-import OrdersCollection from "../../collections/OrdersCollection";
-import PollsCollection from "../../collections/PollsCollection";
 import moment from "moment";
 import { useCookies } from "react-cookie";
 import Autocomplete from "../Autocomplete/Autocomplete";
@@ -13,7 +11,8 @@ const CreateOrder = () => {
   const { orders, dispatchOrders } = useContext(OrdersContext);
 
   const [orderName, setOrderName] = useState("");
-  const [restaurantWon, setRestaurantWon] = useState(0);
+  const [restaurantWon, setRestaurantWon] = useState("");
+  const [pollId, setPollId] = useState("");
 
   const dotayFinishedPollsArray = [
     { id: 1, name: "Rucak za subotu", restaurantWon: 4 },
@@ -41,7 +40,6 @@ const CreateOrder = () => {
     // let newDocRef = OrdersCollection.doc();
 
     let orderId = uuidv4();
-
     dispatchOrders({
       type: "CREATE_ORDER",
       payload: {
@@ -55,24 +53,6 @@ const CreateOrder = () => {
       },
       pollId: "",
     });
-
-    // newDocRef
-    //   .set({
-    //     created: moment().format(),
-    //     createBy: cookies.user,
-    //     label: orderName,
-    //     restaurantId: restaurantWon,
-    //     active: true,
-    //     allMeals: [],
-    //     id: newDocRef.id,
-    //   })
-    //   .then(() => {
-    //     PollsCollection.doc("bb394d29-d3a8-45a9-b009-e7b90db94fc3").update({
-    //       isOrderCreated: true,
-    //     });
-
-    //     console.log("Order created");
-    //   });
   };
 
   return (
@@ -85,18 +65,9 @@ const CreateOrder = () => {
           allOrders={orders}
           setOrderName={setOrderName}
           setRestaurantWon={setRestaurantWon}
+          setPollId={setPollId}
           placeholder="Choose a order"
         />
-        {/* <input
-        className="poll-input"
-        type="text"
-        onChange={(event) => setRestaurantWon(event.target.value)}
-      />
-      <input
-        className="order-input"
-        type="text"
-        onChange={(event) => setOrderName(event.target.value)}
-      /> */}
         <button className="submit-button" onClick={createOrder}>
           Create an order
         </button>

@@ -13,10 +13,7 @@ import PollsCollection from "../../collections/PollsCollection";
 import OrdersCollection from "../../collections/OrdersCollection";
 import RestaurantCollection from "../../collections/RestaurantCollection";
 import moment from "moment";
-import { Cookies, useCookies } from "react-cookie";
-import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
-import firebase from "firebase";
+import { useCookies } from "react-cookie";
 const Home = () => {
   const { polls, dispatch } = useContext(PollsContext);
   const { orders, dispatchOrders } = useContext(OrdersContext);
@@ -36,7 +33,6 @@ const Home = () => {
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
-          //console.log(moment(doc.data().created).diff(moment(today), "hours"));
           arrAllPolls.push(doc.data());
         });
       });
@@ -89,19 +85,19 @@ const Home = () => {
 
   return (
     <div className="main">
-      <div className='pollButton-container'>
+      <div className="pollButton-container">
         <Link className="pollButton" to="/polls">
           Active Polls
-      </Link>
+        </Link>
         <Link className="pollButton" to="/create-poll">
           Create Poll
-      </Link>
+        </Link>
         <Link className="pollButton" to="/orders">
           Active Orders
-      </Link>
+        </Link>
         <Link className="pollButton" to="/create-order">
           Create Order
-      </Link>
+        </Link>
       </div>
 
       <Switch>

@@ -35,11 +35,6 @@ const NavBar = () => {
       return (
         <>
           <NavBarName />
-          {/* <Link to="/">
-                        <button onClick={handleLogout} className="userLogin-button">
-                            LOG OUT
-                        </button>
-                    </Link> */}
         </>
       );
   };
@@ -48,13 +43,6 @@ const NavBar = () => {
     <div className="navBar">
       <div className="logo" onClick={handleHomeUrl}></div>
       {showButtons()}
-      {/* kad nije ulogovan */}
-
-      {/* kad je ulogovan */}
-      {/* <div className="userInfo-wrapper">
-            <button>Settings</button>
-            <span>Welcome, $John Doe$</span>
-        </div> */}
     </div>
   );
 };

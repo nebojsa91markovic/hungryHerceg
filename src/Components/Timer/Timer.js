@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CountdownTimer from "react-component-countdown-timer";
-// import moment from 'moment';
 import "../../../node_modules/react-component-countdown-timer/lib/styles.css";
 import PollsCollection from "../../collections/PollsCollection";
 
@@ -10,14 +9,6 @@ const Timer = ({ duration, pollId }) => {
       active: false,
     });
     alert("Anketa je istekla");
-    // PollsCollection.doc(pollId)
-    //   .get()
-    //   .then((response) => {
-    //     PollsCollection.doc(pollId).update({
-    //       active: false,
-    //     });
-    //     alert("Anketa je istekla");
-    //   });
   };
 
   const endPoll = () => {

@@ -3,7 +3,6 @@ import { useState } from "react";
 import Autocomplete from "../Autocomplete/Autocomplete";
 import { useHistory } from "react-router-dom";
 import RestaurantCollection from "../../collections/RestaurantCollection";
-import PollsCollection from "../../collections/PollsCollection";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import { useCookies } from "react-cookie";
@@ -43,7 +42,6 @@ const CreatePoll = () => {
     let restaurants = selectedRestaurants
       .slice(1)
       .map((selectedRestaurant) => selectedRestaurant.restaurantId);
-    console.log(restaurants, "ovde smo");
     let pollId = uuidv4();
 
     dispatch({
@@ -59,21 +57,6 @@ const CreatePoll = () => {
         isOrderCreated: false,
       },
     });
-
-    // PollsCollection.doc(pollId)
-    //   .set({
-    //     created: moment(`${date}T${time}`).format(),
-    //     createBy: cookies.user,
-    //     label: label,
-    //     restaurants: selectedRestaurants.slice(1),
-    //     active: true,
-    //     id: pollId,
-    //     voters: [],
-    //     isOrderCreated: false,
-    //   })
-    //   .then(() => {
-    //     history.push(`poll/${pollId}`);
-    //   });
     history.push(`poll/${pollId}`);
   };
 

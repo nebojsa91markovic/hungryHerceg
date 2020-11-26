@@ -2,11 +2,8 @@ import RestaurantCollection from "../collections/RestaurantCollection";
 import firebase from "firebase";
 
 export const RestaurantsReducer = (state, action) => {
-  console.log("STIGLI SMO U RESTAURANT");
-  console.log(state, action.payload, 111, action.type);
   switch (action.type) {
     case "ALL_RESTAURANTS":
-      console.log(action.payload);
       return action.payload;
     // case "CREATE_RESTAURANT":
     //   console.log(state, action, 222);

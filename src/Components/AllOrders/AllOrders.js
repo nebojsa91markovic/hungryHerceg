@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
-import OrdersCollection from "../../collections/OrdersCollection";
+import React, { useContext } from "react";
 import OrderItem from "../OrderItem/OrderItem";
 import { useCookies } from "react-cookie";
 import { OrdersContext } from "../../Context/OrdersContext";
@@ -7,24 +6,7 @@ import { OrdersContext } from "../../Context/OrdersContext";
 const AllOrders = () => {
   const [cookies] = useCookies(["user"]);
 
-  const { orders, dispatchOrders } = useContext(OrdersContext);
-
-  //   const [orders, setOrders] = useState([]);
-
-  //   const getAllOrders = () => {
-  //     let arrAllOrders = [];
-  //     OrdersCollection.get().then(function (querySnapshot) {
-  //       querySnapshot.forEach(function (doc) {
-  //         arrAllOrders.push(doc.data());
-  //       });
-  //       setOrders(arrAllOrders);
-  //     });
-  //   };
-
-  //   useEffect(() => {
-  //    // getAllOrders();
-  //     console.log(orders)
-  //   }, []);
+  const { orders } = useContext(OrdersContext);
 
   return (
     <div className="allPolls">

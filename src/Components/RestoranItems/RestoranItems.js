@@ -1,24 +1,12 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import numeral from "../../services/numeral";
-import { mergeWith, isArray } from "lodash";
 
 numeral.locale("srb");
 
 const RestoranItems = ({ items, myCart, setMyCart }) => {
-  // const [mealPrice, setMealPrice] = useState(0)
-  // const [mealPrice, setMealPrice] = useState(0)
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const { amount, note, mealId, mealTitle, mealPrice } = event.target;
-
-    console.log({
-      id: mealId.value,
-      note: note.value,
-      title: mealTitle.value,
-      price: mealPrice.value,
-      amount: amount.value === "" ? 1 : amount.value,
-    });
 
     let aa = amount.value === "" ? 1 : amount.value;
 

@@ -18,8 +18,7 @@ const ViewOrder = () => {
   const [myCart, setMyCart] = useState([]);
   const { orders, dispatchOrders } = useContext(OrdersContext);
 
-
-  const [isClicked, setIsClicked] = useState(false)
+  const [isClicked, setIsClicked] = useState(false);
 
   const newMeals = {
     consumer: "Nebojsa Markovic",
@@ -38,7 +37,7 @@ const ViewOrder = () => {
   const addFavoriteMeal = () => {
     console.log("test2");
 
-    FavoriteMealsCollection.doc("C653YQ51XdA5gqWXUWRw").update({
+    FavoriteMealsCollection.doc("AWOvrTz4ITrTxeomq48A").update({
       pizza: 1,
     });
   };
@@ -49,8 +48,10 @@ const ViewOrder = () => {
     dispatchOrders({
       type: "ADD_ORDER",
       payload: newMeals,
-      pollId: "89cHkUJiwrqiXW8v10TY",
+      orderId: "07a398e4-696a-4f06-8fa9-f13ca7b79c3f",
     });
+
+    alert("Meal successfully added!");
 
     // OrdersCollection.doc("89cHkUJiwrqiXW8v10TY").update({
     //   allMeals: firebase.firestore.FieldValue.arrayUnion(newMeals),
@@ -63,7 +64,7 @@ const ViewOrder = () => {
       .get()
       .then((response) => {
         setMenuItems(response.data().meals);
-        console.log(menuItems, 'itemi')
+        console.log(menuItems, "itemi");
         return response.data().meals;
       });
   };
@@ -89,7 +90,6 @@ const ViewOrder = () => {
 
   return (
     <div className="order-wrapper">
-
       <BackButton />
       <main>
         <button onClick={addOrder}>Add meal to order</button>
@@ -112,11 +112,16 @@ const ViewOrder = () => {
             <Cart myCart={myCart} setMyCart={setMyCart} isClicked={isClicked} />
           </AppProvider>
 
-          {/* <ShowAllOrders /> */}
+          <ShowAllOrders />
         </section>
       </main>
       <div onClick={() => setIsClicked(!isClicked)} className="show-cart">
         <span>CART</span>
+        <div className="nav-container">
+          <div className="amount-container">
+            <p className="total-amount">{myCart.length}</p>
+          </div>
+        </div>
         <AiFillCaretUp className="caret-up" />
       </div>
     </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import CartItem from "./CartItem";
 import numeral from "../../services/numeral";
+import { v4 as uuidv4 } from "uuid";
+
 numeral.locale("srb");
 
 const CartContainer = ({ myCart, setMyCart }) => {
@@ -52,7 +54,7 @@ const CartContainer = ({ myCart, setMyCart }) => {
 
       <div className="cart-items">
         {myCart.map((item) => {
-          return <CartItem key={item.id} {...item} />;
+          return <CartItem key={uuidv4()} {...item} removeItem={removeItem} />;
         })}
       </div>
     </section>

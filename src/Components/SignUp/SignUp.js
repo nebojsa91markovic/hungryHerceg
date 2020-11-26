@@ -4,7 +4,6 @@ import UsersCollection from "../../collections/UsersCollection";
 import FavoriteMealsCollection from "../../collections/FavoriteMealsCollection";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
-
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -26,7 +25,7 @@ const SignUp = () => {
       barbecue: 0,
       burito: 0,
       salad: 0,
-      napici: 0,
+      drinks: 0,
       pasta: 0,
     });
   };
@@ -52,6 +51,7 @@ const SignUp = () => {
           lastName,
           password,
           id: newDocRef.id,
+          isActiveted: false,
         },
         { merge: true }
       )
@@ -62,6 +62,7 @@ const SignUp = () => {
         history.push("/home");
       });
   };
+
   return (
     <div className="signUp-wrapper">
       <form onSubmit={handleSubmit}>

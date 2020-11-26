@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ExportCSV } from "../../services/ExportCSV";
 import numeral from "../../services/numeral";
 numeral.locale("srb");

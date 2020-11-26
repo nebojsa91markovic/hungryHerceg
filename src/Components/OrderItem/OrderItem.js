@@ -19,7 +19,7 @@ const OrderItem = ({ order, id }) => {
   };
 
   return (
-    <Link className="orderItem" to={`/order/${order.restaurantId}`}>
+    <Link className="orderItem" to={`/order/${order.id}`}>
       <h3>{order.label}</h3>
       <span>{timeLeft}</span>
       <span>{haveIOrdered() ? "You have ordered" : "Not yet!"}</span>

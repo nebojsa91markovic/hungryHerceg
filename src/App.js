@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import NavBar from "./Components/NavBar/NavBar";
 import WelcomePage from "./Components/WelcomePage/WelcomePage";
-import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
 import CreatePoll from "./Components/CreatePoll/CreatePoll";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

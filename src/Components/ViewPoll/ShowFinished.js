@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { PollsContext } from "../../Context/PollsContext";
+import React from "react";
 import "./style.css";
 import { useHistory } from "react-router-dom";
 

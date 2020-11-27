@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const [cookies, setCookie] = useCookies(["user"]);
+  const [cookies] = useCookies(["user"]);
 
   const isLogin = () => {
     if (cookies.user === undefined && cookies.user === "undefined") {

@@ -8,8 +8,6 @@ const RestoranItems = ({ items, myCart, setMyCart }) => {
     event.preventDefault();
     const { amount, note, mealId, mealTitle, mealPrice } = event.target;
 
-    let aa = amount.value === "" ? 1 : amount.value;
-
     setMyCart([
       ...myCart,
       {

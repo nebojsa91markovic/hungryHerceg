@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
 import AllOrders from "./AllOrders";
-import OrderCategories from "./OrderCategories";
-import items from "./allOrdersData";
+//import OrderCategories from "./OrderCategories";
+//import items from "./allOrdersData";
 import OrdersCollection from "../../collections/OrdersCollection";
 import { useParams } from "react-router-dom";
 
-const allCategories = ["all", ...new Set(items.map((item) => item.category))];
+//const allCategories = ["all", ...new Set(items.map((item) => item.category))];
 //console.log(allCategories);
 
 function ShowAllOrders() {
   const [menuItems, setMenuItems] = useState([]);
-  const [categories, setCategories] = useState(allCategories);
+  //const [categories, setCategories] = useState(allCategories);
 
   const orderId = useParams().orderId;
 
-  const filterItems = (category) => {
-    if (category === "all") {
-      setMenuItems(items);
-      return;
-    }
-    const newItems = items.filter((item) => item.category === category);
-    setMenuItems(newItems);
-  };
+  // const filterItems = (category) => {
+  //   if (category === "all") {
+  //     setMenuItems(items);
+  //     return;
+  //   }
+  //   const newItems = items.filter((item) => item.category === category);
+  //   setMenuItems(newItems);
+  // };
 
   const setTable = () => {
     let tableArray = [];
@@ -30,9 +30,6 @@ function ShowAllOrders() {
     OrdersCollection.doc(orderId)
       .get()
       .then((response) => {
-        console.log(response);
-        console.log(response.data);
-
         let i = 1;
         response.data().allMeals.forEach((order) => {
           order.payload.forEach((meal) => {

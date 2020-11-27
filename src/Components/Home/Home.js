@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { Link, Route, Router, Switch, useHistory } from "react-router-dom";
+import { Link, Route, Switch, useHistory } from "react-router-dom";
 import AllOrders from "../AllOrders/AllOrders";
 import AllPolls from "../AllPolls/AllPolls";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import ViewOrder from "../ViewOrder/ViewOrder";
 import About from "../About/About";
 import "./style.css";
 import { PollsContext } from "../../Context/PollsContext";
@@ -13,13 +12,13 @@ import PollsCollection from "../../collections/PollsCollection";
 import OrdersCollection from "../../collections/OrdersCollection";
 import RestaurantCollection from "../../collections/RestaurantCollection";
 import moment from "moment";
-import { useCookies } from "react-cookie";
+//import { useCookies } from "react-cookie";
 
 const Home = () => {
-  const { polls, dispatch } = useContext(PollsContext);
-  const { orders, dispatchOrders } = useContext(OrdersContext);
-  const { restaurants, dispatchRestaurants } = useContext(RestaurantsContext);
-  const [cookies] = useCookies("user");
+  const { dispatch } = useContext(PollsContext);
+  const { dispatchOrders } = useContext(OrdersContext);
+  const { dispatchRestaurants } = useContext(RestaurantsContext);
+  //const [cookies] = useCookies("user");
   const history = useHistory();
 
   let today = moment().subtract(1, "days").endOf("day").format();
@@ -77,15 +76,15 @@ const Home = () => {
     }, sec);
   };
 
-  const update = () => {
-    OrdersCollection.doc().onSnapshot(() => {
-      getAllOrders();
-    });
+  // const update = () => {
+  //   OrdersCollection.doc().onSnapshot(() => {
+  //     getAllOrders();
+  //   });
 
-    PollsCollection.doc().onSnapshot(() => {
-      getAllPolls();
-    });
-  };
+  //   PollsCollection.doc().onSnapshot(() => {
+  //     getAllPolls();
+  //   });
+  // };
 
   useEffect(() => {
     getAllPolls();

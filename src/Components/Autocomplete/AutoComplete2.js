@@ -13,23 +13,20 @@ const AutoComplete2 = ({
   const [filter, setFilter] = useState("");
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [text, setText] = useState("");
-  const [chosen, setChosen] = useState("");
+  //const [chosen, setChosen] = useState("");
   const [disabled, setDisabled] = useState(false);
   const handleClick = (e) => {
     setText(e.target.innerText);
     setOrderName(e.target.innerText);
     setFilter("");
 
-    console.log(e.target);
-    setChosen(e.target.value);
+    //setChosen(e.target.value);
     //if (setRestaurantWon !== undefined) setRestaurantWon(e.target.value);
-    console.log(allPolls());
+
     let chosenPoll = allPolls().filter((poll) => poll.id == e.target.value)[0];
-    console.log(chosenPoll);
 
     setRestaurantWon(chosenPoll);
     setPollId(chosenPoll.id);
-    console.log(chosenPoll);
   };
 
   var filtered = allPolls().filter((poll) =>

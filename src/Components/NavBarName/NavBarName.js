@@ -20,7 +20,7 @@ const NavBarName = () => {
           setUser(response.data());
         });
     }
-  }, []);
+  }, [cookies.user, history]);
 
   const handleLogout = () => {
     removeCookie("user");

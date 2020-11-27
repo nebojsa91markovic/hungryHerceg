@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./style.css";
 import { useCookies } from "react-cookie";
-import Timer from "../Timer/Timer";
+//import Timer from "../Timer/Timer";
 import moment from "moment";
-import { PollsContext } from "../../Context/PollsContext";
+//import { PollsContext } from "../../Context/PollsContext";
 import { OrdersContext } from "../../Context/OrdersContext";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -15,9 +15,9 @@ import ShowFinished from "./ShowFinished";
 import PollsCollection from "../../collections/PollsCollection";
 import ShowWaiting from "./ShowWaiting";
 const ViewPoll = () => {
-  const [cookies, setCookie] = useCookies(["user"]);
-  const { polls, dispatch } = useContext(PollsContext);
-  const { orders, dispatchOrders } = useContext(OrdersContext);
+  const [cookies] = useCookies(["user"]);
+  //const { polls, dispatch } = useContext(PollsContext);
+  const { dispatchOrders } = useContext(OrdersContext);
 
   const history = useHistory();
 
@@ -27,10 +27,9 @@ const ViewPoll = () => {
 
   const [step, setStep] = useState("");
 
-  const [duration, setDuration] = useState(0);
+  //const [duration, setDuration] = useState(0);
 
   const checkSetStep = () => {
-    console.log(poll);
     setTimeout(() => {
       if (poll.created > moment().format()) {
         setStep("waiting");
@@ -88,10 +87,8 @@ const ViewPoll = () => {
   };
 
   const addOrder = () => {
-    console.log(mostVotes());
     let orderId = uuidv4();
     let creator = cookies.user;
-    console.log("creator", cookies.user);
     let s = {
       type: "CREATE_ORDER",
       payload: {

@@ -5,7 +5,7 @@ import UsersCollection from "../../collections/UsersCollection";
 import { useCookies } from "react-cookie";
 
 const Login = () => {
-  const [cookies, setCookie] = useCookies(["user"]);
+  const [setCookie] = useCookies(["user"]);
 
   const handleCookie = (userId) => {
     setCookie("user", userId, { path: "/" });
@@ -13,30 +13,30 @@ const Login = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("1");
-  const [errorUsername, setErrorUsername] = useState('')
-  const [errorPassword, setErrorPassword] = useState('')
+  const [errorUsername, setErrorUsername] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
 
   const history = useHistory();
 
-  function validateEmail (email) {
+  function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
-}
-const ErrorLogin = (username, password, setErrorUsername, setErrorPassword) => {
-  if(validateEmail(username) === false) {
-    return(
-      setErrorUsername("Invalid username")
-    )
-  } else if(password.length < 3){
-    return(
-      setErrorPassword("Invalid password")
-    )
   }
-}
+  const ErrorLogin = (
+    username,
+    password,
+    setErrorUsername,
+    setErrorPassword
+  ) => {
+    if (validateEmail(username) === false) {
+      return setErrorUsername("Invalid username");
+    } else if (password.length < 3) {
+      return setErrorPassword("Invalid password");
+    }
+  };
 
-const ConditionsLogin = (username, password) => validateEmail(username)=== true 
-                                        && password.length > 2  
-
+  const ConditionsLogin = (username, password) =>
+    validateEmail(username) === true && password.length > 2;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,23 +44,21 @@ const ConditionsLogin = (username, password) => validateEmail(username)=== true
     let allUsers = [];
 
     if (ConditionsLogin(username, password)) {
-    UsersCollection.get().then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        allUsers.push(doc.data());
+      UsersCollection.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          allUsers.push(doc.data());
+        });
+        allUsers.map((user) => {
+          if (user.email === username && user.password === password) {
+            handleCookie(user.id);
+            localStorage.setItem("status", "ulogovan");
+            history.push("/home");
+          }
+        });
       });
-      allUsers.map((user) => {
-        if (user.email === username && user.password === password) {
-          handleCookie(user.id);
-          localStorage.setItem("status", "ulogovan");
-          history.push("/home");
-        }
-      });
-    });
-  } else {
-    return(
-      ErrorLogin(username, password, setErrorUsername, setErrorPassword)
-     )
-  }
+    } else {
+      return ErrorLogin(username, password, setErrorUsername, setErrorPassword);
+    }
   };
 
   return (

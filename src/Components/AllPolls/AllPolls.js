@@ -44,21 +44,10 @@ const AllPolls = () => {
   return (
     <div className="allPolls">
       <div className="pollItem-header">
-        <button onClick={(event) => setFilter(event.target.value)} value="name">
-          Name{" "}
-        </button>
-        <button onClick={(event) => setFilter(event.target.value)} value="date">
-          Date{" "}
-        </button>
-        <button onClick={(event) => setFilter(event.target.value)} value="ends">
-          Ends in
-        </button>
-        <button
-          onClick={(event) => setFilter(event.target.value)}
-          value="ordered"
-        >
-          Ordered
-        </button>
+        <span value="name">Name </span>
+        <span value="date">Date </span>
+        <span value="ends">Ends in</span>
+        <span value="ordered">Ordered</span>
       </div>
       {polls.map((poll) => (
         <PollItem key={poll.id} poll={poll} />

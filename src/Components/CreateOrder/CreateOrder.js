@@ -55,7 +55,9 @@ const CreateOrder = () => {
         active: true,
         allMeals: [],
         id: orderId,
-        restaurantName: restaurantWon.restaurants[0].restaurantName,
+        restaurantName: restaurantWon.restaurants.filter(
+          (res) => res.restaurantId === restaurantWon.restaurantId
+        )[0],
       },
       pollId: pollId,
     });

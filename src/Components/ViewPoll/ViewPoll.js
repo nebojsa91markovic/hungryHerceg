@@ -88,9 +88,25 @@ const ViewPoll = () => {
   };
 
   const addOrder = () => {
+    console.log(mostVotes());
     let orderId = uuidv4();
     let creator = cookies.user;
     console.log("creator", cookies.user);
+    let s = {
+      type: "CREATE_ORDER",
+      payload: {
+        created: moment().format(),
+        createBy: `${creator}`,
+        label: poll.label,
+        restaurantId: mostVotes().restaurantId,
+        restaurantName: mostVotes().restaurantName,
+        active: true,
+        allMeals: [],
+        id: orderId,
+      },
+      pollId: pollId,
+    };
+    console.log(s);
 
     if (poll.createBy === creator) {
       dispatchOrders({

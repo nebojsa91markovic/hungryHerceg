@@ -19,6 +19,7 @@ const Autocomplete = ({
     setText(e.target.innerText);
     setFilter("");
     setChosen(e.target.value);
+    console.log(e.target);
 
     if (setSelectedRestaurants !== undefined) {
       let tmp = [...selectedRestaurants];
@@ -70,7 +71,7 @@ const Autocomplete = ({
               <button
                 className="search-result-button"
                 type="button"
-                value={el.restaurantId}
+                value={el.id}
                 onClick={handleClick}
               >
                 {el.name}

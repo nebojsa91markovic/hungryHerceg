@@ -7,6 +7,7 @@ export const PollsReducer = (state, action) => {
     case "ALL_POLLS":
       return action.payload.allPolls;
     case "ADD_POLL":
+      console.log(action);
       PollsCollection.doc(action.payload.id)
         .set(action.payload)
         .then(() => alert("Poll added successfully!"));

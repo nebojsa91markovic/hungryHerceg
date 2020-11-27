@@ -26,8 +26,8 @@ export const OrdersReducer = (state, action) => {
           created,
           id,
           label,
-          restaurantId: restaurantId.restaurantId,
-          restaurantName: restaurantId.restaurantName,
+          restaurantId,
+          restaurantName,
         })
         .then(() => alert("Order successfully added!"));
       PollsCollection.doc(action.pollId).update({

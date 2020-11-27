@@ -17,7 +17,7 @@ const ShowResults = ({ poll, user, setStep, getPoll }) => {
   //   }, []);
 
   let sortedRestaurants = poll.restaurants.sort((a, b) => b.votes - a.votes);
-  console.log(sortedRestaurants);
+
   const mostVotes = () => {
     let res = poll.restaurants.sort((a, b) => a.votes - b.votes).slice(-1)[0]
       .restaurantId;

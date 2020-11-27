@@ -43,7 +43,7 @@ const CreatePoll = () => {
       .slice(1)
       .map((selectedRestaurant) => selectedRestaurant.restaurantId);
     let pollId = uuidv4();
-
+    console.log(selectedRestaurants);
     dispatch({
       type: "ADD_POLL",
       payload: {

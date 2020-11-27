@@ -2,12 +2,10 @@ import PollsCollection from "../collections/PollsCollection";
 import firebase from "firebase/app";
 
 export const PollsReducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "ALL_POLLS":
       return action.payload.allPolls;
     case "ADD_POLL":
-      console.log(action);
       PollsCollection.doc(action.payload.id)
         .set(action.payload)
         .then(() => alert("Poll added successfully!"));
@@ -80,7 +78,6 @@ export const PollsReducer = (state, action) => {
       setTimeout(() => {}, 1500);
       return arrAllPolls;
     case "FINISHED_POLL":
-      console.log(action);
       PollsCollection.doc(action.payload.id)
         .get()
         .then((response) => {
@@ -107,9 +104,7 @@ export const PollsReducer = (state, action) => {
       // return [...state, { name, email, phone, id }];
       return state;
     case "REMOVE_POLL":
-      PollsCollection.doc(action.payload.id)
-        .delete()
-        .then(() => console.log("successfully removed poll"));
+      PollsCollection.doc(action.payload.id).delete();
       // CustomersCollection.doc(action.customer.id).delete();
       // return state.filter((customer) => customer.id !== action.customer.id);
       return state.filter((poll) => poll.id === action.payload.id);

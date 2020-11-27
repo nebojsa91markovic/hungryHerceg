@@ -1,5 +1,5 @@
-import RestaurantCollection from "../collections/RestaurantCollection";
-import firebase from "firebase";
+// import RestaurantCollection from "../collections/RestaurantCollection";
+// import firebase from "firebase";
 
 export const RestaurantsReducer = (state, action) => {
   switch (action.type) {
@@ -28,5 +28,7 @@ export const RestaurantsReducer = (state, action) => {
     //   return state.filter((order) => order.id === action.payload.id);
     // default:
     //   return state;
+    default:
+      return state;
   }
 };

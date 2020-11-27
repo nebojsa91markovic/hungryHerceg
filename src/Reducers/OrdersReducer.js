@@ -17,7 +17,6 @@ export const OrdersReducer = (state, action) => {
         restaurantId,
         restaurantName,
       } = action.payload;
-      console.log(action);
       OrdersCollection.doc(id)
         .set({
           active,
@@ -43,9 +42,7 @@ export const OrdersReducer = (state, action) => {
 
       return state;
     case "REMOVE_ORDER":
-      OrdersCollection.doc(action.payload.id)
-        .delete()
-        .then(() => console.log("successfully removed order"));
+      OrdersCollection.doc(action.payload.id).delete();
       return state.filter((order) => order.id === action.payload.id);
     default:
       return state.filter();

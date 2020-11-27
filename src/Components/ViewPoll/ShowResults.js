@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { PollsContext } from "../../Context/PollsContext";
 import "./style.css";
 
 const ShowResults = ({ poll, user, setStep, getPoll }) => {
-  const { polls, dispatch } = useContext(PollsContext);
+  const { dispatch } = useContext(PollsContext);
   //const [poll, setPoll] = useState({});
   //   const getPoll = () => {
   //     PollsCollection.doc(pollId).then((response) => {

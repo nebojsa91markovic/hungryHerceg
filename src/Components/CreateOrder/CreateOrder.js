@@ -6,12 +6,12 @@ import BackButton from "../BackButton/BackButton";
 import { OrdersContext } from "../../Context/OrdersContext";
 import { v4 as uuidv4 } from "uuid";
 import { PollsContext } from "../../Context/PollsContext";
-import style from "./style.css";
+import "./style.css";
 import { useHistory } from "react-router-dom";
 const CreateOrder = () => {
   const [cookies] = useCookies(["user"]);
   const { orders, dispatchOrders } = useContext(OrdersContext);
-  const { polls, dispatch } = useContext(PollsContext);
+  const { polls } = useContext(PollsContext);
 
   const history = useHistory();
 
@@ -19,11 +19,11 @@ const CreateOrder = () => {
   const [restaurantWon, setRestaurantWon] = useState("");
   const [pollId, setPollId] = useState("");
 
-  const dotayFinishedPollsArray = [
-    { id: 1, name: "Rucak za subotu", restaurantWon: 4 },
-    { id: 2, name: "Sta cemo da jedemo", restaurantWon: 2 },
-    { id: 3, name: "Treca anketa", restaurantWon: 3 },
-  ];
+  // const dotayFinishedPollsArray = [
+  //   { id: 1, name: "Rucak za subotu", restaurantWon: 4 },
+  //   { id: 2, name: "Sta cemo da jedemo", restaurantWon: 2 },
+  //   { id: 3, name: "Treca anketa", restaurantWon: 3 },
+  // ];
 
   // const restaurantsWonArray = [
   //   {idRestaurant: 1,
@@ -42,8 +42,6 @@ const CreateOrder = () => {
     //   alert("Please insert valid informations");
     //   return;
     // }
-    // let newDocRef = OrdersCollection.doc();
-    console.log(restaurantWon);
     let orderId = uuidv4();
     dispatchOrders({
       type: "CREATE_ORDER",

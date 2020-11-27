@@ -3,7 +3,7 @@ import { PollsContext } from "../../Context/PollsContext";
 import "./style.css";
 
 const ShowVoting = ({ poll, setStep, user }) => {
-  const { polls, dispatch } = useContext(PollsContext);
+  const { dispatch } = useContext(PollsContext);
 
   const [vote, setVote] = useState("");
 

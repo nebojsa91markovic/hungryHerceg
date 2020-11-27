@@ -13,13 +13,12 @@ const Autocomplete = ({
   const [filter, setFilter] = useState("");
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [text, setText] = useState("");
-  const [chosen, setChosen] = useState("");
+  //const [chosen, setChosen] = useState("");
   const [disabled, setDisabled] = useState(false);
   const handleClick = (e) => {
     setText(e.target.innerText);
     setFilter("");
-    setChosen(e.target.value);
-    console.log(e.target);
+    //setChosen(e.target.value);
 
     if (setSelectedRestaurants !== undefined) {
       let tmp = [...selectedRestaurants];

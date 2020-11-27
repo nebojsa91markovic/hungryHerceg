@@ -9,7 +9,7 @@ const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
-  const [cookies, setCookie] = useCookies(["user"]);
+  const [setCookie] = useCookies(["user"]);
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorFirstName, setErrorFirstName] = useState("");
@@ -60,11 +60,11 @@ const SignUp = () => {
     }
   };
 
-  const ConditionsSignUp = (email, firstName, lastName, password) =>
-    validateEmail(email) &&
-    firstName.length > 2 &&
-    lastName.length > 2 &&
-    password.length > 2;
+  // const ConditionsSignUp = (email, firstName, lastName, password) =>
+  //   validateEmail(email) &&
+  //   firstName.length > 2 &&
+  //   lastName.length > 2 &&
+  //   password.length > 2;
 
   const handleSubmit = (event) => {
     event.preventDefault();

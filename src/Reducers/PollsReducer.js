@@ -2,10 +2,12 @@ import PollsCollection from "../collections/PollsCollection";
 import firebase from "firebase/app";
 
 export const PollsReducer = (state, action) => {
+  console.log(action);
   switch (action.type) {
     case "ALL_POLLS":
       return action.payload.allPolls;
     case "ADD_POLL":
+      console.log(action);
       PollsCollection.doc(action.payload.id)
         .set(action.payload)
         .then(() => alert("Poll added successfully!"));
@@ -75,31 +77,30 @@ export const PollsReducer = (state, action) => {
           });
         });
       }, 2000);
-      setTimeout(() => {
-        return arrAllPolls;
-      }, 3000);
-
+      setTimeout(() => {}, 1500);
+      return arrAllPolls;
     case "FINISHED_POLL":
+      console.log(action);
       PollsCollection.doc(action.payload.id)
         .get()
         .then((response) => {
           if (response.data().createBy === action.payload.createBy) {
             PollsCollection.doc(action.payload.id).update({
               active: false,
+              restaurantId: action.restaurantId,
             });
             alert("Poll is now finished!");
           } else alert("Only creator of this poll can finish it!");
         });
 
-      let prevState = [...state];
-      let newState = [...state].filter(
-        (poll) => poll.id === action.payload.id
-      )[0];
-      let index = prevState.indexOf(newState);
+      // let prevState = [...state];
+      // let newState;
+      // newState = [...state].filter((poll) => poll.id === action.payload.id)[0];
+      // let index = prevState.indexOf(newState);
 
-      newState.active = false;
-      prevState[index] = newState;
-      return prevState;
+      // newState.active = false;
+      // prevState[index] = newState;
+      return [...state];
     case "ISORDER_CREATED":
       // const { name, email, phone, id } = action.customer;
       // CustomersCollection.doc(id).set({ name, email, phone, id });

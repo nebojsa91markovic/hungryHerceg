@@ -19,7 +19,7 @@ function About() {
   };
 
   return (
-    <main>
+    <main className="about-wrapper">
       <section className="menu section">
         <div className="title">
           <h2>Tesla Eats App</h2>

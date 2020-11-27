@@ -10,17 +10,17 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [cookies, setCookie] = useCookies(["user"]);
-  const [errorEmail, setErrorEmail] = useState('')
-  const [errorPassword, setErrorPassword] = useState('')
-  const [errorFirstName, setErrorFirstName] = useState('')
-  const [errorLastName, setErrorLastName] = useState('')
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorFirstName, setErrorFirstName] = useState("");
+  const [errorLastName, setErrorLastName] = useState("");
 
   const history = useHistory();
 
-  function validateEmail (email) {
+  function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
-}
+  }
 
   const handleCookie = (userId) => {
     setCookie("user", userId, { path: "/" });
@@ -39,57 +39,72 @@ const SignUp = () => {
     });
   };
 
-  const ErrorSignUp = (email, firstName, lastName, password, setErrorEmail, setErrorFirstName, setErrorLastName, setErrorPassword) => { 
-    if(validateEmail(email) === false){ 
-      return(
-          setErrorEmail("Invalid email")
-          )
-        }else if (firstName.length < 3){
-            return (
-              setErrorFirstName("First name must have 3 letters minimum!")
-            )
-        }else if(lastName.length < 3){
-            return (
-              setErrorLastName("Last name must have 3 letters minimum!")
-            )
-        }else if(password.length < 3){
-          return (
-            setErrorPassword("Invalid password")
-          )
-        }
-  }
+  const ErrorSignUp = (
+    email,
+    firstName,
+    lastName,
+    password,
+    setErrorEmail,
+    setErrorFirstName,
+    setErrorLastName,
+    setErrorPassword
+  ) => {
+    if (validateEmail(email) === false) {
+      return setErrorEmail("Invalid email");
+    } else if (firstName.length < 3) {
+      return setErrorFirstName("First name must have 3 letters minimum!");
+    } else if (lastName.length < 3) {
+      return setErrorLastName("Last name must have 3 letters minimum!");
+    } else if (password.length < 3) {
+      return setErrorPassword("Invalid password");
+    }
+  };
 
-  const ConditionsSignUp = (email, firstName, lastName, password) => validateEmail(email) === true
-                                                              && firstName.length > 2
-                                                              && lastName.length > 2
-                                                              && password.length > 2
-
+  const ConditionsSignUp = (email, firstName, lastName, password) =>
+    validateEmail(email) &&
+    firstName.length > 2 &&
+    lastName.length > 2 &&
+    password.length > 2;
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if(ConditionsSignUp === true){
-    let newDocRef = UsersCollection.doc();
+    if (
+      validateEmail(email) === true &&
+      firstName.length > 2 &&
+      lastName.length > 2 &&
+      password.length > 2
+    ) {
+      let newDocRef = UsersCollection.doc();
 
-    newDocRef
-      .set(
-        {
-          email,
-          firstName,
-          lastName,
-          password,
-          id: newDocRef.id,
-          isActiveted: false,
-        },
-        { merge: true }
-      )
-      .then(() => {
-        createFavoriteMeals(newDocRef.id);
-        handleCookie(newDocRef.id);
-        history.push("/home");
-      });
-    }else{
-      ErrorSignUp(email, firstName, lastName, password, setErrorEmail, setErrorFirstName, setErrorLastName, setErrorPassword)
+      newDocRef
+        .set(
+          {
+            email,
+            firstName,
+            lastName,
+            password,
+            id: newDocRef.id,
+            isActiveted: false,
+          },
+          { merge: true }
+        )
+        .then(() => {
+          createFavoriteMeals(newDocRef.id);
+          handleCookie(newDocRef.id);
+          history.push("/home");
+        });
+    } else {
+      ErrorSignUp(
+        email,
+        firstName,
+        lastName,
+        password,
+        setErrorEmail,
+        setErrorFirstName,
+        setErrorLastName,
+        setErrorPassword
+      );
     }
   };
 

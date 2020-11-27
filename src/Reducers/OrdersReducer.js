@@ -3,12 +3,10 @@ import PollsCollection from "../collections/PollsCollection";
 import firebase from "firebase";
 
 export const OrdersReducer = (state, action) => {
-  console.log("action", action);
   switch (action.type) {
     case "ALL_ORDERS":
       return action.payload.allOrders;
     case "CREATE_ORDER":
-      console.log(action, action.payload.createBy);
       const {
         active,
         allMeals,
@@ -17,8 +15,10 @@ export const OrdersReducer = (state, action) => {
         id,
         label,
         restaurantId,
+        restaurantName,
       } = action.payload;
-      OrdersCollection.doc(action.payload.id)
+      console.log(action);
+      OrdersCollection.doc(id)
         .set({
           active,
           allMeals,
@@ -27,14 +27,12 @@ export const OrdersReducer = (state, action) => {
           id,
           label,
           restaurantId,
+          restaurantName,
         })
         .then(() => alert("Order successfully added!"));
-      PollsCollection.doc(action.pollId)
-        .update({
-          isOrderCreated: true,
-        })
-        .then(() => alert("order is created by poll"))
-        .then(() => alert("Order is now created!"));
+      PollsCollection.doc(action.pollId).update({
+        isOrderCreated: true,
+      });
       return [...state, action.payload];
     // case "FINISHED_ORDER":
     //   return prevState;

@@ -47,9 +47,9 @@ const NavBarName = () => {
 
       {isClicked ? (
         <div className="dropdown-list">
-          <Link to="/settings">
+          <Link to="/about">
             <button className="dropdown-links" onClick={toggleMenu}>
-              SETTINGS
+              ABOUT
             </button>
           </Link>
           <button className="dropdown-links" onClick={handleLogout}>

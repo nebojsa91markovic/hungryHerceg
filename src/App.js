@@ -13,7 +13,7 @@ import PollsContextProvider from "./Context/PollsContext";
 import OrdersContextProvider from "./Context/OrdersContext";
 import RestaurantsContextProvider from "./Context/RestaurantsContext";
 import ViewOrder from "./Components/ViewOrder/ViewOrder";
-
+import About from "./Components/About/About";
 function App() {
   return (
     <div className="App">
@@ -39,12 +39,17 @@ function App() {
                   path="/create-order"
                 />
                 <PrivateRoute component={ViewPoll} exact path="/poll/:pollId" />
-                <PrivateRoute component={ViewOrder} exact path="/order/:orderId" />
+                <PrivateRoute
+                  component={ViewOrder}
+                  exact
+                  path="/order/:orderId"
+                />
                 <Route
                   component={WelcomePage}
                   exact
                   path={["/", "/signup", "/login"]}
                 />
+                <PrivateRoute component={About} exact path="/about" />
               </Switch>
             </RestaurantsContextProvider>
           </OrdersContextProvider>

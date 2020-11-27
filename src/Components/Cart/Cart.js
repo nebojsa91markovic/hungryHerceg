@@ -7,7 +7,7 @@ import { OrdersContext } from "../../Context/OrdersContext";
 import { useCookies } from "react-cookie";
 import UsersCollection from "../../collections/UsersCollection";
 
-const Cart = ({ myCart, setMyCart, isClicked }) => {
+const Cart = ({ myCart, setMyCart, isClicked, orderId }) => {
   const { loading } = useGlobalContext();
 
   const [cookies] = useCookies(["user"]);
@@ -43,7 +43,7 @@ const Cart = ({ myCart, setMyCart, isClicked }) => {
     dispatchOrders({
       type: "ADD_ORDER",
       payload: newMeal,
-      orderId: "26d79253-ad3f-4a9e-aa0f-e2fff7991931",
+      orderId: orderId,
     });
 
     alert("Meal successfully added!");
@@ -71,7 +71,9 @@ const Cart = ({ myCart, setMyCart, isClicked }) => {
     <div className={`cart-wrapper${isClicked ? "-clicked" : ""}`}>
       <NavbarCart myCart={myCart} />
 
-      <button onClick={addOrder}>Order</button>
+      <button className="filter-btn" onClick={addOrder}>
+        Order
+      </button>
       <CartContainer myCart={myCart} setMyCart={setMyCart} />
     </div>
   );

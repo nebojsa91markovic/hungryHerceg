@@ -15,7 +15,9 @@ export const OrdersReducer = (state, action) => {
         id,
         label,
         restaurantId,
+        restaurantName,
       } = action.payload;
+      console.log(action.payload);
       OrdersCollection.doc(action.payload.id)
         .set({
           active,
@@ -25,14 +27,12 @@ export const OrdersReducer = (state, action) => {
           id,
           label,
           restaurantId,
+          restaurantName,
         })
         .then(() => alert("Order successfully added!"));
-      PollsCollection.doc(action.pollId)
-        .update({
-          isOrderCreated: true,
-        })
-        .then(() => alert("order is created by poll"))
-        .then(() => alert("Order is now created!"));
+      PollsCollection.doc(action.pollId).update({
+        isOrderCreated: true,
+      });
       return [...state, action.payload];
     // case "FINISHED_ORDER":
     //   return prevState;

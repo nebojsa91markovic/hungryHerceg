@@ -27,7 +27,7 @@ const AutoComplete2 = ({
     let chosenPoll = allPolls().filter((poll) => poll.id == e.target.value)[0];
     console.log(chosenPoll);
 
-    setRestaurantWon(chosenPoll.restaurantId);
+    setRestaurantWon(chosenPoll);
     setPollId(chosenPoll.id);
     console.log(chosenPoll);
   };

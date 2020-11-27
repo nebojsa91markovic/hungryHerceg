@@ -51,14 +51,15 @@ const CreateOrder = () => {
         created: moment().format(),
         createBy: cookies.user,
         label: orderName,
-        restaurantId: restaurantWon,
+        restaurantId: restaurantWon.restaurantId,
         active: true,
         allMeals: [],
         id: orderId,
+        restaurantName: restaurantWon.restaurantName,
       },
       pollId: pollId,
     });
-    history.push(`/order/${orderId}`);
+    history.push(`order/${orderId}`);
   };
 
   const filteredPolls = () => {

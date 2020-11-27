@@ -30,13 +30,34 @@ const ViewPoll = () => {
   const [duration, setDuration] = useState(0);
 
   const checkSetStep = () => {
-    if (!poll.active) {
-      setStep("finished");
-    } else if (poll.voters.includes(cookies.user)) {
-      setStep("results");
-    } else {
-      setStep("voting");
-    }
+    console.log(poll);
+    setTimeout(() => {
+      if (poll.active === false) {
+        setStep("finished");
+      } else if (poll.voters !== undefined) {
+        if (poll.voters.includes(cookies.user)) {
+          setStep("results");
+        }
+      } else {
+        setStep("voting");
+      }
+    }, 500);
+  };
+
+  const getNewResults = () => {
+    PollsCollection.doc(pollId)
+      .get()
+      .then((response) => {
+        setPoll(response.data());
+      });
+    return (
+      <ShowResults
+        poll={poll}
+        setStep={setStep}
+        user={cookies.user}
+        getPoll={getPoll}
+      />
+    );
   };
 
   const getPoll = () => {
@@ -44,7 +65,8 @@ const ViewPoll = () => {
       .get()
       .then((response) => {
         setPoll(response.data());
-
+      })
+      .then(() => {
         checkSetStep();
       });
 
@@ -56,9 +78,8 @@ const ViewPoll = () => {
   }, [step]);
 
   const mostVotes = () => {
-    let res = poll.restaurants.sort((a, b) => a.votes - b.votes).slice(-1)[0]
-      .restaurantId;
-    if (res === "" || res === undefined) {
+    let res = poll.restaurants.sort((a, b) => a.votes - b.votes).slice(-1)[0];
+    if (res.restaurantId === "" || res.restaurantId === undefined) {
       res = poll.restaurants[0];
     }
     return res;
@@ -76,7 +97,8 @@ const ViewPoll = () => {
           created: moment().format(),
           createBy: `${creator}`,
           label: poll.label,
-          restaurantId: mostVotes(),
+          restaurantId: mostVotes().restaurantId,
+          restaurantName: mostVotes().restaurantName,
           active: true,
           allMeals: [],
           id: orderId,
@@ -95,25 +117,19 @@ const ViewPoll = () => {
     <div className="polls-wrapper">
       <BackButton />
       <div className="polls">
-        {setTimeout(() => {
-          <h3 className="poll-name">Poll name: {poll.label}</h3>;
-        }, 1000)}
-        {duration > 0 ? (
+        <h3 className="poll-name">Poll name: {poll.label}</h3>
+
+        {/* {duration > 0 ? (
           ""
         ) : (
           // <Timer duration={duration} pollId={pollId} />
           <span className="timer">Isteklo</span>
-        )}
+        )} */}
 
         {step === "voting" ? (
           <ShowVoting poll={poll} setStep={setStep} user={cookies.user} />
         ) : step === "results" ? (
-          <ShowResults
-            poll={poll}
-            setStep={setStep}
-            user={cookies.user}
-            getPoll={getPoll}
-          />
+          getNewResults()
         ) : step === "finished" ? (
           <ShowFinished addOrder={addOrder} />
         ) : (

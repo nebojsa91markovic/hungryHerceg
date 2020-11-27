@@ -93,9 +93,8 @@ export const PollsReducer = (state, action) => {
         });
 
       let prevState = [...state];
-      let newState = [...state].filter(
-        (poll) => poll.id === action.payload.id
-      )[0];
+      let newState;
+      newState = [...state].filter((poll) => poll.id === action.payload.id)[0];
       let index = prevState.indexOf(newState);
 
       newState.active = false;

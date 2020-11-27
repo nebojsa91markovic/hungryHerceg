@@ -7,7 +7,7 @@ import OrdersCollection from "../../collections/OrdersCollection";
 const allCategories = ["all", ...new Set(items.map((item) => item.category))];
 //console.log(allCategories);
 
-function ShowAllOrders() {
+function ShowAllOrders({ orderId }) {
   const [menuItems, setMenuItems] = useState([]);
   const [categories, setCategories] = useState(allCategories);
 
@@ -23,16 +23,18 @@ function ShowAllOrders() {
   const setTable = () => {
     let tableArray = [];
 
-    //OrdersCollection.doc("26d79253-ad3f-4a9e-aa0f-e2fff7991931")
-    OrdersCollection.doc("038a9a9e-64c3-4606-9c18-cc280d3066b5")
+    //OrdersCollection.doc("26d79253-ad3f-4a9e-aa0f-e2fff7991931");
+    OrdersCollection.doc(orderId)
       .get()
       .then((response) => {
         console.log(response);
         console.log(response.data());
 
+        let i = 1;
         response.data().allMeals.forEach((order) => {
           order.payload.forEach((meal) => {
             let newObj = {
+              num: i,
               user: order.consumer,
               name: meal.title,
               amount: meal.amount,
@@ -40,6 +42,7 @@ function ShowAllOrders() {
               price: meal.price * meal.amount * 100,
             };
             tableArray.push(newObj);
+            i++;
           });
         });
       })
@@ -57,11 +60,10 @@ function ShowAllOrders() {
   };
 
   const updateTable = () => {
-    OrdersCollection.doc("26d79253-ad3f-4a9e-aa0f-e2fff7991931").onSnapshot(
-      () => {
-        setTable();
-      }
-    );
+    // OrdersCollection.doc("26d79253-ad3f-4a9e-aa0f-e2fff7991931").onSnapshot(
+    OrdersCollection.doc(orderId).onSnapshot(() => {
+      setTable();
+    });
   };
 
   useEffect(() => {
@@ -77,9 +79,13 @@ function ShowAllOrders() {
           <div className="underline"></div>
         </div>
 
-        <OrderCategories filterItems={filterItems} categories={categories} />
+        {/* <OrderCategories filterItems={filterItems} categories={categories} /> */}
 
-        <AllOrders items={menuItems} setMenuItems={setMenuItems} />
+        <AllOrders
+          items={menuItems}
+          setMenuItems={setMenuItems}
+          orderId={orderId}
+        />
       </section>
     </main>
   );

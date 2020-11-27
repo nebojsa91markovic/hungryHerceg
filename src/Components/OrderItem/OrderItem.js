@@ -27,7 +27,7 @@ const OrderItem = ({ order, id }) => {
   };
 
   return (
-    <Link className="orderItem" to={`/order/${order.id}`}>
+    <Link disabled className="orderItem" to={!isItFinished() ? `/order/${order.id}` : '/orders'}>
       <h3>{order.label}</h3>
       <span>{timeLeft}</span>
       <span>{isItFinished() ? "Order is created" : "Not yet!"}</span>

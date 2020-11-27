@@ -92,14 +92,14 @@ export const PollsReducer = (state, action) => {
           } else alert("Only creator of this poll can finish it!");
         });
 
-      let prevState = [...state];
-      let newState;
-      newState = [...state].filter((poll) => poll.id === action.payload.id)[0];
-      let index = prevState.indexOf(newState);
+      // let prevState = [...state];
+      // let newState;
+      // newState = [...state].filter((poll) => poll.id === action.payload.id)[0];
+      // let index = prevState.indexOf(newState);
 
-      newState.active = false;
-      prevState[index] = newState;
-      return prevState;
+      // newState.active = false;
+      // prevState[index] = newState;
+      return [...state];
     case "ISORDER_CREATED":
       // const { name, email, phone, id } = action.customer;
       // CustomersCollection.doc(id).set({ name, email, phone, id });

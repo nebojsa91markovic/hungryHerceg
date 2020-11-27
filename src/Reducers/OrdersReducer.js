@@ -17,8 +17,8 @@ export const OrdersReducer = (state, action) => {
         restaurantId,
         restaurantName,
       } = action.payload;
-      console.log(action.payload);
-      OrdersCollection.doc(action.payload.id)
+      console.log(action);
+      OrdersCollection.doc(id)
         .set({
           active,
           allMeals,
@@ -26,8 +26,8 @@ export const OrdersReducer = (state, action) => {
           created,
           id,
           label,
-          restaurantId,
-          restaurantName,
+          restaurantId: restaurantId.restaurantId,
+          restaurantName: restaurantId.restaurantName,
         })
         .then(() => alert("Order successfully added!"));
       PollsCollection.doc(action.pollId).update({

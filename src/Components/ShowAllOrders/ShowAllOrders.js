@@ -3,13 +3,16 @@ import AllOrders from "./AllOrders";
 import OrderCategories from "./OrderCategories";
 import items from "./allOrdersData";
 import OrdersCollection from "../../collections/OrdersCollection";
+import { useParams } from "react-router-dom";
 
 const allCategories = ["all", ...new Set(items.map((item) => item.category))];
 //console.log(allCategories);
 
-function ShowAllOrders({ orderId }) {
+function ShowAllOrders() {
   const [menuItems, setMenuItems] = useState([]);
   const [categories, setCategories] = useState(allCategories);
+
+  const orderId = useParams().orderId;
 
   const filterItems = (category) => {
     if (category === "all") {
@@ -28,7 +31,7 @@ function ShowAllOrders({ orderId }) {
       .get()
       .then((response) => {
         console.log(response);
-        console.log(response.data());
+        console.log(response.data);
 
         let i = 1;
         response.data().allMeals.forEach((order) => {

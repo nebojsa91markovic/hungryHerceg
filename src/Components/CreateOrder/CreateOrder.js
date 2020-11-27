@@ -43,7 +43,7 @@ const CreateOrder = () => {
     //   return;
     // }
     // let newDocRef = OrdersCollection.doc();
-
+    console.log(restaurantWon);
     let orderId = uuidv4();
     dispatchOrders({
       type: "CREATE_ORDER",
@@ -55,7 +55,7 @@ const CreateOrder = () => {
         active: true,
         allMeals: [],
         id: orderId,
-        restaurantName: restaurantWon.restaurantName,
+        restaurantName: restaurantWon.restaurants[0].restaurantName,
       },
       pollId: pollId,
     });

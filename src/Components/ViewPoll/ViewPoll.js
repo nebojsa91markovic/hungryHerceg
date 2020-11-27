@@ -13,7 +13,7 @@ import ShowVoting from "./ShowVoting";
 import ShowResults from "./ShowResults";
 import ShowFinished from "./ShowFinished";
 import PollsCollection from "../../collections/PollsCollection";
-
+import ShowWaiting from "./ShowWaiting";
 const ViewPoll = () => {
   const [cookies, setCookie] = useCookies(["user"]);
   const { polls, dispatch } = useContext(PollsContext);
@@ -32,7 +32,9 @@ const ViewPoll = () => {
   const checkSetStep = () => {
     console.log(poll);
     setTimeout(() => {
-      if (poll.active === false) {
+      if (poll.created > moment().format()) {
+        setStep("waiting");
+      } else if (poll.active === false) {
         setStep("finished");
       } else if (poll.voters !== undefined) {
         if (poll.voters.includes(cookies.user)) {
@@ -41,7 +43,7 @@ const ViewPoll = () => {
       } else {
         setStep("voting");
       }
-    }, 500);
+    }, 200);
   };
 
   const getNewResults = () => {
@@ -133,7 +135,7 @@ const ViewPoll = () => {
         ) : step === "finished" ? (
           <ShowFinished addOrder={addOrder} />
         ) : (
-          ""
+          <ShowWaiting />
         )}
       </div>
     </div>

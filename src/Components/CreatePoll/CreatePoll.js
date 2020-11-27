@@ -90,7 +90,7 @@ const CreatePoll = () => {
             <input
               className="date-time-input"
               type="time"
-              min="06:00"
+              //min="06:00"
               // max="20:00"
               name="pollStartsAt"
               onChange={(event) => setTime(event.target.value)}

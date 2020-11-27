@@ -18,11 +18,19 @@ const OrderItem = ({ order, id }) => {
     return bool;
   };
 
+  const isItFinished = () => {
+    if (!order.active) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <Link className="orderItem" to={`/order/${order.id}`}>
       <h3>{order.label}</h3>
       <span>{timeLeft}</span>
-      <span>{haveIOrdered() ? "You have ordered" : "Not yet!"}</span>
+      <span>{isItFinished() ? "Order is created" : "Not yet!"}</span>
     </Link>
   );
 };

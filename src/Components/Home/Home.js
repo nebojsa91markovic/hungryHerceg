@@ -14,6 +14,7 @@ import OrdersCollection from "../../collections/OrdersCollection";
 import RestaurantCollection from "../../collections/RestaurantCollection";
 import moment from "moment";
 import { useCookies } from "react-cookie";
+
 const Home = () => {
   const { polls, dispatch } = useContext(PollsContext);
   const { orders, dispatchOrders } = useContext(OrdersContext);
@@ -113,8 +114,8 @@ const Home = () => {
       <Switch>
         <Route component={AllPolls} exact path={["/polls", "/home"]} />
         <PrivateRoute component={AllOrders} exact path="/orders" />
+        <PrivateRoute component={About} exact path="/about" />
       </Switch>
-      <About />
     </div>
   );
 };

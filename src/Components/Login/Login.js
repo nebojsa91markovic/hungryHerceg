@@ -5,7 +5,7 @@ import UsersCollection from "../../collections/UsersCollection";
 import { useCookies } from "react-cookie";
 
 const Login = () => {
-  const [setCookie] = useCookies(["user"]);
+  const [cookies, setCookie] = useCookies(["user"]);
 
   const handleCookie = (userId) => {
     setCookie("user", userId, { path: "/" });

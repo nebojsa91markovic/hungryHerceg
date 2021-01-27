@@ -9,7 +9,7 @@ const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
-  const [setCookie] = useCookies(["user"]);
+  const [cookies, setCookie] = useCookies(["user"]);
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorFirstName, setErrorFirstName] = useState("");

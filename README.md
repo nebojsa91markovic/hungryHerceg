@@ -24,8 +24,9 @@
 You need to have NodeJS installed (v12.14.0 or newer)
    
     1. Clone this repository
-    2. cd hungryHerceg/ and then npm install
-    3. npm start
+    2. cd hungryHerceg/ 
+    3. npm install
+    4. npm start
 
 
 ## Inspiration
